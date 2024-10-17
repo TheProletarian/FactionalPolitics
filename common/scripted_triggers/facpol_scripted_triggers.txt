@@ -1,0 +1,413 @@
+is_facpol_supported_faction = {
+	OR = {
+		is_pop_faction_type = imperialist
+		is_pop_faction_type = isolationist
+		is_pop_faction_type = progressive
+		is_pop_faction_type = prosperity
+		is_pop_faction_type = supremacist
+		is_pop_faction_type = technologist
+		is_pop_faction_type = totalitarian
+		is_pop_faction_type = traditionalist
+		is_pop_faction_type = xenoist
+	}
+}
+
+has_any_faction_majority_support = { #checks if any country's faction has more than 50% pop percentage
+	OR = {
+		AND = {
+			has_faction = imperialist
+			any_pop_faction = {
+				is_pop_faction_type = imperialist
+				support > 0.50
+			}
+		}
+		AND = {
+			has_faction = isolationist
+			any_pop_faction = {
+				is_pop_faction_type = isolationist
+				support > 0.50
+			}
+		}
+		AND = {
+			has_faction = progressive
+			any_pop_faction = {
+				is_pop_faction_type = progressive
+				support > 0.50
+			}
+		}
+		AND = {
+			has_faction = prosperity
+			any_pop_faction = {
+				is_pop_faction_type = prosperity
+				
+				support > 0.50
+			}
+		}
+		AND = {
+			has_faction = supremacist
+			any_pop_faction = {
+				is_pop_faction_type = supremacist
+				
+				support > 0.50
+			}
+		}
+		AND = {
+			has_faction = technologist
+			any_pop_faction = {
+				is_pop_faction_type = technologist
+				
+				support > 0.50
+			}
+		}
+		AND = {
+			has_faction = totalitarian
+			any_pop_faction = {
+				is_pop_faction_type = totalitarian
+				
+				support > 0.50
+			}
+		}
+		AND = {
+			has_faction = traditionalist
+			any_pop_faction = {
+				is_pop_faction_type = traditionalist
+				
+				support > 0.50
+			}
+		}
+		AND = {
+			has_faction = xenoist
+			any_pop_faction = {
+				is_pop_faction_type = xenoist
+				
+				support > 0.50
+			}
+		}
+	}
+}
+
+has_any_faction_supermajority_support = { #checks if any country's faction has more than 66% pop percentage
+	OR = {
+		AND = {
+			has_faction = imperialist
+			any_pop_faction = {
+				is_pop_faction_type = imperialist
+				
+				support > 0.66
+			}
+		}
+		AND = {
+			has_faction = isolationist
+			any_pop_faction = {
+				is_pop_faction_type = isolationist
+				
+				support > 0.66
+			}
+		}
+		AND = {
+			has_faction = progressive
+			any_pop_faction = {
+				is_pop_faction_type = progressive
+				
+				support > 0.66
+			}
+		}
+		AND = {
+			has_faction = prosperity
+			any_pop_faction = {
+				is_pop_faction_type = prosperity
+				
+				support > 0.66
+			}
+		}
+		AND = {
+			has_faction = supremacist
+			any_pop_faction = {
+				is_pop_faction_type = supremacist
+				
+				support > 0.66
+			}
+		}
+		AND = {
+			has_faction = technologist
+			any_pop_faction = {
+				is_pop_faction_type = technologist
+				
+				support > 0.66
+			}
+		}
+		AND = {
+			has_faction = totalitarian
+			any_pop_faction = {
+				is_pop_faction_type = totalitarian
+				
+				support > 0.66
+			}
+		}
+		AND = {
+			has_faction = traditionalist
+			any_pop_faction = {
+				is_pop_faction_type = traditionalist
+				
+				support > 0.66
+			}
+		}
+		AND = {
+			has_faction = xenoist
+			any_pop_faction = {
+				is_pop_faction_type = xenoist
+				
+				support > 0.66
+			}
+		}
+	}
+}
+
+can_any_faction_form_coalition = { #checks if any country's faction has more than 30% pop percentage
+	OR = {
+		AND = {
+			has_faction = imperialist
+			any_pop_faction = {
+				is_pop_faction_type = imperialist
+				
+				support > 0.30
+			}
+		}
+		AND = {
+			has_faction = isolationist
+			any_pop_faction = {
+				is_pop_faction_type = isolationist
+				
+				support > 0.30
+			}
+		}
+		AND = {
+			has_faction = progressive
+			any_pop_faction = {
+				is_pop_faction_type = progressive
+				
+				support > 0.30
+			}
+		}
+		AND = {
+			has_faction = prosperity
+			any_pop_faction = {
+				is_pop_faction_type = prosperity
+				
+				support > 0.30
+			}
+		}
+		AND = {
+			has_faction = supremacist
+			any_pop_faction = {
+				is_pop_faction_type = supremacist
+				
+				support > 0.30
+			}
+		}
+		AND = {
+			has_faction = technologist
+			any_pop_faction = {
+				is_pop_faction_type = technologist
+				
+				support > 0.30
+			}
+		}
+		AND = {
+			has_faction = totalitarian
+			any_pop_faction = {
+				is_pop_faction_type = totalitarian
+				
+				support > 0.30
+			}
+		}
+		AND = {
+			has_faction = traditionalist
+			any_pop_faction = {
+				is_pop_faction_type = traditionalist
+				
+				support > 0.30
+			}
+		}
+		AND = {
+			has_faction = xenoist
+			any_pop_faction = {
+				is_pop_faction_type = xenoist
+				
+				support > 0.30
+			}
+		}
+	}
+}
+
+has_coalition_partner = {
+	OR = {
+		has_modifier = facpol_miners_coalition_partner
+		has_modifier = facpol_farmers_coalition_partner
+		has_modifier = facpol_pacifist_coalition_partner
+		has_modifier = facpol_manifesti_coalition_partner
+		has_modifier = facpol_xenophile_coalition_partner
+		has_modifier = facpol_xenophobe_coalition_partner
+		has_modifier = facpol_militarist_coalition_partner
+		has_modifier = facpol_technician_coalition_partner
+		has_modifier = facpol_egalitarian_coalition_partner
+		has_modifier = facpol_authoritarian_coalition_partner
+		has_modifier = facpol_fanatic_materialist_coalition_partner
+		has_modifier = facpol_fanatic_spiritualist_coalition_partner
+		has_modifier = facpol_autonomy_party_coalition_partner
+	}
+}
+
+has_any_major_loyal_faction = { 
+	OR = {
+		AND = {
+			has_faction = imperialist
+			any_pop_faction = {
+				is_pop_faction_type = imperialist
+				faction_approval > 0.6
+				support > 0.30
+			}
+		}
+		AND = {
+			has_faction = isolationist
+			any_pop_faction = {
+				is_pop_faction_type = isolationist
+				faction_approval > 0.6
+				support > 0.30
+			}
+		}
+		AND = {
+			has_faction = progressive
+			any_pop_faction = {
+				is_pop_faction_type = progressive
+				faction_approval > 0.6
+				support > 0.30
+			}
+		}
+		AND = {
+			has_faction = prosperity
+			any_pop_faction = {
+				is_pop_faction_type = prosperity
+				faction_approval > 0.6
+				support > 0.30
+			}
+		}
+		AND = {
+			has_faction = supremacist
+			any_pop_faction = {
+				is_pop_faction_type = supremacist
+				faction_approval > 0.6
+				support > 0.30
+			}
+		}
+		AND = {
+			has_faction = technologist
+			any_pop_faction = {
+				is_pop_faction_type = technologist
+				faction_approval > 0.6
+				support > 0.30
+			}
+		}
+		AND = {
+			has_faction = totalitarian
+			any_pop_faction = {
+				is_pop_faction_type = totalitarian
+				faction_approval > 0.6
+				support > 0.30
+			}
+		}
+		AND = {
+			has_faction = traditionalist
+			any_pop_faction = {
+				is_pop_faction_type = traditionalist
+				faction_approval > 0.6
+				support > 0.30
+			}
+		}
+		AND = {
+			has_faction = xenoist
+			any_pop_faction = {
+				is_pop_faction_type = xenoist
+				faction_approval > 0.6
+				support > 0.30
+			}
+		}
+	}
+}
+
+has_any_major_disloyal_faction = { 
+	OR = {
+		AND = {
+			has_faction = imperialist
+			any_pop_faction = {
+				is_pop_faction_type = imperialist
+				faction_approval < 0.4
+				support > 0.30
+			}
+		}
+		AND = {
+			has_faction = isolationist
+			any_pop_faction = {
+				is_pop_faction_type = isolationist
+				faction_approval < 0.4
+				support > 0.30
+			}
+		}
+		AND = {
+			has_faction = progressive
+			any_pop_faction = {
+				is_pop_faction_type = progressive
+				faction_approval < 0.4
+				support > 0.30
+			}
+		}
+		AND = {
+			has_faction = prosperity
+			any_pop_faction = {
+				is_pop_faction_type = prosperity
+				faction_approval < 0.4
+				support > 0.30
+			}
+		}
+		AND = {
+			has_faction = supremacist
+			any_pop_faction = {
+				is_pop_faction_type = supremacist
+				faction_approval < 0.4
+				support > 0.30
+			}
+		}
+		AND = {
+			has_faction = technologist
+			any_pop_faction = {
+				is_pop_faction_type = technologist
+				faction_approval < 0.4
+				support > 0.30
+			}
+		}
+		AND = {
+			has_faction = totalitarian
+			any_pop_faction = {
+				is_pop_faction_type = totalitarian
+				faction_approval < 0.4
+				support > 0.30
+			}
+		}
+		AND = {
+			has_faction = traditionalist
+			any_pop_faction = {
+				is_pop_faction_type = traditionalist
+				faction_approval < 0.4
+				support > 0.30
+			}
+		}
+		AND = {
+			has_faction = xenoist
+			any_pop_faction = {
+				is_pop_faction_type = xenoist
+				faction_approval < 0.4
+				support > 0.30
+			}
+		}
+	}
+}

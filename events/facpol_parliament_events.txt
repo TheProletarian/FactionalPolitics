@@ -1,0 +1,4635 @@
+namespace = facpol_parliament_events
+country_event = {
+	id = facpol_parliament_events.10 #Forming government for regular elections
+	title = facpol_parliament_events.10.name
+	is_triggered_only = yes
+	picture = GFX_evt_arguing_senate
+	immediate = {
+		if = {
+			limit = { 
+				has_policy_flag = p_3_year_parliament_term
+			}
+			set_timed_country_flag = {
+				flag = ongoing_parliament_term
+				years = 3
+			}
+			country_event = {
+				id = facpol_parliament_events.12
+				days = 1080
+			}
+		}
+		if = {
+			limit = { 
+				has_policy_flag = p_5_year_parliament_term
+			}
+			set_timed_country_flag = {
+				flag = ongoing_parliament_term
+				years = 5
+			}
+			country_event = {
+				id = facpol_parliament_events.12
+				days = 1800
+			}
+		}
+		if = {
+			limit = { 
+				has_policy_flag = p_10_year_parliament_term
+			}
+			set_timed_country_flag = {
+				flag = ongoing_parliament_term
+				years = 10
+			}
+			country_event = {
+				id = facpol_parliament_events.12
+				days = 3600
+			}
+		}
+		if = {
+			limit = { 
+				has_policy_flag = p_20_year_parliament_term
+			}
+			set_timed_country_flag = {
+				flag = ongoing_parliament_term
+				years = 20
+			}
+			country_event = {
+				id = facpol_parliament_events.12
+				days = 7200
+			}
+		}
+		if = {
+			limit = {
+				has_any_faction_majority_support = yes
+			}
+			random_pop_faction = {
+				limit = {
+					num_pops > 2
+					support > 0.50
+				}
+				save_event_target_as = facpol_dominant_party
+			}
+		}
+		if = {
+			limit = {
+				NOT = {
+					any_pop_faction = {
+						num_pops > 2
+						support > 0.50
+					}
+				}
+				count_pop_faction = {
+					count = 2
+					limit = {
+						num_pops > 2
+						support > 0.20
+					}
+				}
+			 }
+			 random_pop_faction = {
+				limit = {
+					num_pops > 2
+					support > 0.20
+				}
+				save_event_target_as = facpol_duopoly_party_first
+			 }
+			 random_pop_faction = {
+				limit = {
+					num_pops > 2
+					support > 0.20
+					NOT = {
+						is_same_value = event_target:facpol_duopoly_party_first
+					}
+				}
+				save_event_target_as = facpol_duopoly_party_second
+			 }
+		}
+		if = {
+			limit = {
+				has_any_faction_majority_support = no
+				count_pop_faction = {
+					count = 3
+					limit = {
+						num_pops > 2
+						support > 0.20
+					}
+				}
+			}
+			random_pop_faction = {
+				limit = {
+					num_pops > 2
+					support > 0.20
+				}
+				save_event_target_as = facpol_oligopoly_party_first
+			 }
+			 random_pop_faction = {
+				limit = {
+					num_pops > 2
+					support > 0.20
+					NOT = {
+						is_same_value = event_target:facpol_oligopoly_party_first
+					}
+				}
+				save_event_target_as = facpol_oligopoly_party_second
+			 }
+			 random_pop_faction = {
+				limit = {
+					num_pops > 2
+					support > 0.20
+					NOR = {
+						is_same_value = event_target:facpol_oligopoly_party_first
+						is_same_value = event_target:facpol_oligopoly_party_second
+					}
+				}
+				save_event_target_as = facpol_oligopoly_party_third
+			 }
+		}
+		if = {
+			limit = {
+				has_any_faction_majority_support = no
+				count_pop_faction = {
+					count > 3
+					limit = {
+						num_pops > 2
+						support > 0.20
+					}
+				}
+			}
+			set_timed_country_flag = {
+				flag = facpol_no_major_factions
+				days = 1
+			}
+		}
+	}
+	desc = {
+		trigger = {
+			any_pop_faction = {
+				is_same_value = event_target:facpol_dominant_party
+			}
+		}
+		text = facpol_parliament_events.10.landslide
+	}
+	desc = {
+		trigger = {
+			any_pop_faction = {
+				is_same_value = event_target:facpol_duopoly_party_first
+			}
+		}
+		text = facpol_parliament_events.10.duopoly
+	}
+	desc = {
+		trigger = {
+			any_pop_faction = {
+				is_same_value = event_target:facpol_oligopoly_party_first
+			}
+		}
+		text = facpol_parliament_events.10.oligopoly
+	}
+	desc = {
+		trigger = {
+			has_country_flag = facpol_no_major_factions
+		}
+		text = facpol_parliament_events.10.nomajor
+	}
+
+	option = {
+		trigger = {
+			can_any_faction_form_coalition = no
+		}
+		name = facpol_parliament_events.10.nowinner
+		add_modifier = {
+			modifier = facpol_hung_parliament
+		}
+	}
+	option = {
+		trigger = {
+			has_any_faction_majority_support = no
+			has_faction = xenoist
+			any_pop_faction = {	
+				support > 0.30
+				is_pop_faction_type = xenoist
+			}
+		}
+		name = facpol_parliament_events.10.xenophile_col
+		add_modifier = {
+			modifier = facpol_xenophile_coalition_gov
+		}
+		hidden_effect = {
+			country_event = {
+				id = facpol_parliament_events.101
+			}
+		}	
+	}
+	option = {
+		trigger = {
+			has_any_faction_supermajority_support = no
+			has_faction = xenoist
+			any_pop_faction = {
+				
+				support > 0.50
+				is_pop_faction_type = xenoist
+			}
+		}
+		name = facpol_parliament_events.10.xenophile_maj
+		add_modifier = {
+			modifier = facpol_xenophile_majority_gov
+		}
+	}
+	option = {
+		trigger = {
+			any_pop_faction = {
+				
+				support > 0.66
+				is_pop_faction_type = xenoist
+			}
+		}
+		name = facpol_parliament_events.10.xenophile_smaj
+		add_modifier = {
+			modifier = facpol_xenophile_supermajority_gov
+		}
+	}
+	option = {
+		trigger = {
+			has_any_faction_majority_support = no
+			OR = {
+				AND = {
+					has_faction = supremacist
+					any_pop_faction = {
+						
+						support > 0.30
+						is_pop_faction_type = supremacist
+						
+					}
+				}
+				AND = {
+					has_faction = isolationist
+					any_pop_faction = {
+						
+						support > 0.30
+						is_pop_faction_type = isolationist
+						
+					}
+				}
+			}
+		}
+		name = facpol_parliament_events.10.xenophobe_col
+		add_modifier = {
+			modifier = facpol_xenophobe_coalition_gov
+		}
+		hidden_effect = {
+			country_event = {
+				id = facpol_parliament_events.101
+			}
+		}
+	}
+	option = {
+		trigger = {
+			has_any_faction_supermajority_support = no
+			OR = {
+				AND = {
+					has_faction = supremacist
+					any_pop_faction = {
+						
+						support > 0.50
+						is_pop_faction_type = supremacist
+						
+					}
+				}
+				AND = {
+					has_faction = isolationist
+					any_pop_faction = {
+						
+						support > 0.50
+						is_pop_faction_type = isolationist
+						
+					}
+				}
+			}
+		}
+		name = facpol_parliament_events.10.xenophobe_maj
+		add_modifier = {
+			modifier = facpol_xenophobe_majority_gov
+		}
+	}
+	option = {
+		trigger = {
+			OR = {
+				AND = {
+					has_faction = supremacist
+					any_pop_faction = {
+						
+						support > 0.66
+						is_pop_faction_type = supremacist
+						
+					}
+				}
+				AND = {
+					has_faction = isolationist
+					any_pop_faction = {
+						
+						support > 0.66
+						is_pop_faction_type = isolationist
+						
+					}
+				}
+			}
+		}
+		name = facpol_parliament_events.10.xenophobe_smaj
+		add_modifier = {
+			modifier = facpol_xenophobe_supermajority_gov
+		}
+	}
+	option = {
+		trigger = {
+			has_any_faction_majority_support = no
+			has_faction = traditionalist
+			any_pop_faction = {
+				
+				support > 0.30
+				is_pop_faction_type = traditionalist
+			}
+		}
+		name = facpol_parliament_events.10.spiritualist_col
+		add_modifier = {
+			modifier = facpol_spiritualist_coalition_gov
+		}
+		hidden_effect = {
+			country_event = {
+				id = facpol_parliament_events.101
+			}
+		}
+	}
+	option = {
+		trigger = {
+			has_any_faction_supermajority_support = no
+			has_faction = traditionalist
+			any_pop_faction = {
+				
+				support > 0.50
+				is_pop_faction_type = traditionalist
+			}
+		}
+		name = facpol_parliament_events.10.spiritualist_maj
+		add_modifier = {
+			modifier = facpol_spiritualist_majority_gov
+		}
+	}
+	option = {
+		trigger = {
+			has_faction = traditionalist
+			any_pop_faction = {
+				
+				support > 0.66
+				is_pop_faction_type = traditionalist
+			}
+		}
+		name = facpol_parliament_events.10.spiritualist_smaj
+		add_modifier = {
+			modifier = facpol_spiritualist_supermajority_gov
+		}
+	}
+	option = {
+		trigger = {
+			has_any_faction_majority_support = no
+			has_faction = technologist
+			any_pop_faction = {
+				
+				support > 0.30
+				is_pop_faction_type = technologist
+			}
+		}
+		name = facpol_parliament_events.10.materialist_col
+		add_modifier = {
+			modifier = facpol_materialist_coalition_gov
+		}
+		hidden_effect = {
+			country_event = {
+				id = facpol_parliament_events.101
+			}
+		}
+	}
+	option = {
+		trigger = {
+			has_any_faction_supermajority_support = no
+			has_faction = technologist
+			any_pop_faction = {
+				
+				support > 0.50
+				is_pop_faction_type = technologist
+			}
+		}
+		name = facpol_parliament_events.10.materialist_maj
+		add_modifier = {
+			modifier = facpol_materialist_majority_gov
+		}
+	}
+	option = {
+		trigger = {
+			has_faction = technologist
+			any_pop_faction = {
+				
+				support > 0.66
+				is_pop_faction_type = technologist
+			}
+		}
+		name = facpol_parliament_events.10.materialist_smaj
+		add_modifier = {
+			modifier = facpol_materialist_supermajority_gov
+		}
+	}
+	option = {
+		trigger = {
+			has_any_faction_majority_support = no
+			has_faction = totalitarian
+			any_pop_faction = {
+				
+				support > 0.30
+				is_pop_faction_type = totalitarian
+			}
+		}
+		name = facpol_parliament_events.10.authoritarian_col
+		add_modifier = {
+			modifier = facpol_authoritarian_coalition_gov
+		}
+		hidden_effect = {
+			country_event = {
+				id = facpol_parliament_events.101
+			}
+		}
+	}
+	option = {
+		trigger = {
+			has_any_faction_supermajority_support = no
+			has_faction = totalitarian
+			any_pop_faction = {
+				
+				support > 0.50
+				is_pop_faction_type = totalitarian
+			}
+		}
+		name = facpol_parliament_events.10.authoritarian_maj
+		add_modifier = {
+			modifier = facpol_authoritarian_majority_gov
+		}
+	}
+	option = {
+		trigger = {
+			has_faction = totalitarian
+			any_pop_faction = {
+				
+				support > 0.66
+				is_pop_faction_type = totalitarian
+			}
+		}
+		name = facpol_parliament_events.10.authoritarian_smaj
+		add_modifier = {
+			modifier = facpol_authoritarian_supermajority_gov
+		}
+	}
+	option = {
+		trigger = {
+			has_any_faction_majority_support = no
+			has_faction = progressive
+			any_pop_faction = {
+				
+				support > 0.30
+				is_pop_faction_type = progressive
+			}
+		}
+		name = facpol_parliament_events.10.egalitarian_col
+		add_modifier = {
+			modifier = facpol_egalitarian_coalition_gov
+		}
+		hidden_effect = {
+			country_event = {
+				id = facpol_parliament_events.101
+			}
+		}
+	}
+	option = {
+		trigger = {
+			has_any_faction_supermajority_support = no
+			has_faction = progressive
+			any_pop_faction = {
+				
+				support > 0.50
+				is_pop_faction_type = progressive
+			}
+		}
+		name = facpol_parliament_events.10.egalitarian_maj
+		add_modifier = {
+			modifier = facpol_egalitarian_majority_gov
+		}
+	}
+	option = {
+		trigger = {
+			has_faction = progressive
+			any_pop_faction = {
+				
+				support > 0.66
+				is_pop_faction_type = progressive
+			}
+		}
+		name = facpol_parliament_events.10.egalitarian_smaj
+		add_modifier = {
+			modifier = facpol_egalitarian_supermajority_gov
+		}
+	}
+	option = {
+		trigger = {
+			has_any_faction_majority_support = no
+			has_faction = imperialist
+			any_pop_faction = {
+				
+				support > 0.30
+				is_pop_faction_type = imperialist
+			}
+		}
+		name = facpol_parliament_events.10.militarist_col
+		add_modifier = {
+			modifier = facpol_militarist_coalition_gov
+		}
+		hidden_effect = {
+			country_event = {
+				id = facpol_parliament_events.101
+			}
+		}
+	}
+	option = {
+		trigger = {
+			has_any_faction_supermajority_support = no
+			has_faction = imperialist
+			any_pop_faction = {
+				
+				support > 0.50
+				is_pop_faction_type = imperialist
+			}
+		}
+		name = facpol_parliament_events.10.militarist_maj
+		add_modifier = {
+			modifier = facpol_militarist_majority_gov
+		}
+	}
+	option = {
+		trigger = {
+			has_faction = imperialist
+			any_pop_faction = {
+				
+				support > 0.66
+				is_pop_faction_type = imperialist
+			}
+		}
+		name = facpol_parliament_events.10.militarist_smaj
+		add_modifier = {
+			modifier = facpol_militarist_supermajority_gov
+		}
+	}
+	option = {
+		trigger = {
+			has_any_faction_majority_support = no
+			has_faction = prosperity
+			any_pop_faction = {
+				
+				support > 0.30
+				is_pop_faction_type = prosperity
+			}
+		}
+		name = facpol_parliament_events.10.pacifist_col
+		add_modifier = {
+			modifier = facpol_pacifist_coalition_gov
+		}
+		hidden_effect = {
+			country_event = {
+				id = facpol_parliament_events.101
+			}
+		}
+	}
+	option = {
+		trigger = {
+			has_any_faction_supermajority_support = no
+			has_faction = prosperity
+			any_pop_faction = {
+				
+				support > 0.50
+				is_pop_faction_type = prosperity
+			}
+		}
+		name = facpol_parliament_events.10.pacifist_maj
+		add_modifier = {
+			modifier = facpol_militarist_majority_gov
+		}
+	}
+	option = {
+		trigger = {
+			has_faction = prosperity
+			any_pop_faction = {
+				
+				support > 0.66
+				is_pop_faction_type = prosperity
+			}
+		}
+		name = facpol_parliament_events.10.pacifist_smaj
+		add_modifier = {
+			modifier = facpol_pacifist_supermajority_gov
+		}
+	}
+}
+country_event = {
+	id = facpol_parliament_events.11 #Forming Government for falsified elections
+	title = facpol_parliament_events.11.name
+	is_triggered_only = yes
+	desc = facpol_parliament_events.11.desc
+	picture = GFX_evt_arguing_senate
+	immediate = {
+		if = {
+			limit = { 
+				has_policy_flag = p_3_year_parliament_term
+			}
+			set_timed_country_flag = {
+				flag = ongoing_parliament_term
+				days = 1080
+			}
+			country_event = {
+				id = facpol_parliament_events.12
+				days = 1080
+			}
+			
+		}
+		if = {
+			limit = { 
+				has_policy_flag = p_5_year_parliament_term
+			}
+			set_timed_country_flag = {
+				flag = ongoing_parliament_term
+				days = 1800
+			}
+			country_event = {
+				id = facpol_parliament_events.12
+				days = 1800
+			}
+		}
+		if = {
+			limit = { 
+				has_policy_flag = p_10_year_parliament_term
+			}
+			set_timed_country_flag = {
+				flag = ongoing_parliament_term
+				days = 3600
+			}
+			country_event = {
+				id = facpol_parliament_events.12
+				days = 3600
+			}
+		}
+		if = {
+			limit = { 
+				has_policy_flag = p_20_year_parliament_term
+			}
+			set_timed_country_flag = {
+				flag = ongoing_parliament_term
+				days = 7200
+			}
+			country_event = {
+				id = facpol_parliament_events.12
+				days = 7200
+			}
+		}
+	}
+	option = {
+		name = facpol_parliament_events.11.xenophile
+		trigger = {
+			has_faction = xenoist
+			is_xenophile = yes
+		}
+		add_modifier = {
+			modifier = facpol_xenophile_falsified_gov
+		}
+	}
+	option = {
+		name = facpol_parliament_events.11.xenophobe
+		trigger = {
+			OR = {
+				has_faction = imperialist
+				has_faction = supremacist
+			}
+			
+			is_xenophobe = yes
+		}
+		add_modifier = {
+			modifier = facpol_xenophobe_falsified_gov
+		}
+	}
+	option = {
+		name = facpol_parliament_events.11.spiritualist
+		trigger = {
+			has_faction = traditionalist
+			is_spiritualist = yes
+		}
+		add_modifier = {
+			modifier = facpol_spiritualist_falsified_gov
+		}
+	}
+	option = {
+		name = facpol_parliament_events.11.materialist
+		trigger = {
+			has_faction = technologist
+			is_materialist = yes
+		}
+		add_modifier = {
+			modifier = facpol_materialist_falsified_gov
+		}
+	}
+	option = {
+		name = facpol_parliament_events.11.authoritarian
+		trigger = {
+			has_faction = totalitarian
+			is_authoritarian = yes
+		}
+		add_modifier = {
+			modifier = facpol_authoritarian_falsified_gov
+		}
+	}
+	option = {
+		name = facpol_parliament_events.11.egalitarian
+		trigger = {
+			has_faction = progressive
+			is_egalitarian = yes
+		}
+		add_modifier = {
+			modifier = facpol_egalitarian_falsified_gov
+		}
+	}
+	option = {
+		name = facpol_parliament_events.11.militarist
+		trigger = {
+			has_faction = imperialist
+			is_militarist = yes
+		}
+		add_modifier = {
+			modifier = facpol_militarist_falsified_gov
+		}
+	}
+	option = {
+		name = facpol_parliament_events.11.pacifist
+		trigger = {
+			has_faction = prosperity
+			is_pacifist = yes
+		}
+		add_modifier = {
+			modifier = facpol_pacifist_falsified_gov
+		}
+	}
+}
+
+country_event = {
+	id = facpol_parliament_events.12 #Parliament ends it's term
+	title = facpol_parliament_events.12.name
+	is_triggered_only = yes
+	desc = facpol_parliament_events.12.desc
+	picture = GFX_evt_arguing_senate
+	immediate = {
+		remove_modifier = facpol_xenophile_coalition_gov
+		remove_modifier = facpol_xenophile_majority_gov
+		remove_modifier = facpol_xenophile_supermajority_gov
+		remove_modifier = facpol_xenophobe_coalition_gov
+		remove_modifier = facpol_xenophobe_majority_gov
+		remove_modifier = facpol_xenophobe_supermajority_gov
+		remove_modifier = facpol_spiritualist_coalition_gov
+		remove_modifier = facpol_spiritualist_majority_gov
+		remove_modifier = facpol_spiritualist_supermajority_gov
+		remove_modifier = facpol_materialist_coalition_gov
+		remove_modifier = facpol_materialist_majority_gov
+		remove_modifier = facpol_materialist_supermajority_gov
+		remove_modifier = facpol_authoritarian_coalition_gov
+		remove_modifier = facpol_authoritarian_majority_gov
+		remove_modifier = facpol_authoritarian_supermajority_gov
+		remove_modifier = facpol_egalitarian_coalition_gov
+		remove_modifier = facpol_egalitarian_majority_gov
+		remove_modifier = facpol_egalitarian_supermajority_gov
+		remove_modifier = facpol_militarist_coalition_gov
+		remove_modifier = facpol_militarist_majority_gov
+		remove_modifier = facpol_militarist_supermajority_gov
+		remove_modifier = facpol_pacifist_coalition_gov
+		remove_modifier = facpol_pacifist_majority_gov
+		remove_modifier = facpol_pacifist_supermajority_gov
+		remove_modifier = facpol_miners_coalition_partner
+		remove_modifier = facpol_farmers_coalition_partner
+		remove_modifier = facpol_pacifist_coalition_partner
+		remove_modifier = facpol_manifesti_coalition_partner
+		remove_modifier = facpol_xenophile_coalition_partner
+		remove_modifier = facpol_xenophobe_coalition_partner
+		remove_modifier = facpol_militarist_coalition_partner
+		remove_modifier = facpol_technician_coalition_partner
+		remove_modifier = facpol_egalitarian_coalition_partner
+		remove_modifier = facpol_authoritarian_coalition_partner
+		remove_modifier = facpol_fanatic_materialist_coalition_partner
+		remove_modifier = facpol_fanatic_spiritualist_coalition_partner
+		remove_modifier = facpol_autonomy_party_coalition_partner
+		remove_modifier = facpol_hung_parliament
+		remove_modifier = facpol_minority_government
+		every_owned_planet = {
+			remove_modifier = facpol_local_autonomy_party
+		}
+		set_variable = {
+			which = coalition_partner_anger
+			value = 0
+		}
+		country_event = {
+			id = facpol_election_events.03
+			days = 30
+		}
+	}
+	option = {
+		name = OK
+	}
+}
+
+### Parliament Bills ###
+
+@actdurationyears = 20
+
+country_event = {
+	id = facpol_parliament_events.13 # Ease Migration Requirements
+	title = facpol_parliament_events.13.name
+	desc = facpol_parliament_events.13.desc
+	is_triggered_only = yes
+	picture = GFX_evt_civil_action
+	immediate = {
+		every_pop_faction = {
+			limit = {
+				is_pop_faction_type = xenoist
+			}
+			save_event_target_as = facpol_xenophile_faction
+		}
+	}
+	option = {
+		name = facpol_SIGN
+		add_modifier = {
+			modifier = facpol_easier_migration_act
+			years = @actdurationyears
+		}
+		# every_pop_faction = {
+		# 	limit = {
+		# 		is_pop_faction_type = isolationist
+		# 		is_pop_faction_type = supremacist
+		# 		is_pop_faction_type = traditionalist
+		# 		is_pop_faction_type = totalitarian
+		# 	}
+		# 	add_modifier = {
+		# 		modifier = facpol_easier_migration_act_faction_disapproves
+		# 		years = 5
+		# 	}
+		# }
+		# every_pop_faction = {
+		# 	limit = {
+		# 		is_pop_faction_type = xenoist
+		# 		is_pop_faction_type = prosperity
+		# 		is_pop_faction_type = progressive
+		# 	}
+		# 	add_modifier = {
+		# 		modifier = facpol_easier_migration_act_faction_approves
+		# 		years = 5
+		# 	}
+		# }
+		hidden_effect = {
+			while = {
+				count = 12
+				if = {
+					limit = { 
+						OR = {
+							pop_percentage = {
+								percentage < 0.1
+								exclude = {
+									NOT = {
+										is_same_species = owner
+									}
+								}
+								limit = { 
+									is_xenophobe = yes
+								}
+							}
+							any_owned_pop = {
+								is_same_species = owner
+								is_unemployed = yes
+							}
+						}
+
+					}
+					random_owned_pop = {
+						limit = {
+							is_same_species = owner
+							is_xenophobe = no
+						}
+						pop_remove_ethic = ethic_xenophile
+						pop_change_ethic = ethic_xenophobe
+						weights = {
+							modifier = {
+								factor = 1000
+								is_unemployed = yes
+							}
+						}
+					}
+				}
+			}
+		}
+		custom_tooltip = facpol_unemployed_pops_become_xenophobes.text
+	}
+	option = {
+		trigger = {
+			has_policy_flag = has_unrestricted_veto
+		}
+		name = facpol_VETO
+		# every_pop_faction = {
+		# 	limit = {
+		# 		is_pop_faction_type = xenoist
+		# 	}
+		# 	add_modifier = {
+		# 		modifier = faction_outraged
+		# 		years = 5
+		# 	}
+		# }
+		custom_tooltip = facpol_veto_consequences
+		hidden_effect = {
+			random_list = {
+				3 = {
+					country_event = {
+						id = facpol_parliament_events.14 #small protests
+						days = 10
+						random = 5
+					}
+				}
+				2 = {
+					country_event = {
+						id = facpol_parliament_events.15 #medium protests
+						days = 10
+						random = 5
+					}
+				}
+				2 = {
+					country_event = {
+						id = facpol_parliament_events.16 #large protests
+						days = 10
+						random = 5
+					}
+				}
+				3 = {
+					#nothing happens
+				}
+			}
+		}
+	}
+
+	option = {
+		trigger = {
+			has_policy_flag = has_limited_veto
+			has_any_faction_supermajority_support = no
+		}
+		allow = {
+			resource_stockpile_compare = {
+				resource = influence
+				value > 50
+			}
+		}
+		add_resource = {
+			influence = -50
+		}
+		# every_pop_faction = {
+		# 	limit = {
+		# 		is_pop_faction_type = xenoist
+		# 	}
+		# 	add_modifier = {
+		# 		modifier = faction_outraged
+		# 		years = 5
+		# 	}
+		# }
+		name = facpol_VETO
+		custom_tooltip = facpol_veto_consequences
+		hidden_effect = {
+			random_list = {
+				3 = {
+					country_event = {
+						id = facpol_parliament_events.14 #small protests
+						days = 10
+						random = 5
+					}
+				}
+				2 = {
+					country_event = {
+						id = facpol_parliament_events.15 #medium protests
+						days = 10
+						random = 5
+					}
+				}
+				1 = {
+					country_event = {
+						id = facpol_parliament_events.16 #large protests
+						days = 10
+						random = 5
+					}
+				}
+				4 = {
+					#nothing happens
+				}
+			}
+		}
+	}
+}
+
+country_event = {
+	id = facpol_parliament_events.14 #small protests
+	title = facpol_parliament_events.14.name
+	desc = facpol_parliament_events.14.desc
+	is_triggered_only = yes
+	picture = GFX_evt_smear_campaign
+	option = {
+		name = facpol_parliament_events.14.A
+		add_modifier = {
+			modifier = facpol_small_protests
+			years = 2
+		}
+	}
+
+	option = {
+		name = facpol_parliament_events.14.B
+		allow = {
+			resource_stockpile_compare = {
+				resource = unity
+				value >= 500
+			}
+		}
+		add_resource = {
+			unity = -500
+		}
+		add_modifier = {
+			modifier = facpol_small_protests
+			years = 1
+		}
+	}
+}
+
+country_event = {
+	id = facpol_parliament_events.15 #medium protests
+	title = facpol_parliament_events.15.name
+	desc = facpol_parliament_events.15.desc
+	is_triggered_only = yes
+	picture = GFX_evt_burning_settlement
+	option = {
+		name = facpol_parliament_events.15.A
+		add_modifier = {
+			modifier = facpol_medium_protests
+			years = 4
+		}
+	}
+
+	option = {
+		name = facpol_parliament_events.15.B
+		allow = {
+			resource_stockpile_compare = {
+				resource = unity
+				value >= 1000
+			}
+		}
+		add_resource = {
+			unity = -1000
+		}
+		add_modifier = {
+			modifier = facpol_medium_protests
+			years = 2
+		}
+	}
+}
+
+country_event = {
+	id = facpol_parliament_events.16 #large protests
+	title = facpol_parliament_events.16.name
+	desc = facpol_parliament_events.16.desc
+	is_triggered_only = yes
+	picture = GFX_evt_open_revolt
+	option = {
+		name = facpol_parliament_events.16.A
+		add_modifier = {
+			modifier = facpol_large_protests
+			years = 10
+		}
+	}
+
+	option = {
+		name = facpol_parliament_events.16.B
+		allow = {
+			resource_stockpile_compare = {
+				resource = unity
+				value >= 2500
+			}
+		}
+		add_resource = {
+			unity = -2500
+		}
+		add_modifier = {
+			modifier = facpol_large_protests
+			years = 5
+		}
+	}
+}
+
+country_event = {
+	id = facpol_parliament_events.17 # Xeno Protection Act
+	title = facpol_parliament_events.17.name
+	desc = facpol_parliament_events.17.desc
+	is_triggered_only = yes
+	picture = GFX_evt_civil_action
+	immediate = {
+		every_pop_faction = {
+			limit = {
+				is_pop_faction_type = xenoist
+			}
+			save_event_target_as = facpol_xenoist_faction
+		}
+	}
+	option = {
+		name = facpol_SIGN
+		add_modifier = {
+			modifier = facpol_xeno_protection_act
+			years = @actdurationyears
+		}
+		# every_pop_faction = {
+		# 	limit = {
+		# 		is_pop_faction_type = isolationist
+		# 		is_pop_faction_type = supremacist
+		# 		is_pop_faction_type = prosperity
+		# 	}
+		# 	add_modifier = {
+		# 		modifier = facpol_xeno_protection_act_faction_disapproves
+		# 		years = 5
+		# 	}
+		# }
+		# every_pop_faction = {
+		# 	limit = {
+		# 		is_pop_faction_type = xenoist
+		# 	}
+		# 	add_modifier = {
+		# 		modifier = facpol_xeno_protection_act_faction_approves
+		# 		years = 5
+		# 	}
+		# }
+		hidden_effect = {
+			while = {
+				count = 12
+				if = {
+					limit = { 
+						pop_percentage = {
+							percentage < 0.3
+							exclude = {
+								OR = {
+									NOT = {
+										is_same_species = owner
+									}
+									NOR = {
+										has_job = farmer
+										has_job = miner
+										has_job = scrap_miner
+										has_job = angler
+									}
+								}
+
+							}
+							limit = { 
+								is_xenophobe = yes
+							}
+						}
+					}
+					random_owned_pop = {
+						limit = {
+							is_same_species = owner
+							is_xenophobe = no
+							OR = {
+								has_job = farmer
+								has_job = miner
+								has_job = scrap_miner
+								has_job = angler
+							}
+						}
+						pop_remove_ethic = ethic_xenophile
+						pop_change_ethic = ethic_xenophobe
+					}
+				}
+			}
+		}
+		custom_tooltip = facpol_farmers_and_miners_become_xenophobes.text
+		
+	}
+	option = {
+		trigger = {
+			has_policy_flag = has_unrestricted_veto
+		}
+		# every_pop_faction = {
+		# 	limit = {
+		# 		is_pop_faction_type = xenoist
+		# 	}
+		# 	add_modifier = {
+		# 		modifier = faction_outraged
+		# 		years = 5
+		# 	}
+		# }
+		name = facpol_VETO
+		custom_tooltip = facpol_veto_consequences
+		hidden_effect = {
+			random_list = {
+				3 = {
+					country_event = {
+						id = facpol_parliament_events.14 #small protests
+						days = 10
+						random = 5
+					}
+				}
+				2 = {
+					country_event = {
+						id = facpol_parliament_events.15 #medium protests
+						days = 10
+						random = 5
+					}
+				}
+				2 = {
+					country_event = {
+						id = facpol_parliament_events.16 #large protests
+						days = 10
+						random = 5
+					}
+				}
+				3 = {
+					#nothing happens
+				}
+			}
+		}
+	}
+
+	option = {
+		trigger = {
+			has_policy_flag = has_limited_veto
+			has_any_faction_supermajority_support = no
+		}
+		allow = {
+			resource_stockpile_compare = {
+				resource = influence
+				value > 50
+			}
+		}
+		add_resource = {
+			influence = -50
+		}
+		# every_pop_faction = {
+		# 	limit = {
+		# 		is_pop_faction_type = xenoist
+		# 	}
+		# 	add_modifier = {
+		# 		modifier = faction_outraged
+		# 		years = 5
+		# 	}
+		# }
+		name = facpol_VETO
+		custom_tooltip = facpol_veto_consequences
+		hidden_effect = {
+			random_list = {
+				3 = {
+					country_event = {
+						id = facpol_parliament_events.14 #small protests
+						days = 10
+						random = 5
+					}
+				}
+				2 = {
+					country_event = {
+						id = facpol_parliament_events.15 #medium protests
+						days = 10
+						random = 5
+					}
+				}
+				1 = {
+					country_event = {
+						id = facpol_parliament_events.16 #large protests
+						days = 10
+						random = 5
+					}
+				}
+				4 = {
+					#nothing happens
+				}
+			}
+		}
+	}
+}
+
+country_event = {
+	id = facpol_parliament_events.18 # Departament of Xeno Affairs Act
+	title = facpol_parliament_events.18.name
+	desc = facpol_parliament_events.18.desc
+	is_triggered_only = yes
+	picture = GFX_evt_civil_action
+	immediate = {
+		every_pop_faction = {
+			limit = {
+				is_pop_faction_type = xenoist
+			}
+			save_event_target_as = facpol_xeno_faction
+		}
+	}
+	option = {
+		name = facpol_SIGN
+		add_modifier = {
+			modifier = facpol_xeno_affairs_departament_act
+			years = @actdurationyears
+		}
+		# every_pop_faction = {
+		# 	limit = {
+		# 		is_pop_faction_type = isolationist
+		# 		is_pop_faction_type = supremacist
+		# 		is_pop_faction_type = imperialist
+		# 	}
+		# 	add_modifier = {
+		# 		modifier = facpol_xeno_affairs_departament_act_faction_disapproves
+		# 		years = 5
+		# 	}
+		# }
+		# every_pop_faction = {
+		# 	limit = {
+		# 		is_pop_faction_type = xenoist
+		# 		is_pop_faction_type = prosperity
+		# 	}
+		# 	add_modifier = {
+		# 		modifier = facpol_xeno_affairs_departament_act_faction_approves
+		# 		years = 5
+		# 	}
+		# }
+	}
+	option = {
+		trigger = {
+			has_policy_flag = has_unrestricted_veto
+		}
+		# every_pop_faction = {
+		# 	limit = {
+		# 		is_pop_faction_type = xenoist
+		# 	}
+		# 	add_modifier = {
+		# 		modifier = faction_outraged
+		# 		years = 5
+		# 	}
+		# }
+		name = facpol_VETO
+		custom_tooltip = facpol_veto_consequences
+		hidden_effect = {
+			random_list = {
+				3 = {
+					country_event = {
+						id = facpol_parliament_events.14 #small protests
+						days = 10
+						random = 5
+					}
+				}
+				2 = {
+					country_event = {
+						id = facpol_parliament_events.15 #medium protests
+						days = 10
+						random = 5
+					}
+				}
+				2 = {
+					country_event = {
+						id = facpol_parliament_events.16 #large protests
+						days = 10
+						random = 5
+					}
+				}
+				3 = {
+					#nothing happens
+				}
+			}
+		}
+	}
+
+	option = {
+		trigger = {
+			has_policy_flag = has_limited_veto
+			has_any_faction_supermajority_support = no
+		}
+		allow = {
+			resource_stockpile_compare = {
+				resource = influence
+				value > 50
+			}
+		}
+		add_resource = {
+			influence = -50
+		}
+		# every_pop_faction = {
+		# 	limit = {
+		# 		is_pop_faction_type = xenoist
+		# 	}
+		# 	add_modifier = {
+		# 		modifier = faction_outraged
+		# 		years = 5
+		# 	}
+		# }
+		name = facpol_VETO
+		custom_tooltip = facpol_veto_consequences
+		hidden_effect = {
+			random_list = {
+				3 = {
+					country_event = {
+						id = facpol_parliament_events.14 #small protests
+						days = 10
+						random = 5
+					}
+				}
+				2 = {
+					country_event = {
+						id = facpol_parliament_events.15 #medium protests
+						days = 10
+						random = 5
+					}
+				}
+				1 = {
+					country_event = {
+						id = facpol_parliament_events.16 #large protests
+						days = 10
+						random = 5
+					}
+				}
+				4 = {
+					#nothing happens
+				}
+			}
+		}
+	}
+}
+
+country_event = {
+	id = facpol_parliament_events.19 # Closed Country Act
+	title = facpol_parliament_events.19.name
+	desc = facpol_parliament_events.19.desc
+	is_triggered_only = yes
+	picture = GFX_evt_civil_action
+	immediate = {
+		if = {
+			limit = { 
+				has_faction = isolationist
+			}
+			every_pop_faction = {
+				limit = {
+					is_pop_faction_type = isolationist
+				}
+				save_event_target_as = facpol_xenophobe_faction
+			}
+		}
+		else = {
+			every_pop_faction = {
+				limit = {
+					is_pop_faction_type = supremacist
+				}
+				save_event_target_as = facpol_xenophobe_faction
+			}
+		}
+
+	}
+	option = {
+		name = facpol_SIGN
+		add_modifier = {
+			modifier = facpol_closed_country_act
+			years = @actdurationyears
+		}
+		# every_pop_faction = {
+		# 	limit = {
+		# 		is_pop_faction_type = xenoist
+		# 		is_pop_faction_type = imperialist
+		# 		is_pop_faction_type = prosperity
+		# 	}
+		# 	add_modifier = {
+		# 		modifier = facpol_closed_country_act_faction_disapproves
+		# 		years = 5
+		# 	}
+		# }
+		# every_pop_faction = {
+		# 	limit = {
+		# 		is_pop_faction_type = isolationist
+		# 		is_pop_faction_type = supremacist
+		# 	}
+		# 	add_modifier = {
+		# 		modifier = facpol_closed_country_act_faction_approves
+		# 		years = 5
+		# 	}
+		# }
+		# hidden_effect = {
+		# 	while = {
+		# 		count = 12
+		# 		if = {
+		# 			limit = { 
+		# 				pop_percentage = {
+		# 					percentage < 0.2
+		# 					limit = { 
+		# 						has_modifier = facpol_foreign_black_market
+		# 					}
+		# 				}
+		# 			}
+		# 			random_owned_pop = {
+		# 				limit = {
+		# 					NOT = {
+		# 						has_modifier = facpol_foreign_black_market
+		# 					}
+		# 				}
+		# 				add_modifier = {
+		# 					modifier = facpol_foreign_black_market
+		# 					years = @actdurationyears
+		# 				}
+		# 				random_list = {
+		# 					2 = {}
+		# 					1 = {
+		# 						pop_remove_ethic = ethic_xenophobe
+		# 						pop_change_ethic = ethic_xenophile
+		# 					}
+		# 				}
+						
+		# 			}
+		# 		}
+		# 	}
+		# }
+		# custom_tooltip = facpol_xeno_black_market.text
+	}
+	option = {
+		trigger = {
+			has_policy_flag = has_unrestricted_veto
+		}
+		# every_pop_faction = {
+		# 	limit = {
+		# 		is_same_value = event_target:facpol_xenophobe_faction
+		# 	}
+		# 	add_modifier = {
+		# 		modifier = faction_outraged
+		# 		years = 5
+		# 	}
+		# }
+		name = facpol_VETO
+		custom_tooltip = facpol_veto_consequences
+		hidden_effect = {
+			random_list = {
+				3 = {
+					country_event = {
+						id = facpol_parliament_events.14 #small protests
+						days = 10
+						random = 5
+					}
+				}
+				2 = {
+					country_event = {
+						id = facpol_parliament_events.15 #medium protests
+						days = 10
+						random = 5
+					}
+				}
+				2 = {
+					country_event = {
+						id = facpol_parliament_events.16 #large protests
+						days = 10
+						random = 5
+					}
+				}
+				3 = {
+					#nothing happens
+				}
+			}
+		}
+	}
+
+	option = {
+		trigger = {
+			has_policy_flag = has_limited_veto
+			has_any_faction_supermajority_support = no
+		}
+		allow = {
+			resource_stockpile_compare = {
+				resource = influence
+				value > 50
+			}
+		}
+		add_resource = {
+			influence = -50
+		}
+		# every_pop_faction = {
+		# 	limit = {
+		# 		is_same_value = event_target:facpol_xenophobe_faction
+		# 	}
+		# 	add_modifier = {
+		# 		modifier = faction_outraged
+		# 		years = 5
+		# 	}
+		# }
+		name = facpol_VETO
+		custom_tooltip = facpol_veto_consequences
+		hidden_effect = {
+			random_list = {
+				3 = {
+					country_event = {
+						id = facpol_parliament_events.14 #small protests
+						days = 10
+						random = 5
+					}
+				}
+				2 = {
+					country_event = {
+						id = facpol_parliament_events.15 #medium protests
+						days = 10
+						random = 5
+					}
+				}
+				1 = {
+					country_event = {
+						id = facpol_parliament_events.16 #large protests
+						days = 10
+						random = 5
+					}
+				}
+				4 = {
+					#nothing happens
+				}
+			}
+		}
+	}
+}
+
+country_event = {
+	id = facpol_parliament_events.20 # Utilities Segregation Act
+	title = facpol_parliament_events.20.name
+	desc = facpol_parliament_events.20.desc
+	is_triggered_only = yes
+	picture = GFX_evt_civil_action
+	immediate = {
+		if = {
+			limit = { 
+				has_faction = supremacist
+			}
+			every_pop_faction = {
+				limit = {
+					is_pop_faction_type = supremacist
+				}
+				save_event_target_as = facpol_xenophobic_faction
+			}
+		}
+		else = {
+			every_pop_faction = {
+				limit = {
+					is_pop_faction_type = isolationist
+				}
+				save_event_target_as = facpol_xenophobic_faction
+			}
+		}
+
+	}
+	option = {
+		name = facpol_SIGN
+		add_modifier = {
+			modifier = facpol_segregation_act
+			years = @actdurationyears
+		}
+		# every_pop_faction = {
+		# 	limit = {
+		# 		is_pop_faction_type = xenoist
+		# 		is_pop_faction_type = progressive
+		# 	}
+		# 	add_modifier = {
+		# 		modifier = facpol_segregation_act_faction_disapproves
+		# 		years = 5
+		# 	}
+		# }
+		# every_pop_faction = {
+		# 	limit = {
+		# 		is_pop_faction_type = isolationist
+		# 		is_pop_faction_type = supremacist
+		# 		is_pop_faction_type = totalitarian
+		# 	}
+		# 	add_modifier = {
+		# 		modifier = facpol_segregation_act_faction_approves
+		# 		years = 5
+		# 	}
+		# }
+		# hidden_effect = {
+		# 	while = {
+		# 		if = {
+		# 			limit = {
+		# 				OR = {
+		# 					any_owned_pop = {
+		# 						NAND = {
+		# 							OR = {
+		# 								is_same_species = owner
+		# 								NOT = {
+		# 									is_pop_category = slave
+		# 								}
+		# 							}	
+		# 							has_modifier = facpol_segregated_pop
+		# 							is_mechanical_species = yes
+		# 						}
+		# 					}
+		# 					pop_percentage = {
+		# 						percentage < 0.35
+		# 						exclude = {
+		# 							NOT = {
+		# 								is_same_species = owner
+		# 							}
+		# 						}
+		# 						limit = {
+		# 							has_modifier = facpol_segregated_pop
+		# 						}
+		# 					}
+		# 				}
+
+		# 			}
+		# 			random_owned_pop = {
+		# 				limit = {
+		# 					NOR = {
+		# 						has_modifier = facpol_segregated_pop
+		# 						is_mechanical_species = yes
+		# 					}
+		# 				}
+		# 				add_modifier = {
+		# 					modifier = facpol_segregated_pop
+		# 					years = @actdurationyears
+		# 				}
+		# 				random_list = {
+		# 					4 = {}
+		# 					1 = {
+		# 						pop_remove_ethic = ethic_xenophobe
+		# 						pop_change_ethic = ethic_xenophile
+		# 						modifier = {
+		# 							factor = 0
+		# 							is_same_species = owner
+		# 						}
+		# 					}
+		# 					1 = {
+		# 						pop_remove_ethic = ethic_authoritarian
+		# 						pop_change_ethic = ethic_egalitarian
+		# 					}
+		# 				}
+		# 				weights = {
+		# 					modifier = {
+		# 						factor = 1000
+		# 						OR = {
+		# 							is_pop_category = slave
+		# 							NOT = {
+		# 								is_same_species = owner
+		# 							}
+		# 						}
+		# 					}
+		# 				}
+						
+		# 			}
+		# 		}
+		# 	}
+		# }
+		# custom_tooltip = facpol_xeno_segregation_effects.text
+	}
+	option = {
+		trigger = {
+			has_policy_flag = has_unrestricted_veto
+		}
+		# every_pop_faction = {
+		# 	limit = {
+		# 		is_same_value = event_target:facpol_xenophobic_faction
+		# 	}
+		# 	add_modifier = {
+		# 		modifier = faction_outraged
+		# 		years = 5
+		# 	}
+		# }
+		name = facpol_VETO
+		custom_tooltip = facpol_veto_consequences
+		hidden_effect = {
+			random_list = {
+				3 = {
+					country_event = {
+						id = facpol_parliament_events.14 #small protests
+						days = 10
+						random = 5
+					}
+				}
+				2 = {
+					country_event = {
+						id = facpol_parliament_events.15 #medium protests
+						days = 10
+						random = 5
+					}
+				}
+				2 = {
+					country_event = {
+						id = facpol_parliament_events.16 #large protests
+						days = 10
+						random = 5
+					}
+				}
+				3 = {
+					#nothing happens
+				}
+			}
+		}
+	}
+
+	option = {
+		trigger = {
+			has_policy_flag = has_limited_veto
+			has_any_faction_supermajority_support = no
+		}
+		allow = {
+			resource_stockpile_compare = {
+				resource = influence
+				value > 50
+			}
+		}
+		add_resource = {
+			influence = -50
+		}
+		# every_pop_faction = {
+		# 	limit = {
+		# 		is_same_value = event_target:facpol_xenophobic_faction
+		# 	}
+		# 	add_modifier = {
+		# 		modifier = faction_outraged
+		# 		years = 5
+		# 	}
+		# }
+		name = facpol_VETO
+		custom_tooltip = facpol_veto_consequences
+		hidden_effect = {
+			random_list = {
+				3 = {
+					country_event = {
+						id = facpol_parliament_events.14 #small protests
+						days = 10
+						random = 5
+					}
+				}
+				2 = {
+					country_event = {
+						id = facpol_parliament_events.15 #medium protests
+						days = 10
+						random = 5
+					}
+				}
+				1 = {
+					country_event = {
+						id = facpol_parliament_events.16 #large protests
+						days = 10
+						random = 5
+					}
+				}
+				4 = {
+					#nothing happens
+				}
+			}
+		}
+	}
+}
+
+country_event = {
+	id = facpol_parliament_events.21 # Spread the Faith Act
+	title = facpol_parliament_events.21.name
+	desc = facpol_parliament_events.21.desc
+	is_triggered_only = yes
+	picture = GFX_evt_civil_action
+	immediate = {
+		every_pop_faction = {
+			limit = {
+				is_pop_faction_type = traditionalist
+			}
+			save_event_target_as = facpol_spiritualist_faction
+		}
+
+	}
+	option = {
+		name = facpol_SIGN
+		add_modifier = {
+			modifier = facpol_spread_faith_act
+			years = @actdurationyears
+		}
+		# every_pop_faction = {
+		# 	limit = {
+		# 		is_pop_faction_type = xenoist
+		# 		is_pop_faction_type = progressive
+		# 		is_pop_faction_type = technologist
+		# 	}
+		# 	add_modifier = {
+		# 		modifier = facpol_spread_faith_act_faction_disapproves
+		# 		years = 5
+		# 	}
+		# }
+		# every_pop_faction = {
+		# 	limit = {
+		# 		is_pop_faction_type = traditionalist
+		# 		is_pop_faction_type = supremacist
+		# 		is_pop_faction_type = isolationist
+		# 	}
+		# 	add_modifier = {
+		# 		modifier = facpol_spread_faith_act_faction_approves
+		# 		years = 5
+		# 	}
+		# }
+		# hidden_effect = {
+		# 	while = {
+		# 		if = {
+		# 			limit = {
+		# 				OR = {
+		# 					any_owned_pop = {
+		# 						NAND = {
+		# 							is_same_species = owner
+		# 							has_modifier = facpol_heathen_pop
+		# 							is_mechanical_species = yes
+									
+		# 						}
+		# 						OR = {
+		# 							has_modifier = pop_recently_conquered
+		# 							is_spiritualist = no
+		# 						}
+		# 					}
+		# 					pop_percentage = {
+		# 						percentage < 0.35
+		# 						exclude = {
+		# 							OR = {
+		# 								NOT = {
+		# 									is_same_species = owner
+		# 								}
+		# 								is_spiritualist = yes
+		# 							}
+
+		# 						}
+		# 						limit = {
+		# 							has_modifier = facpol_heathen_pop
+		# 						}
+		# 					}
+		# 				}
+
+		# 			}
+		# 			random_owned_pop = {
+		# 				limit = {
+		# 					NOR = {
+		# 						has_modifier = facpol_heathen_pop
+		# 						is_mechanical_species = yes
+		# 					}
+		# 					OR = {
+		# 						has_modifier = pop_recently_conquered
+		# 						is_spiritualist = no
+		# 					}
+		# 				}
+		# 				add_modifier = {
+		# 					modifier = facpol_heathen_pop
+		# 					years = @actdurationyears
+		# 				}
+		# 				weights = {
+		# 					modifier = {
+		# 						factor = 1000
+		# 						NOT = {
+		# 							is_same_species = owner
+		# 						}
+		# 					}
+		# 				}
+		# 			}
+		# 		}
+		# 	}
+		# }
+		# custom_tooltip = facpol_heathens_effects.text
+	}
+	option = {
+		trigger = {
+			has_policy_flag = has_unrestricted_veto
+		}
+		# every_pop_faction = {
+		# 	limit = {
+		# 		is_same_value = event_target:facpol_spiritualist_faction
+		# 	}
+		# 	add_modifier = {
+		# 		modifier = faction_outraged
+		# 		years = 5
+		# 	}
+		# }
+		name = facpol_VETO
+		custom_tooltip = facpol_veto_consequences
+		hidden_effect = {
+			random_list = {
+				3 = {
+					country_event = {
+						id = facpol_parliament_events.14 #small protests
+						days = 10
+						random = 5
+					}
+				}
+				2 = {
+					country_event = {
+						id = facpol_parliament_events.15 #medium protests
+						days = 10
+						random = 5
+					}
+				}
+				2 = {
+					country_event = {
+						id = facpol_parliament_events.16 #large protests
+						days = 10
+						random = 5
+					}
+				}
+				3 = {
+					#nothing happens
+				}
+			}
+		}
+	}
+
+	option = {
+		trigger = {
+			has_policy_flag = has_limited_veto
+			has_any_faction_supermajority_support = no
+		}
+		allow = {
+			resource_stockpile_compare = {
+				resource = influence
+				value > 50
+			}
+		}
+		add_resource = {
+			influence = -50
+		}
+		# every_pop_faction = {
+		# 	limit = {
+		# 		is_same_value = event_target:facpol_spiritualist_faction
+		# 	}
+		# 	add_modifier = {
+		# 		modifier = faction_outraged
+		# 		years = 5
+		# 	}
+		# }
+		name = facpol_VETO
+		custom_tooltip = facpol_veto_consequences
+		hidden_effect = {
+			random_list = {
+				3 = {
+					country_event = {
+						id = facpol_parliament_events.14 #small protests
+						days = 10
+						random = 5
+					}
+				}
+				2 = {
+					country_event = {
+						id = facpol_parliament_events.15 #medium protests
+						days = 10
+						random = 5
+					}
+				}
+				1 = {
+					country_event = {
+						id = facpol_parliament_events.16 #large protests
+						days = 10
+						random = 5
+					}
+				}
+				4 = {
+					#nothing happens
+				}
+			}
+		}
+	}
+}
+
+country_event = {
+	id = facpol_parliament_events.22 # Temple Land Act
+	title = facpol_parliament_events.22.name
+	desc = facpol_parliament_events.22.desc
+	is_triggered_only = yes
+	picture = GFX_evt_civil_action
+	immediate = {
+		every_pop_faction = {
+			limit = {
+				is_pop_faction_type = traditionalist
+			}
+			save_event_target_as = facpol_spiritualist_faction
+		}
+
+	}
+	option = {
+		name = facpol_SIGN
+		add_modifier = {
+			modifier = facpol_temple_land_act
+			years = @actdurationyears
+		}
+		# every_pop_faction = {
+		# 	limit = {
+		# 		is_pop_faction_type = prosperity
+		# 		is_pop_faction_type = technologist
+		# 	}
+		# 	add_modifier = {
+		# 		modifier = facpol_temple_land_act_faction_disapproves
+		# 		years = 5
+		# 	}
+		# }
+		# every_pop_faction = {
+		# 	limit = {
+		# 		is_pop_faction_type = traditionalist
+		# 	}
+		# 	add_modifier = {
+		# 		modifier = facpol_temple_land_act_faction_approves
+		# 		years = 5
+		# 	}
+		# }
+		hidden_effect = {
+			country_event = {
+				id = facpol_meta.04
+			}
+		}
+		custom_tooltip = facpol_temple_land_act_effects.text
+	}
+	option = {
+		trigger = {
+			has_policy_flag = has_unrestricted_veto
+		}
+		# every_pop_faction = {
+		# 	limit = {
+		# 		is_same_value = event_target:facpol_spiritualist_faction
+		# 	}
+		# 	add_modifier = {
+		# 		modifier = faction_outraged
+		# 		years = 5
+		# 	}
+		# }
+		name = facpol_VETO
+		custom_tooltip = facpol_veto_consequences
+		hidden_effect = {
+			random_list = {
+				3 = {
+					country_event = {
+						id = facpol_parliament_events.14 #small protests
+						days = 10
+						random = 5
+					}
+				}
+				2 = {
+					country_event = {
+						id = facpol_parliament_events.15 #medium protests
+						days = 10
+						random = 5
+					}
+				}
+				2 = {
+					country_event = {
+						id = facpol_parliament_events.16 #large protests
+						days = 10
+						random = 5
+					}
+				}
+				3 = {
+					#nothing happens
+				}
+			}
+		}
+	}
+
+	option = {
+		trigger = {
+			has_policy_flag = has_limited_veto
+			has_any_faction_supermajority_support = no
+		}
+		allow = {
+			resource_stockpile_compare = {
+				resource = influence
+				value > 50
+			}
+		}
+		add_resource = {
+			influence = -50
+		}
+		# every_pop_faction = {
+		# 	limit = {
+		# 		is_same_value = event_target:facpol_spiritualist_faction
+		# 	}
+		# 	add_modifier = {
+		# 		modifier = faction_outraged
+		# 		years = 5
+		# 	}
+		# }
+		name = facpol_VETO
+		custom_tooltip = facpol_veto_consequences
+		hidden_effect = {
+			random_list = {
+				3 = {
+					country_event = {
+						id = facpol_parliament_events.14 #small protests
+						days = 10
+						random = 5
+					}
+				}
+				2 = {
+					country_event = {
+						id = facpol_parliament_events.15 #medium protests
+						days = 10
+						random = 5
+					}
+				}
+				1 = {
+					country_event = {
+						id = facpol_parliament_events.16 #large protests
+						days = 10
+						random = 5
+					}
+				}
+				4 = {
+					#nothing happens
+				}
+			}
+		}
+	}
+}
+
+country_event = {
+	id = facpol_parliament_events.23 # State Atheism Act
+	title = facpol_parliament_events.23.name
+	desc = facpol_parliament_events.23.desc
+	is_triggered_only = yes
+	picture = GFX_evt_civil_action
+	immediate = {
+		every_pop_faction = {
+			limit = {
+				is_pop_faction_type = technologist
+			}
+			save_event_target_as = facpol_materialist_faction
+		}
+
+	}
+	option = {
+		name = facpol_SIGN
+		add_modifier = {
+			modifier = facpol_state_atheism_act
+			years = @actdurationyears
+		}
+		# every_pop_faction = {
+		# 	limit = {
+		# 		is_pop_faction_type = isolationist
+		# 		is_pop_faction_type = traditionalist
+		# 	}
+		# 	add_modifier = {
+		# 		modifier = facpol_state_atheism_act_faction_disapproves
+		# 		years = 5
+		# 	}
+		# }
+		# every_pop_faction = {
+		# 	limit = {
+		# 		is_pop_faction_type = technologist
+		# 		is_pop_faction_type = totalitarian
+		# 	}
+		# 	add_modifier = {
+		# 		modifier = facpol_state_atheism_act_faction_approves
+		# 		years = 5
+		# 	}
+		# }
+	}
+	option = {
+		trigger = {
+			has_policy_flag = has_unrestricted_veto
+		}
+		# every_pop_faction = {
+		# 	limit = {
+		# 		is_same_value = event_target:facpol_materialist_faction
+		# 	}
+		# 	add_modifier = {
+		# 		modifier = faction_outraged
+		# 		years = 5
+		# 	}
+		# }
+		name = facpol_VETO
+		custom_tooltip = facpol_veto_consequences
+		hidden_effect = {
+			random_list = {
+				3 = {
+					country_event = {
+						id = facpol_parliament_events.14 #small protests
+						days = 10
+						random = 5
+					}
+				}
+				2 = {
+					country_event = {
+						id = facpol_parliament_events.15 #medium protests
+						days = 10
+						random = 5
+					}
+				}
+				2 = {
+					country_event = {
+						id = facpol_parliament_events.16 #large protests
+						days = 10
+						random = 5
+					}
+				}
+				3 = {
+					#nothing happens
+				}
+			}
+		}
+	}
+
+	option = {
+		trigger = {
+			has_policy_flag = has_limited_veto
+			has_any_faction_supermajority_support = no
+		}
+		allow = {
+			resource_stockpile_compare = {
+				resource = influence
+				value > 50
+			}
+		}
+		add_resource = {
+			influence = -50
+		}
+		# every_pop_faction = {
+		# 	limit = {
+		# 		is_same_value = event_target:facpol_materialist_faction
+		# 	}
+		# 	add_modifier = {
+		# 		modifier = faction_outraged
+		# 		years = 5
+		# 	}
+		# }
+		name = facpol_VETO
+		custom_tooltip = facpol_veto_consequences
+		hidden_effect = {
+			random_list = {
+				3 = {
+					country_event = {
+						id = facpol_parliament_events.14 #small protests
+						days = 10
+						random = 5
+					}
+				}
+				2 = {
+					country_event = {
+						id = facpol_parliament_events.15 #medium protests
+						days = 10
+						random = 5
+					}
+				}
+				1 = {
+					country_event = {
+						id = facpol_parliament_events.16 #large protests
+						days = 10
+						random = 5
+					}
+				}
+				4 = {
+					#nothing happens
+				}
+			}
+		}
+	}
+}
+
+country_event = {
+	id = facpol_parliament_events.24 # Machines Rights Act
+	title = facpol_parliament_events.24.name
+	desc = facpol_parliament_events.24.desc
+	is_triggered_only = yes
+	picture = GFX_evt_civil_action
+	immediate = {
+		every_pop_faction = {
+			limit = {
+				is_pop_faction_type = technologist
+			}
+			save_event_target_as = facpol_materialist_faction
+		}
+		random_owned_leader = {
+			limit = {
+				is_materialist = yes
+				species = {
+					OR = {
+						has_trait = trait_machine_unit
+						has_trait = trait_mechanical
+						is_species_class = ROBOT
+						is_species_class = MACHINE
+					}
+				}
+			}
+			save_event_target_as = facpol_materialist_machine_mp
+		}
+
+	}
+	option = {
+		name = facpol_SIGN
+		add_modifier = {
+			modifier = facpol_machines_rights_act
+			years = @actdurationyears
+		}
+		# every_pop_faction = {
+		# 	limit = {
+		# 		is_pop_faction_type = totalitarian
+		# 		is_pop_faction_type = traditionalist
+		# 	}
+		# 	add_modifier = {
+		# 		modifier = facpol_machines_rights_act_faction_disapproves
+		# 		years = 5
+		# 	}
+		# }
+		# every_pop_faction = {
+		# 	limit = {
+		# 		is_pop_faction_type = technologist
+		# 		is_pop_faction_type = progressive
+		# 	}
+		# 	add_modifier = {
+		# 		modifier = facpol_machines_rights_act_faction_approves
+		# 		years = 5
+		# 	}
+		# }
+		hidden_effect = {
+			while = {
+				count = 12
+				if = {
+					limit = { 
+						pop_percentage = {
+							percentage < 0.2
+							exclude = {
+								OR = {
+									is_robot_pop = yes
+									NOT = {
+										has_job_category = worker
+									}
+								}	
+							}
+							limit = { 
+								is_spiritualist = yes
+							}
+						}
+					}
+					random_owned_pop = {
+						limit = {
+							is_robot_pop = no
+							is_spiritualist = no
+							has_job_category = worker
+						}
+						pop_remove_ethic = ethic_materialist
+						pop_change_ethic = ethic_spiritualist
+					}
+				}
+			}
+		}
+		custom_tooltip = facpol_workers_become_spiritualists.text
+	}
+	option = {
+		trigger = {
+			has_policy_flag = has_unrestricted_veto
+		}
+		# every_pop_faction = {
+		# 	limit = {
+		# 		is_same_value = event_target:facpol_materialist_faction
+		# 	}
+		# 	add_modifier = {
+		# 		modifier = faction_outraged
+		# 		years = 5
+		# 	}
+		# }
+		name = facpol_VETO
+		custom_tooltip = facpol_veto_consequences
+		hidden_effect = {
+			random_list = {
+				3 = {
+					country_event = {
+						id = facpol_parliament_events.14 #small protests
+						days = 10
+						random = 5
+					}
+				}
+				2 = {
+					country_event = {
+						id = facpol_parliament_events.15 #medium protests
+						days = 10
+						random = 5
+					}
+				}
+				2 = {
+					country_event = {
+						id = facpol_parliament_events.16 #large protests
+						days = 10
+						random = 5
+					}
+				}
+				3 = {
+					#nothing happens
+				}
+			}
+		}
+	}
+
+	option = {
+		trigger = {
+			has_policy_flag = has_limited_veto
+			has_any_faction_supermajority_support = no
+		}
+		allow = {
+			resource_stockpile_compare = {
+				resource = influence
+				value > 50
+			}
+		}
+		add_resource = {
+			influence = -50
+		}
+		# every_pop_faction = {
+		# 	limit = {
+		# 		is_same_value = event_target:facpol_materialist_faction
+		# 	}
+		# 	add_modifier = {
+		# 		modifier = faction_outraged
+		# 		years = 5
+		# 	}
+		# }
+		name = facpol_VETO
+		custom_tooltip = facpol_veto_consequences
+		hidden_effect = {
+			random_list = {
+				3 = {
+					country_event = {
+						id = facpol_parliament_events.14 #small protests
+						days = 10
+						random = 5
+					}
+				}
+				2 = {
+					country_event = {
+						id = facpol_parliament_events.15 #medium protests
+						days = 10
+						random = 5
+					}
+				}
+				1 = {
+					country_event = {
+						id = facpol_parliament_events.16 #large protests
+						days = 10
+						random = 5
+					}
+				}
+				4 = {
+					#nothing happens
+				}
+			}
+		}
+	}
+}
+
+country_event = {
+	id = facpol_parliament_events.25 # Slavery Enforcement Act
+	title = facpol_parliament_events.25.name
+	desc = facpol_parliament_events.25.desc
+	is_triggered_only = yes
+	picture = GFX_evt_civil_action
+	immediate = {
+		every_pop_faction = {
+			limit = {
+				is_pop_faction_type = totalitarian
+			}
+			save_event_target_as = facpol_authoritarian_faction
+		}
+	}
+	option = {
+		name = facpol_SIGN
+		add_modifier = {
+			modifier = facpol_slavery_enforcement_act
+			years = @actdurationyears
+		}
+		# every_pop_faction = {
+		# 	limit = {
+		# 		is_pop_faction_type = progressive
+		# 		is_pop_faction_type = xenoist
+		# 	}
+		# 	add_modifier = {
+		# 		modifier = facpol_slavery_enforcement_act_faction_disapproves
+		# 		years = 5
+		# 	}
+		# }
+		# every_pop_faction = {
+		# 	limit = {
+		# 		is_pop_faction_type = totalitarian
+		# 	}
+		# 	add_modifier = {
+		# 		modifier = facpol_slavery_enforcement_act_faction_approves
+		# 		years = 5
+		# 	}
+		# }
+		hidden_effect = {
+			while = {
+				count = 12
+				if = {
+					limit = { 
+						pop_percentage = {
+							percentage < 0.15
+							exclude = {
+								OR = {
+									is_robot_pop = yes
+									has_job_category = slave
+								}
+						
+							}
+							limit = { 
+								is_egalitarian = yes
+							}
+						}
+					}
+					random_owned_pop = {
+						limit = {
+							is_robot_pop = no
+							is_egalitarian = no
+							NOT = {
+								has_job_category = slave
+							}
+						}
+						pop_remove_ethic = ethic_authoritarian
+						pop_change_ethic = ethic_egalitarian
+					}
+				}
+			}
+		}
+		custom_tooltip = facpol_free_pops_become_egalitarian.text
+	}
+	option = {
+		trigger = {
+			has_policy_flag = has_unrestricted_veto
+		}
+		# every_pop_faction = {
+		# 	limit = {
+		# 		is_same_value = event_target:facpol_authoritarian_faction
+		# 	}
+		# 	add_modifier = {
+		# 		modifier = faction_outraged
+		# 		years = 5
+		# 	}
+		# }
+		name = facpol_VETO
+		custom_tooltip = facpol_veto_consequences
+		hidden_effect = {
+			random_list = {
+				3 = {
+					country_event = {
+						id = facpol_parliament_events.14 #small protests
+						days = 10
+						random = 5
+					}
+				}
+				2 = {
+					country_event = {
+						id = facpol_parliament_events.15 #medium protests
+						days = 10
+						random = 5
+					}
+				}
+				2 = {
+					country_event = {
+						id = facpol_parliament_events.16 #large protests
+						days = 10
+						random = 5
+					}
+				}
+				3 = {
+					#nothing happens
+				}
+			}
+		}
+	}
+
+	option = {
+		trigger = {
+			has_policy_flag = has_limited_veto
+			has_any_faction_supermajority_support = no
+		}
+		allow = {
+			resource_stockpile_compare = {
+				resource = influence
+				value > 50
+			}
+		}
+		add_resource = {
+			influence = -50
+		}
+		# every_pop_faction = {
+		# 	limit = {
+		# 		is_same_value = event_target:facpol_authoritarian_faction
+		# 	}
+		# 	add_modifier = {
+		# 		modifier = faction_outraged
+		# 		years = 5
+		# 	}
+		# }
+		name = facpol_VETO
+		custom_tooltip = facpol_veto_consequences
+		hidden_effect = {
+			random_list = {
+				3 = {
+					country_event = {
+						id = facpol_parliament_events.14 #small protests
+						days = 10
+						random = 5
+					}
+				}
+				2 = {
+					country_event = {
+						id = facpol_parliament_events.15 #medium protests
+						days = 10
+						random = 5
+					}
+				}
+				1 = {
+					country_event = {
+						id = facpol_parliament_events.16 #large protests
+						days = 10
+						random = 5
+					}
+				}
+				4 = {
+					#nothing happens
+				}
+			}
+		}
+	}
+}
+
+country_event = {
+	id = facpol_parliament_events.26 # Treason Act
+	title = facpol_parliament_events.26.name
+	desc = facpol_parliament_events.26.desc
+	is_triggered_only = yes
+	picture = GFX_evt_civil_action
+	immediate = {
+		every_pop_faction = {
+			limit = {
+				is_pop_faction_type = totalitarian
+			}
+			save_event_target_as = facpol_authoritarian_faction
+		}
+	}
+	option = {
+		name = facpol_SIGN
+		add_modifier = {
+			modifier = facpol_treason_act
+			years = @actdurationyears
+		}
+		# every_pop_faction = {
+		# 	limit = {
+		# 		is_pop_faction_type = progressive
+		# 		is_pop_faction_type = xenoist
+		# 		is_pop_faction_type = prosperity
+		# 	}
+		# 	add_modifier = {
+		# 		modifier = facpol_treason_act_faction_disapproves
+		# 		years = 5
+		# 	}
+		# }
+		# every_pop_faction = {
+		# 	limit = {
+		# 		is_pop_faction_type = totalitarian
+		# 		is_pop_faction_type = supremacist
+		# 		is_pop_faction_type = isolationist
+		# 		is_pop_faction_type = imperialist
+		# 	}
+		# 	add_modifier = {
+		# 		modifier = facpol_treason_act_faction_approves
+		# 		years = 5
+		# 	}
+		# }
+		hidden_effect = {
+			while = {
+				count = 12
+				if = {
+					limit = { 
+						pop_percentage = {
+							percentage < 0.4
+							exclude = {
+								OR = {
+									is_robot_pop = yes
+									is_same_species = owner
+								}
+						
+							}
+							limit = { 
+								is_egalitarian = yes
+							}
+						}
+					}
+					random_owned_pop = {
+						limit = {
+							is_robot_pop = no
+							is_egalitarian = no
+							NOT = {
+								is_same_species = owner
+							}
+						}
+						pop_remove_ethic = ethic_authoritarian
+						pop_change_ethic = ethic_egalitarian
+					}
+				}
+			}
+		}
+		custom_tooltip = facpol_xeno_pops_become_egalitarian.text
+	}
+	option = {
+		trigger = {
+			has_policy_flag = has_unrestricted_veto
+		}
+		# every_pop_faction = {
+		# 	limit = {
+		# 		is_same_value = event_target:facpol_authoritarian_faction
+		# 	}
+		# 	add_modifier = {
+		# 		modifier = faction_outraged
+		# 		years = 5
+		# 	}
+		# }
+		name = facpol_VETO
+		custom_tooltip = facpol_veto_consequences
+		hidden_effect = {
+			random_list = {
+				3 = {
+					country_event = {
+						id = facpol_parliament_events.14 #small protests
+						days = 10
+						random = 5
+					}
+				}
+				2 = {
+					country_event = {
+						id = facpol_parliament_events.15 #medium protests
+						days = 10
+						random = 5
+					}
+				}
+				2 = {
+					country_event = {
+						id = facpol_parliament_events.16 #large protests
+						days = 10
+						random = 5
+					}
+				}
+				3 = {
+					#nothing happens
+				}
+			}
+		}
+	}
+
+	option = {
+		trigger = {
+			has_policy_flag = has_limited_veto
+			has_any_faction_supermajority_support = no
+		}
+		allow = {
+			resource_stockpile_compare = {
+				resource = influence
+				value > 50
+			}
+		}
+		add_resource = {
+			influence = -50
+		}
+		# every_pop_faction = {
+		# 	limit = {
+		# 		is_same_value = event_target:facpol_authoritarian_faction
+		# 	}
+		# 	add_modifier = {
+		# 		modifier = faction_outraged
+		# 		years = 5
+		# 	}
+		# }
+		name = facpol_VETO
+		custom_tooltip = facpol_veto_consequences
+		hidden_effect = {
+			random_list = {
+				3 = {
+					country_event = {
+						id = facpol_parliament_events.14 #small protests
+						days = 10
+						random = 5
+					}
+				}
+				2 = {
+					country_event = {
+						id = facpol_parliament_events.15 #medium protests
+						days = 10
+						random = 5
+					}
+				}
+				1 = {
+					country_event = {
+						id = facpol_parliament_events.16 #large protests
+						days = 10
+						random = 5
+					}
+				}
+				4 = {
+					#nothing happens
+				}
+			}
+		}
+	}
+}
+
+country_event = {
+	id = facpol_parliament_events.27 # Right to Work Act
+	title = facpol_parliament_events.27.name
+	desc = facpol_parliament_events.27.desc
+	is_triggered_only = yes
+	picture = GFX_evt_civil_action
+	immediate = {
+		every_pop_faction = {
+			limit = {
+				is_pop_faction_type = progressive
+			}
+			save_event_target_as = facpol_egalitarian_faction
+		}
+	}
+	option = {
+		name = facpol_SIGN
+		add_modifier = {
+			modifier = facpol_right_to_work_act
+			years = @actdurationyears
+		}
+		# every_pop_faction = {
+		# 	limit = {
+		# 		is_pop_faction_type = totalitarian
+		# 		is_pop_faction_type = prosperity
+		# 		is_pop_faction_type = technologist
+		# 	}
+		# 	add_modifier = {
+		# 		modifier = facpol_right_to_work_act_faction_disapproves
+		# 		years = 5
+		# 	}
+		# }
+		# every_pop_faction = {
+		# 	limit = {
+		# 		is_pop_faction_type = progressive
+		# 		is_pop_faction_type = traditionalist
+		# 	}
+		# 	add_modifier = {
+		# 		modifier = facpol_right_to_work_act_faction_approves
+		# 		years = 5
+		# 	}
+		# }
+		hidden_effect = {
+			while = {
+				count = 12
+				if = {
+					limit = { 
+						pop_percentage = {
+							percentage < 0.3
+							exclude = {
+								OR = {
+									is_robot_pop = yes
+									has_job_category = worker
+								}
+						
+							}
+							limit = { 
+								is_authoritarian = yes
+							}
+						}
+					}
+					random_owned_pop = {
+						limit = {
+							is_robot_pop = no
+							is_authoritarian = no
+							NOT = {
+								has_job_category = worker
+							}
+						}
+						pop_remove_ethic = ethic_egalitarian
+						pop_change_ethic = ethic_authoritarian
+					}
+				}
+			}
+		}
+		custom_tooltip = facpol_non_worker_pops_become_authoritarian.text
+	}
+	option = {
+		trigger = {
+			has_policy_flag = has_unrestricted_veto
+		}
+		# every_pop_faction = {
+		# 	limit = {
+		# 		is_same_value = event_target:facpol_egalitarian_faction
+		# 	}
+		# 	add_modifier = {
+		# 		modifier = faction_outraged
+		# 		years = 5
+		# 	}
+		# }
+		name = facpol_VETO
+		custom_tooltip = facpol_veto_consequences
+		hidden_effect = {
+			random_list = {
+				3 = {
+					country_event = {
+						id = facpol_parliament_events.14 #small protests
+						days = 10
+						random = 5
+					}
+				}
+				2 = {
+					country_event = {
+						id = facpol_parliament_events.15 #medium protests
+						days = 10
+						random = 5
+					}
+				}
+				2 = {
+					country_event = {
+						id = facpol_parliament_events.16 #large protests
+						days = 10
+						random = 5
+					}
+				}
+				3 = {
+					#nothing happens
+				}
+			}
+		}
+	}
+
+	option = {
+		trigger = {
+			has_policy_flag = has_limited_veto
+			has_any_faction_supermajority_support = no
+		}
+		allow = {
+			resource_stockpile_compare = {
+				resource = influence
+				value > 50
+			}
+		}
+		add_resource = {
+			influence = -50
+		}
+		# every_pop_faction = {
+		# 	limit = {
+		# 		is_same_value = event_target:facpol_egalitarian_faction
+		# 	}
+		# 	add_modifier = {
+		# 		modifier = faction_outraged
+		# 		years = 5
+		# 	}
+		# }
+		name = facpol_VETO
+		custom_tooltip = facpol_veto_consequences
+		hidden_effect = {
+			random_list = {
+				3 = {
+					country_event = {
+						id = facpol_parliament_events.14 #small protests
+						days = 10
+						random = 5
+					}
+				}
+				2 = {
+					country_event = {
+						id = facpol_parliament_events.15 #medium protests
+						days = 10
+						random = 5
+					}
+				}
+				1 = {
+					country_event = {
+						id = facpol_parliament_events.16 #large protests
+						days = 10
+						random = 5
+					}
+				}
+				4 = {
+					#nothing happens
+				}
+			}
+		}
+	}
+}
+
+country_event = {
+	id = facpol_parliament_events.28 # Freedom of Speech Act
+	title = facpol_parliament_events.28.name
+	desc = facpol_parliament_events.28.desc
+	is_triggered_only = yes
+	picture = GFX_evt_civil_action
+	immediate = {
+		every_pop_faction = {
+			limit = {
+				is_pop_faction_type = progressive
+			}
+			save_event_target_as = facpol_egalitarian_faction
+		}
+	}
+	option = {
+		name = facpol_SIGN
+		add_modifier = {
+			modifier = facpol_free_speech_act
+			years = @actdurationyears
+		}
+		# every_pop_faction = {
+		# 	limit = {
+		# 		is_pop_faction_type = totalitarian
+		# 		is_pop_faction_type = traditionalist
+		# 	}
+		# 	add_modifier = {
+		# 		modifier = facpol_free_speech_act_faction_disapproves
+		# 		years = 5
+		# 	}
+		# }
+		# every_pop_faction = {
+		# 	limit = {
+		# 		is_pop_faction_type = progressive
+		# 	}
+		# 	add_modifier = {
+		# 		modifier = facpol_free_speech_act_faction_approves
+		# 		years = 5
+		# 	}
+		# }
+	}
+	option = {
+		trigger = {
+			has_policy_flag = has_unrestricted_veto
+		}
+		# every_pop_faction = {
+		# 	limit = {
+		# 		is_same_value = event_target:facpol_egalitarian_faction
+		# 	}
+		# 	add_modifier = {
+		# 		modifier = faction_outraged
+		# 		years = 5
+		# 	}
+		# }
+		name = facpol_VETO
+		custom_tooltip = facpol_veto_consequences
+		hidden_effect = {
+			random_list = {
+				3 = {
+					country_event = {
+						id = facpol_parliament_events.14 #small protests
+						days = 10
+						random = 5
+					}
+				}
+				2 = {
+					country_event = {
+						id = facpol_parliament_events.15 #medium protests
+						days = 10
+						random = 5
+					}
+				}
+				2 = {
+					country_event = {
+						id = facpol_parliament_events.16 #large protests
+						days = 10
+						random = 5
+					}
+				}
+				3 = {
+					#nothing happens
+				}
+			}
+		}
+	}
+
+	option = {
+		trigger = {
+			has_policy_flag = has_limited_veto
+			has_any_faction_supermajority_support = no
+		}
+		allow = {
+			resource_stockpile_compare = {
+				resource = influence
+				value > 50
+			}
+		}
+		add_resource = {
+			influence = -50
+		}
+		# every_pop_faction = {
+		# 	limit = {
+		# 		is_same_value = event_target:facpol_egalitarian_faction
+		# 	}
+		# 	add_modifier = {
+		# 		modifier = faction_outraged
+		# 		years = 5
+		# 	}
+		# }
+		name = facpol_VETO
+		custom_tooltip = facpol_veto_consequences
+		hidden_effect = {
+			random_list = {
+				3 = {
+					country_event = {
+						id = facpol_parliament_events.14 #small protests
+						days = 10
+						random = 5
+					}
+				}
+				2 = {
+					country_event = {
+						id = facpol_parliament_events.15 #medium protests
+						days = 10
+						random = 5
+					}
+				}
+				1 = {
+					country_event = {
+						id = facpol_parliament_events.16 #large protests
+						days = 10
+						random = 5
+					}
+				}
+				4 = {
+					#nothing happens
+				}
+			}
+		}
+	}
+}
+
+country_event = {
+	id = facpol_parliament_events.29 # Emergency Impressement Act
+	title = facpol_parliament_events.29.name
+	desc = facpol_parliament_events.29.desc
+	is_triggered_only = yes
+	picture = GFX_evt_civil_action
+	immediate = {
+		every_pop_faction = {
+			limit = {
+				is_pop_faction_type = imperialist
+			}
+			save_event_target_as = facpol_militarist_faction
+		}
+	}
+	option = {
+		name = facpol_SIGN
+		add_modifier = {
+			modifier = facpol_emergency_impressement_act
+			years = @actdurationyears
+		}
+		add_monthly_resource_mult = {
+			resource = alloys
+			value = @tier3materialreward
+			min = @tier3materialmin
+			max = @tier3materialmax
+		}
+		# every_pop_faction = {
+		# 	limit = {
+		# 		is_pop_faction_type = prosperity
+		# 	}
+		# 	add_modifier = {
+		# 		modifier = facpol_emergency_impressement_act_faction_disapproves
+		# 		years = 5
+		# 	}
+		# }
+		# every_pop_faction = {
+		# 	limit = {
+		# 		is_pop_faction_type = imperialist
+		# 		is_pop_faction_type = supremacist
+		# 	}
+		# 	add_modifier = {
+		# 		modifier = facpol_emergency_impressement_act_faction_approves
+		# 		years = 5
+		# 	}
+		# }
+		hidden_effect = {
+			while = {
+				count = 12
+				if = {
+					limit = { 
+						pop_percentage = {
+							percentage < 0.3
+							exclude = {
+								OR = {
+									is_robot_pop = yes
+									NOT = {
+										has_job_category = specialist
+									}
+								}
+						
+							}
+							limit = { 
+								is_pacifist = yes
+							}
+						}
+					}
+					random_owned_pop = {
+						limit = {
+							is_robot_pop = no
+							is_pacifist = no
+							has_job_category = specialist
+						}
+						pop_remove_ethic = ethic_materialist
+						pop_change_ethic = ethic_pacifist
+						weights = {
+							base = 10
+							modifier = {
+								factor = 2
+								has_job = trader
+							}
+						}
+					}
+				}
+			}
+		}
+		custom_tooltip = facpol_specialist_pops_become_pacifist.text
+	}
+	option = {
+		trigger = {
+			has_policy_flag = has_unrestricted_veto
+		}
+		# every_pop_faction = {
+		# 	limit = {
+		# 		is_same_value = event_target:facpol_militarist_faction
+		# 	}
+		# 	add_modifier = {
+		# 		modifier = faction_outraged
+		# 		years = 5
+		# 	}
+		# }
+		name = facpol_VETO
+		custom_tooltip = facpol_veto_consequences
+		hidden_effect = {
+			random_list = {
+				3 = {
+					country_event = {
+						id = facpol_parliament_events.14 #small protests
+						days = 10
+						random = 5
+					}
+				}
+				2 = {
+					country_event = {
+						id = facpol_parliament_events.15 #medium protests
+						days = 10
+						random = 5
+					}
+				}
+				2 = {
+					country_event = {
+						id = facpol_parliament_events.16 #large protests
+						days = 10
+						random = 5
+					}
+				}
+				3 = {
+					#nothing happens
+				}
+			}
+		}
+	}
+
+	option = {
+		trigger = {
+			has_policy_flag = has_limited_veto
+			has_any_faction_supermajority_support = no
+		}
+		allow = {
+			resource_stockpile_compare = {
+				resource = influence
+				value > 50
+			}
+		}
+		add_resource = {
+			influence = -50
+		}
+		# every_pop_faction = {
+		# 	limit = {
+		# 		is_same_value = event_target:facpol_militarist_faction
+		# 	}
+		# 	add_modifier = {
+		# 		modifier = faction_outraged
+		# 		years = 5
+		# 	}
+		# }
+		name = facpol_VETO
+		custom_tooltip = facpol_veto_consequences
+		hidden_effect = {
+			random_list = {
+				3 = {
+					country_event = {
+						id = facpol_parliament_events.14 #small protests
+						days = 10
+						random = 5
+					}
+				}
+				2 = {
+					country_event = {
+						id = facpol_parliament_events.15 #medium protests
+						days = 10
+						random = 5
+					}
+				}
+				1 = {
+					country_event = {
+						id = facpol_parliament_events.16 #large protests
+						days = 10
+						random = 5
+					}
+				}
+				4 = {
+					#nothing happens
+				}
+			}
+		}
+	}
+}
+
+country_event = {
+	id = facpol_parliament_events.30 # Reindustrialization Act
+	title = facpol_parliament_events.30.name
+	desc = facpol_parliament_events.30.desc
+	is_triggered_only = yes
+	picture = GFX_evt_civil_action
+	immediate = {
+		every_pop_faction = {
+			limit = {
+				is_pop_faction_type = imperialist
+			}
+			save_event_target_as = facpol_militarist_faction
+		}
+	}
+	option = {
+		name = facpol_SIGN
+		add_modifier = {
+			modifier = facpol_reindustrialization_act
+			years = @actdurationyears
+		}
+		# every_pop_faction = {
+		# 	limit = {
+		# 		is_pop_faction_type = prosperity
+		# 	}
+		# 	add_modifier = {
+		# 		modifier = facpol_reindustrialization_act_faction_disapproves
+		# 		years = 5
+		# 	}
+		# }
+		# every_pop_faction = {
+		# 	limit = {
+		# 		is_pop_faction_type = imperialist
+		# 		is_pop_faction_type = supremacist
+		# 	}
+		# 	add_modifier = {
+		# 		modifier = facpol_reindustrialization_act_faction_approves
+		# 		years = 5
+		# 	}
+		# }
+
+	}
+	option = {
+		trigger = {
+			has_policy_flag = has_unrestricted_veto
+		}
+		# every_pop_faction = {
+		# 	limit = {
+		# 		is_same_value = event_target:facpol_militarist_faction
+		# 	}
+		# 	add_modifier = {
+		# 		modifier = faction_outraged
+		# 		years = 5
+		# 	}
+		# }
+		name = facpol_VETO
+		custom_tooltip = facpol_veto_consequences
+		hidden_effect = {
+			random_list = {
+				3 = {
+					country_event = {
+						id = facpol_parliament_events.14 #small protests
+						days = 10
+						random = 5
+					}
+				}
+				2 = {
+					country_event = {
+						id = facpol_parliament_events.15 #medium protests
+						days = 10
+						random = 5
+					}
+				}
+				2 = {
+					country_event = {
+						id = facpol_parliament_events.16 #large protests
+						days = 10
+						random = 5
+					}
+				}
+				3 = {
+					#nothing happens
+				}
+			}
+		}
+	}
+
+	option = {
+		trigger = {
+			has_policy_flag = has_limited_veto
+			has_any_faction_supermajority_support = no
+		}
+		allow = {
+			resource_stockpile_compare = {
+				resource = influence
+				value > 50
+			}
+		}
+		add_resource = {
+			influence = -50
+		}
+		every_pop_faction = {
+			limit = {
+				is_same_value = event_target:facpol_militarist_faction
+			}
+			add_modifier = {
+				modifier = faction_outraged
+				years = 5
+			}
+		}
+		name = facpol_VETO
+		custom_tooltip = facpol_veto_consequences
+		hidden_effect = {
+			random_list = {
+				3 = {
+					country_event = {
+						id = facpol_parliament_events.14 #small protests
+						days = 10
+						random = 5
+					}
+				}
+				2 = {
+					country_event = {
+						id = facpol_parliament_events.15 #medium protests
+						days = 10
+						random = 5
+					}
+				}
+				1 = {
+					country_event = {
+						id = facpol_parliament_events.16 #large protests
+						days = 10
+						random = 5
+					}
+				}
+				4 = {
+					#nothing happens
+				}
+			}
+		}
+	}
+}
+
+country_event = {
+	id = facpol_parliament_events.31 # Free Trade Act
+	title = facpol_parliament_events.31.name
+	desc = facpol_parliament_events.31.desc
+	is_triggered_only = yes
+	picture = GFX_evt_civil_action
+	immediate = {
+		every_pop_faction = {
+			limit = {
+				is_pop_faction_type = prosperity
+			}
+			save_event_target_as = facpol_pacifist_faction
+		}
+	}
+	option = {
+		name = facpol_SIGN
+		add_modifier = {
+			modifier = facpol_free_trade_act
+			years = @actdurationyears
+		}
+		# every_pop_faction = {
+		# 	limit = {
+		# 		is_pop_faction_type = prosperity
+		# 	}
+		# 	add_modifier = {
+		# 		modifier = facpol_free_trade_act_faction_disapproves
+		# 		years = 5
+		# 	}
+		# }
+		# every_pop_faction = {
+		# 	limit = {
+		# 		is_pop_faction_type = imperialist
+		# 		is_pop_faction_type = supremacist
+		# 	}
+		# 	add_modifier = {
+		# 		modifier = facpol_free_trade_act_faction_approves
+		# 		years = 5
+		# 	}
+		# }
+	}
+	option = {
+		trigger = {
+			has_policy_flag = has_unrestricted_veto
+		}
+		# every_pop_faction = {
+		# 	limit = {
+		# 		is_same_value = event_target:facpol_pacifist_faction
+		# 	}
+		# 	add_modifier = {
+		# 		modifier = faction_outraged
+		# 		years = 5
+		# 	}
+		# }
+		name = facpol_VETO
+		custom_tooltip = facpol_veto_consequences
+		hidden_effect = {
+			random_list = {
+				3 = {
+					country_event = {
+						id = facpol_parliament_events.14 #small protests
+						days = 10
+						random = 5
+					}
+				}
+				2 = {
+					country_event = {
+						id = facpol_parliament_events.15 #medium protests
+						days = 10
+						random = 5
+					}
+				}
+				2 = {
+					country_event = {
+						id = facpol_parliament_events.16 #large protests
+						days = 10
+						random = 5
+					}
+				}
+				3 = {
+					#nothing happens
+				}
+			}
+		}
+	}
+
+	option = {
+		trigger = {
+			has_policy_flag = has_limited_veto
+			has_any_faction_supermajority_support = no
+		}
+		allow = {
+			resource_stockpile_compare = {
+				resource = influence
+				value > 50
+			}
+		}
+		add_resource = {
+			influence = -50
+		}
+		# every_pop_faction = {
+		# 	limit = {
+		# 		is_same_value = event_target:facpol_pacifist_faction
+		# 	}
+		# 	add_modifier = {
+		# 		modifier = faction_outraged
+		# 		years = 5
+		# 	}
+		# }
+		name = facpol_VETO
+		custom_tooltip = facpol_veto_consequences
+		hidden_effect = {
+			random_list = {
+				3 = {
+					country_event = {
+						id = facpol_parliament_events.14 #small protests
+						days = 10
+						random = 5
+					}
+				}
+				2 = {
+					country_event = {
+						id = facpol_parliament_events.15 #medium protests
+						days = 10
+						random = 5
+					}
+				}
+				1 = {
+					country_event = {
+						id = facpol_parliament_events.16 #large protests
+						days = 10
+						random = 5
+					}
+				}
+				4 = {
+					#nothing happens
+				}
+			}
+		}
+	}
+}
+
+country_event = {
+	id = facpol_parliament_events.32 # Business Subsidies Act
+	title = facpol_parliament_events.32.name
+	desc = facpol_parliament_events.32.desc
+	is_triggered_only = yes
+	picture = GFX_evt_civil_action
+	immediate = {
+		every_pop_faction = {
+			limit = {
+				is_pop_faction_type = prosperity
+			}
+			save_event_target_as = facpol_pacifist_faction
+		}
+	}
+	option = {
+		name = facpol_SIGN
+		add_modifier = {
+			modifier = facpol_business_subsidies_act
+			years = @actdurationyears
+		}
+		# every_pop_faction = {
+		# 	limit = {
+		# 		is_pop_faction_type = prosperity
+		# 	}
+		# 	add_modifier = {
+		# 		modifier = facpol_business_subsidies_act_faction_disapproves
+		# 		years = 5
+		# 	}
+		# }
+		# every_pop_faction = {
+		# 	limit = {
+		# 		is_pop_faction_type = imperialist
+		# 		is_pop_faction_type = supremacist
+		# 	}
+		# 	add_modifier = {
+		# 		modifier = facpol_business_subsidies_act_faction_approves
+		# 		years = 5
+		# 	}
+		# }
+	}
+	option = {
+		trigger = {
+			has_policy_flag = has_unrestricted_veto
+		}
+		every_pop_faction = {
+			limit = {
+				is_same_value = event_target:facpol_pacifist_faction
+			}
+			add_modifier = {
+				modifier = faction_outraged
+				years = 5
+			}
+		}
+		name = facpol_VETO
+		custom_tooltip = facpol_veto_consequences
+		hidden_effect = {
+			random_list = {
+				3 = {
+					country_event = {
+						id = facpol_parliament_events.14 #small protests
+						days = 10
+						random = 5
+					}
+				}
+				2 = {
+					country_event = {
+						id = facpol_parliament_events.15 #medium protests
+						days = 10
+						random = 5
+					}
+				}
+				2 = {
+					country_event = {
+						id = facpol_parliament_events.16 #large protests
+						days = 10
+						random = 5
+					}
+				}
+				3 = {
+					#nothing happens
+				}
+			}
+		}
+	}
+
+	option = {
+		trigger = {
+			has_policy_flag = has_limited_veto
+			has_any_faction_supermajority_support = no
+		}
+		allow = {
+			resource_stockpile_compare = {
+				resource = influence
+				value > 50
+			}
+		}
+		add_resource = {
+			influence = -50
+		}
+		every_pop_faction = {
+			limit = {
+				is_same_value = event_target:facpol_pacifist_faction
+			}
+			add_modifier = {
+				modifier = faction_outraged
+				years = 5
+			}
+		}
+		name = facpol_VETO
+		custom_tooltip = facpol_veto_consequences
+		hidden_effect = {
+			random_list = {
+				3 = {
+					country_event = {
+						id = facpol_parliament_events.14 #small protests
+						days = 10
+						random = 5
+					}
+				}
+				2 = {
+					country_event = {
+						id = facpol_parliament_events.15 #medium protests
+						days = 10
+						random = 5
+					}
+				}
+				1 = {
+					country_event = {
+						id = facpol_parliament_events.16 #large protests
+						days = 10
+						random = 5
+					}
+				}
+				4 = {
+					#nothing happens
+				}
+			}
+		}
+	}
+}
+
+### Coalitions and Random Parliament Events ###
+
+country_event = { #Formation of Coalition
+	id = facpol_parliament_events.101
+	title = facpol_parliament_events.101.name
+	desc = facpol_parliament_events.101.desc
+	is_triggered_only = yes
+	picture = GFX_evt_one_sided_deal
+
+	immediate = {
+		if = {
+			limit = { 
+				any_owned_planet = {
+					is_homeworld = no
+					is_capital = no
+					num_pops > 9
+				}
+				OR = {
+					has_modifier = facpol_pacifist_coalition_gov
+					has_modifier = facpol_egalitarian_coalition_gov
+				}
+			}
+			random_owned_planet = {
+				limit = {
+					is_homeworld = no
+					is_capital = no
+					num_pops > 9
+				}
+				save_event_target_as = facpol_local_autonomy_party_planet
+			}
+		}
+	}
+
+	option = {
+		name = facpol_parliament_events.101.minority_gov
+		add_modifier = {
+			modifier = facpol_minority_government
+		}
+	}
+	option = {
+		trigger = {
+			has_modifier = facpol_militarist_coalition_gov
+			has_faction = totalitarian
+		}
+		name = facpol_parliament_events.101.authoritarian_coalition
+		add_modifier = {
+			modifier = facpol_authoritarian_coalition_partner
+		}
+	}
+	option = {
+		trigger = {
+			OR = {
+				has_modifier = facpol_authoritarian_coalition_gov
+				AND = {
+					has_modifier = facpol_xenophobe_coalition_gov
+					is_pacifist = no
+				}
+			}
+			has_faction = imperialist
+			
+		}
+		name = facpol_parliament_events.101.militarist_coalition
+		add_modifier = {
+			modifier = facpol_militarist_coalition_partner
+		}
+	}
+	option = {
+		trigger = {
+			OR = {
+				AND = {
+					has_modifier = facpol_pacifist_coalition_gov
+					is_pacifist = yes
+					has_faction = isolationist
+				}
+				AND = {
+					has_modifier = facpol_militarist_coalition_gov
+					is_pacifist = no
+					has_faction = supremacist
+				}
+			}
+			
+		}
+		name = facpol_parliament_events.101.xenophobe_coalition
+		add_modifier = {
+			modifier = facpol_xenophobe_coalition_partner
+		}
+	}
+	option = {
+		trigger = {
+			OR = {
+				AND = {
+					has_modifier = facpol_xenophobe_coalition_gov
+					is_pacifist = yes
+				}
+				has_modifier = facpol_xenophile_coalition_gov
+			}
+			has_faction = prosperity
+		}
+		name = facpol_parliament_events.101.pacifist_coalition
+		add_modifier = {
+			modifier = facpol_pacifist_coalition_partner
+		}
+	}
+	option = {
+		trigger = {
+			has_modifier = facpol_xenophile_coalition_gov
+			has_faction = progressive
+		}
+		name = facpol_parliament_events.101.egalitarian_coalition
+		add_modifier = {
+			modifier = facpol_egalitarian_coalition_partner
+		}
+	}
+	option = {
+		trigger = {
+			OR = {
+				has_modifier = facpol_pacifist_coalition_gov
+				has_modifier = facpol_egalitarian_coalition_gov
+			}
+			
+			has_faction = xenoist
+		}
+		name = facpol_parliament_events.101.xenophile_coalition
+		add_modifier = {
+			modifier = facpol_xenophile_coalition_partner
+		}
+	}
+	option = {
+		trigger = {
+			has_modifier = facpol_spiritualist_coalition_gov
+		}
+		name = facpol_parliament_events.101.fanatic_spiritualist_coalition
+		add_modifier = {
+			modifier = facpol_fanatic_spiritualist_coalition_partner
+		}
+	}
+	option = {
+		trigger = {
+			has_modifier = facpol_materialist_coalition_gov
+		}
+		name = facpol_parliament_events.101.fanatic_materialist_coalition
+		add_modifier = {
+			modifier = facpol_fanatic_materialist_coalition_partner
+		}
+	}
+	option = {
+		trigger = {
+			OR = {
+				has_civic = civic_agrarian_idyll
+				has_civic = civic_anglers
+				has_civic = civic_corporate_anglers
+				AND = {
+					any_owned_planet = {
+						OR = {
+							has_designation = col_farming
+							has_designation = col_ring_farming
+							has_designation = col_ring_farming
+						}
+						num_pops > 9
+					}
+					OR = {
+						has_modifier = facpol_pacifist_coalition_gov
+						has_modifier = facpol_spiritualist_coalition_gov
+						has_modifier = facpol_egalitarian_coalition_gov
+					}
+				}
+
+			}
+		}
+		name = facpol_parliament_events.101.farmers_coalition
+		add_modifier = {
+			modifier = facpol_farmers_coalition_partner
+		}
+	}
+	option = {
+		trigger = {
+			OR = {
+				has_civic = civic_mining_guilds
+				is_lithoid = yes
+				AND = {
+					any_owned_planet = {
+						OR = {
+							has_designation = col_mining
+							has_designation = col_habitat_mining
+						}
+						num_pops > 9
+					}
+					OR = {
+						has_modifier = facpol_militarist_coalition_gov
+						has_modifier = facpol_xenophobe_coalition_gov
+						has_modifier = facpol_egalitarian_coalition_gov
+					}
+				}
+			}
+		}
+		name = facpol_parliament_events.101.miners_coalition
+		add_modifier = {
+			modifier = facpol_miners_coalition_partner
+		}
+	}
+	option = {
+		trigger = {
+			any_owned_planet = {
+				OR = {
+					has_designation = col_generator
+					has_designation = col_habitat_energy
+					has_designation = col_ring_generator
+				}
+				num_pops > 9
+			}
+			OR = {
+				has_modifier = facpol_materialist_coalition_gov
+				has_modifier = facpol_xenophile_coalition_gov
+				has_modifier = facpol_egalitarian_coalition_gov
+			}
+		}
+		name = facpol_parliament_events.101.technician_coalition
+		add_modifier = {
+			modifier = facpol_technician_coalition_partner
+		}
+	}
+	option = {
+		trigger = {
+			any_owned_planet = {
+				is_capital = no
+				num_pops > 9
+			}
+			OR = {
+				has_modifier = facpol_pacifist_coalition_gov
+				has_modifier = facpol_egalitarian_coalition_gov
+			}
+		}
+		name = facpol_parliament_events.101.local_autonomy_party_coalition
+		random_owned_planet = {
+			limit = {
+				is_same_value = event_target:facpol_local_autonomy_party_planet
+			}
+			add_modifier = {
+				modifier = facpol_local_autonomy_party
+			}
+		}
+		add_modifier = {
+			modifier = facpol_autonomy_party_coalition_partner
+		}
+	}
+	option = {
+		trigger = {
+			has_faction = manifesti
+			OR = {
+				has_modifier = facpol_pacifist_coalition_gov
+				has_modifier = facpol_egalitarian_coalition_gov
+				has_modifier = facpol_xenophile_coalition_gov
+			}
+		}
+		name = facpol_parliament_events.101.manifesti_coalition
+		add_modifier = {
+			modifier = facpol_manifesti_coalition_partner
+		}
+	}
+}
+
+country_event = {
+	id = facpol_parliament_events.102 #Coalition fails, parliament dissolves itself
+	title = facpol_parliament_events.102.name
+	desc = facpol_parliament_events.102.desc
+	is_triggered_only = yes
+	picture = GFX_evt_assembly_fight
+	pre_triggers = {
+		is_ai = no
+	}
+	trigger = {
+		has_coalition_partner = yes
+		check_variable = {
+			which = coalition_partner_anger
+			value > 2
+		}
+	}
+	immediate = {
+		remove_modifier = facpol_miners_coalition_partner
+		remove_modifier = facpol_farmers_coalition_partner
+		remove_modifier = facpol_pacifist_coalition_partner
+		remove_modifier = facpol_manifesti_coalition_partner
+		remove_modifier = facpol_xenophile_coalition_partner
+		remove_modifier = facpol_xenophobe_coalition_partner
+		remove_modifier = facpol_militarist_coalition_partner
+		remove_modifier = facpol_technician_coalition_partner
+		remove_modifier = facpol_egalitarian_coalition_partner
+		remove_modifier = facpol_authoritarian_coalition_partner
+		remove_modifier = facpol_fanatic_materialist_coalition_partner
+		remove_modifier = facpol_fanatic_spiritualist_coalition_partner
+		remove_modifier = facpol_autonomy_party_coalition_partner
+		remove_country_flag = ongoing_parliament_term
+		every_owned_planet = {
+			remove_modifier = facpol_local_autonomy_party
+		}
+	}
+	option = {
+		name = facpol_parliament_events.102.A
+		add_modifier = {
+			modifier = facpol_parliament_fails_forming_gov
+			years = 1
+		}
+		custom_tooltip = parliament_emergency_election.text
+		hidden_effect = {
+			country_event = {
+				id = facpol_election_events.03
+				days = 360
+			}
+		}
+	}
+}
+
+country_event = {
+	id = facpol_parliament_events.103 # Parliament Supports Government Policy
+	title = facpol_parliament_events.103.name
+	desc = facpol_parliament_events.103.desc
+	is_triggered_only = yes
+	picture = GFX_evt_arguing_senate
+	trigger = {
+		has_country_flag = ongoing_parliament_term
+	}
+	option = {
+		name = facpol_parliament_events.103.A
+		add_monthly_resource_mult = {
+			resource = unity
+			value = @tier1unityreward
+			min = @tier1unitymin
+			max = @tier1unitymax
+		}
+	}
+	option = {
+		name = facpol_parliament_events.103.B
+		add_monthly_resource_mult = {
+			resource = influence
+			value = @tier1influencereward
+			min = @tier1influencemin
+			max = @tier1influencemax
+		}
+	}
+	option = {
+		trigger = {
+			has_coalition_partner = yes
+		}
+		name = facpol_parliament_events.103.C
+		hidden_effect = {
+			subtract_variable = {
+				which = coalition_partner_anger
+				value = 1
+			}
+		}
+		custom_tooltip = coalition_partner_pleased
+	}
+}
+
+country_event = {
+	id = facpol_parliament_events.104 # Parliament Conflicts with Government
+	title = facpol_parliament_events.104.name
+	desc = facpol_parliament_events.104.desc
+	is_triggered_only = yes
+	picture = GFX_evt_civil_action
+	immediate = {
+		set_timed_country_flag = {
+			flag = facpol_parliament_government_conflict
+			years = 20
+		}
+	}
+	trigger = {
+		has_country_flag = ongoing_parliament_term
+		NOT = {
+			has_country_flag = facpol_parliament_government_conflict
+		}
+	}
+	option = {
+		name = facpol_parliament_events.104.A
+		add_modifier = {
+			modifier = facpol_restricted_executive_power
+			years = 10
+		}
+	}
+	option = {
+		name = facpol_parliament_events.104.B
+		add_modifier = {
+			modifier = facpol_ignored_parliament
+			years = 10
+		}
+	}
+	option = {
+		trigger = {
+			has_coalition_partner = yes
+		}
+		name = facpol_parliament_events.104.C
+		change_variable = {
+			which = coalition_partner_anger
+			value = 1
+		}
+		custom_tooltip = coalition_partner_angry
+	}
+}
+
+country_event = {
+	id = facpol_parliament_events.105 # Parliament Conflicts with Council
+	title = facpol_parliament_events.105.name
+	desc = facpol_parliament_events.105.desc
+	is_triggered_only = yes
+	picture = GFX_evt_civil_action
+	immediate = {
+		set_timed_country_flag = {
+			flag = facpol_parliament_government_conflict
+			years = 20
+		}
+	}
+	trigger = {
+		has_country_flag = ongoing_parliament_term
+		NOT = {
+			has_country_flag = facpol_parliament_government_conflict
+		}
+	}
+	option = {
+		name = facpol_parliament_events.105.A
+		add_modifier = {
+			modifier = facpol_council_supported
+			years = 10
+		}
+	}
+	option = {
+		name = facpol_parliament_events.105.B
+		add_modifier = {
+			modifier = facpol_parliament_supported
+			years = 10
+		}
+	}
+}
+
+country_event = {
+	id = facpol_parliament_events.106 # Political Lobbying
+	title = facpol_parliament_events.106.name
+	desc = facpol_parliament_events.106.desc
+	is_triggered_only = yes
+	picture = GFX_evt_bribery
+	option = {
+		name = facpol_parliament_events.106.A
+		add_monthly_resource_mult = {
+			resource = energy
+			value = 6
+			min = 200
+			max = 5000
+		}
+	}
+	option = {
+		name = facpol_parliament_events.106.B
+		add_modifier = {
+			modifier = facpol_banned_lobbying
+		}
+	}
+}
+
+country_event = {
+	id = facpol_parliament_events.107 # Popular MP
+	title = facpol_parliament_events.107.name
+	desc = facpol_parliament_events.107.desc
+	is_triggered_only = yes
+	picture = GFX_evt_alien_propaganda
+	trigger = {
+		any_owned_planet = {
+			NOR = {
+				planet_crime < 10
+				planet_stability > 80
+				happiness_planet > 80
+			}
+			num_pops > 5 
+		}
+	}
+	immediate = {
+		random_owned_planet = {
+			limit = {
+				NOR = {
+					planet_crime < 10
+					planet_stability > 80
+					happiness_planet > 80
+				}
+				num_pops > 5
+			}
+			weights = {
+				base = 10
+				modifier = {
+					factor = 2
+					planet_stability < 50
+				}
+				modifier = {
+					factor = 2
+					happiness_planet < 50
+				}
+				modifier = {
+					factor = 2
+					planet_crime > 30
+				}
+			}
+			save_event_target_as = facpol_popular_mp_planet
+		}
+	}
+	option = {
+		name = facpol_parliament_events.107.A
+		random_owned_planet = {
+			limit = {
+				is_same_value = event_target:facpol_popular_mp_planet
+			}
+			add_modifier = {
+				modifier = facpol_popular_mp
+				years = 5
+			}
+		}
+	}
+	option = {
+		name = facpol_parliament_events.107.B
+		create_leader = {
+			class = official
+			skill = 2
+			traits = {
+				trait = leader_trait_politician
+			}
+		}
+	}
+	option = {
+		name = facpol_parliament_events.107.C
+		add_resource = {
+			influence = 50
+		}
+	}
+}
+
+country_event = {
+	id = facpol_parliament_events.108 # Coalition Partner's Demands
+	title = facpol_parliament_events.108.name
+	desc = facpol_parliament_events.108.desc
+	is_triggered_only = yes
+	picture = GFX_evt_arguing_senate
+	trigger = {
+		has_coalition_partner = yes
+	}
+	option = {
+		name = facpol_parliament_events.108.A
+		change_variable = {
+			which = coalition_partner_anger
+			value = 2
+		}
+		custom_tooltip = coalition_partner_very_angry
+	}
+	option = {
+		name = facpol_parliament_events.108.B
+		if = {
+			limit = { 
+				has_modifier = facpol_miners_coalition_partner
+			}
+			add_modifier = {
+				modifier = facpol_miners_coalition_demand
+				years = 5
+			}
+		}
+		else_if = {
+			limit = { 
+				has_modifier = facpol_farmers_coalition_partner
+			}
+			add_modifier = {
+				modifier = facpol_farmers_coalition_demand
+				years = 5
+			}
+		}
+		else_if = {
+			limit = { 
+				has_modifier = facpol_pacifist_coalition_partner
+			}
+			add_modifier = {
+				modifier = facpol_pacifist_coalition_demand
+				years = 5
+			}
+		}
+		else_if = {
+			limit = { 
+				has_modifier = facpol_manifesti_coalition_partner
+			}
+			add_modifier = {
+				modifier = facpol_manifesti_coalition_demand
+				years = 5
+			}
+		}
+		else_if = {
+			limit = { 
+				has_modifier = facpol_xenophile_coalition_partner
+			}
+			add_modifier = {
+				modifier = facpol_xenophile_coalition_demand
+				years = 5
+			}
+		}
+		else_if = {
+			limit = { 
+				has_modifier = facpol_xenophobe_coalition_partner
+			}
+			add_modifier = {
+				modifier = facpol_xenophobe_coalition_demand
+				years = 5
+			}
+		}
+		else_if = {
+			limit = { 
+				has_modifier = facpol_militarist_coalition_partner
+			}
+			add_modifier = {
+				modifier = facpol_militarist_coalition_demand
+				years = 5
+			}
+		}
+		else_if = {
+			limit = { 
+				has_modifier = facpol_technician_coalition_partner
+			}
+			add_modifier = {
+				modifier = facpol_technician_coalition_demand
+				years = 5
+			}
+		}
+		else_if = {
+			limit = { 
+				has_modifier = facpol_egalitarian_coalition_partner
+			}
+			add_modifier = {
+				modifier = facpol_egalitarian_coalition_demand
+				years = 5
+			}
+		}
+		else_if = {
+			limit = { 
+				has_modifier = facpol_authoritarian_coalition_partner
+			}
+			add_modifier = {
+				modifier = facpol_authoritarian_coalition_demand
+				years = 5
+			}
+		}
+		else_if = {
+			limit = { 
+				has_modifier = facpol_autonomy_party_coalition_partner
+			}
+			every_owned_planet = {
+				limit = {
+					has_modifier = facpol_local_autonomy_party
+				}
+				add_modifier = {
+					modifier = facpol_autonomy_party_coalition_demand
+					years = 5
+				}
+			}
+
+		}
+		else_if = {
+			limit = { 
+				has_modifier = facpol_fanatic_materialist_coalition_partner
+			}
+			add_modifier = {
+				modifier = facpol_fanatic_materialist_coalition_demand
+				years = 5
+			}
+		}
+		else_if = {
+			limit = { 
+				has_modifier = facpol_fanatic_spiritualist_coalition_partner
+			}
+			add_modifier = {
+				modifier = facpol_fanatic_spiritualist_coalition_demand
+				years = 5
+			}
+		}
+		set_timed_country_flag = {
+			flag = partners_demands_fulfilled
+			years = 10
+		}
+	}
+}
+
+country_event = {
+	id = facpol_parliament_events.109 # Corrupt Coalition Partner MP
+	title = facpol_parliament_events.109.name
+	desc = facpol_parliament_events.109.desc
+	is_triggered_only = yes
+	picture = GFX_evt_bribery
+	trigger = {
+		any_owned_planet = {
+			NOR = {
+				planet_crime < 10
+				planet_stability > 80
+				happiness_planet > 80
+			}
+			num_pops > 10 
+		}
+		any_owned_leader = {
+			OR = {
+				has_trait = leader_trait_corrupt
+				has_trait = leader_trait_corrupt_2
+				has_trait = leader_trait_insider_trading
+				has_trait = leader_trait_insider_trading_2
+			}
+			is_ruler = no
+		}
+	}
+	immediate = {
+		random_owned_planet = {
+			limit = {
+				NOR = {
+					planet_crime < 10
+					planet_stability > 80
+					happiness_planet > 80
+				}
+				num_pops > 10
+			}
+			weights = {
+				base = 10
+				modifier = {
+					factor = 2
+					planet_stability < 50
+				}
+				modifier = {
+					factor = 2
+					happiness_planet < 50
+				}
+				modifier = {
+					factor = 2
+					planet_crime > 30
+				}
+			}
+			save_event_target_as = facpol_corrupt_mps_planet
+		}
+		random_owned_leader = {
+			limit = {
+				OR = {
+					has_trait = leader_trait_corrupt
+					has_trait = leader_trait_corrupt_2
+					has_trait = leader_trait_insider_trading
+					has_trait = leader_trait_insider_trading_2
+				}
+				is_ruler = no
+			}
+			save_event_target_as = facpol_corrupt_mp
+		}
+		set_timed_country_flag = {
+			flag = facpol_corrupt_coalition
+			years = 20
+		}
+	}
+	option = {
+		name = facpol_parliament_events.109.A
+		random_owned_planet = {
+			limit = {
+				is_same_value = event_target:facpol_corrupt_mps_planet
+			}
+			add_modifier = {
+				modifier = facpol_corruption_unpunished
+				years = 5
+			}
+		}
+		random_owned_leader = {
+			limit = {
+				is_same_value = event_target:facpol_corrupt_mp
+			}
+			kill_leader = {
+				show_notification = no
+			}
+		}
+	}
+	option = {
+		name = facpol_parliament_events.109.B
+		change_variable = {
+			which = coalition_partner_anger
+			value = 2
+		}
+		custom_tooltip = coalition_partner_very_angry
+	}
+}

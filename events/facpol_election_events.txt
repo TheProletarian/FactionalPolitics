@@ -1,0 +1,2517 @@
+namespace = facpol_election_events
+# Meta event for selecting random elections events
+country_event = {
+	id = facpol_election_events.01
+	hide_window = yes
+	is_triggered_only = yes
+	immediate = {
+		random_list = {
+			500 = {
+			}
+			2 = {
+				modifier = {
+					set = 0
+					OR = {
+						NOR = {
+							has_faction = supremacist 
+							any_pop_faction = {
+								is_pop_faction_type = supremacist
+								num_pops > 2
+								support > 0.1
+							}
+						}
+						has_modifier = facpol_supremacist_martyr
+					}
+				}
+				modifier = {
+					factor = 2
+					OR = {
+						has_ethic = ethic_fanatic_xenophobe
+						has_ethic = ethic_xenophobe
+					}
+					count_owned_pop = {
+						count > 8
+						limit = {
+							OR = {
+								has_ethic = ethic_egalitarian
+								has_ethic = ethic_xenophile
+							}
+						}
+					}
+				}
+				modifier = {
+					factor = 1.35
+					owner = {
+						any_neighbor_country = {
+							OR = { 
+								has_ethic = ethic_fanatic_egalitarian
+								has_ethic = ethic_fanatic_xenophile
+							}
+						}
+					}
+				}
+				country_event = {
+					id = facpol_election_events.02
+				}
+			}
+			2 = {
+				modifier = {
+					set = 0
+					OR = {
+						NOR = { 
+							has_faction = progressive
+							any_pop_faction = {
+								is_pop_faction_type = progressive
+								num_pops > 2
+								support > 0.1
+							}
+						}
+						has_modifier = facpol_labor_martyr
+					}
+				}
+				modifier = {
+					factor = 2
+					OR = {
+						has_ethic = ethic_fanatic_egalitarian
+						has_ethic = ethic_egalitarian
+					}
+					count_owned_pop = {
+						count > 8
+						limit = {
+							OR = {
+								has_ethic = ethic_authoritarian
+								has_ethic = ethic_xenophobe
+							}
+						}
+					}
+				}
+				modifier = {
+					factor = 1.35
+					owner = {
+						any_neighbor_country = {
+							OR = { 
+								has_ethic = ethic_fanatic_authoritarian
+							}
+						}
+					}
+				}
+				country_event = {
+					id = facpol_election_events.05
+				}
+			}
+			10 = {
+				modifier = {
+					factor = 0
+					OR = {
+						NOR = {						
+							has_faction = traditionalist 
+							any_pop_faction = {
+								is_pop_faction_type = traditionalist
+								num_pops > 2
+								support > 0.1
+							}
+							any_owned_leader = {
+								is_ruler = no
+								has_ethic = ethic_spiritualist
+							}
+						}
+						has_country_flag = recent_spiritualist_scandal
+						
+					}
+				}
+				modifier = {
+					factor = 1.35
+					OR = {
+						has_civic = civic_death_cult
+						has_civic = civic_death_cult_corporate
+					}
+				}
+				modifier = {
+					factor = 1.35
+					has_ethic = ethic_spiritualist
+				}
+				modifier = {
+					factor = 2
+					has_ethic = ethic_fanatic_spiritualist
+				}
+				country_event = {
+					id = facpol_election_events.10
+				}
+			}
+			10 = {
+				modifier = {
+					factor = 0
+					OR = {
+						NOR = {						
+							has_faction = imperialist 
+							any_pop_faction = {
+								is_pop_faction_type = imperialist
+								num_pops > 2
+								support > 0.1
+							}
+							any_owned_leader = {
+								is_ruler = no
+								leader_class = commander
+								has_ethic = ethic_militarist
+							}
+						}
+						has_country_flag = recent_militarist_scandal
+						
+					}
+				}
+				modifier = {
+					factor = 1.35
+					OR = {
+						has_civic = civic_distinguished_admiralty
+						has_civic = civic_nationalistic_zeal
+					}
+				}
+				modifier = {
+					factor = 1.35
+					has_ethic = ethic_militarist
+				}
+				modifier = {
+					factor = 2
+					has_ethic = ethic_fanatic_militarist
+				}
+				country_event = {
+					id = facpol_election_events.11
+				}
+			}
+			15 = {
+				modifier = {
+					factor = 0
+					OR = {
+						has_country_flag = election_betting_banned
+						has_civic = civic_shared_burden
+						has_modifier = facpol_elections_betting
+					}
+				}
+				modifier = {
+					factor = 0.75
+					is_egalitarian = yes
+				}
+				modifier = {
+					factor = 0.5
+					has_ethic = ethic_fanatic_egalitarian
+				}
+				modifier = {
+					factor = 1.35
+					owner_main_species = {
+						has_trait = trait_thrifty
+					}	
+				}
+				country_event = {
+					id = facpol_election_events.12
+				}
+			}
+			5 = {
+				modifier = {
+					factor = 0
+					OR = {
+						is_galactic_community_member = no
+						has_country_flag = foc_investigation
+						has_country_flag = galcom_oversight_committee_banned
+						is_democracy = no
+						count_country = {
+							count <= 3
+							limit = {
+								is_democracy = yes
+								is_galactic_community_member = yes
+							}
+						}
+					}
+				}
+				modifier = {
+					factor = 2
+					OR = {
+						has_country_flag = facpol_approach_elections_falsify_cf
+						has_country_flag = facpol_approach_elections_censorship_cf
+					}
+				}
+				modifier = {
+					factor = 0.5
+					has_country_flag = facpol_approach_elections_protect_liberties_cf
+				}
+				country_event = {
+					id = facpol_election_events.13
+				}
+			}
+			10 = {
+				modifier = {
+					factor = 0
+					OR = {
+						has_country_flag = facpol_culture_war
+						years_passed < 10
+						NOR = {
+							any_owned_pop = {
+								has_ethic = ethic_materialist
+							}
+							any_owned_pop = {
+								has_ethic = ethic_spiritualist
+							}
+						}
+					}
+				}
+				modifier = {
+					factor = 0.5
+					NOT = {
+						any_owned_pop = {
+							has_ethic = ethic_materialist
+						}
+					}
+				}
+				modifier = {
+					factor = 0.5
+					NOT = {
+						any_owned_pop = {
+							has_ethic = ethic_spiritualist
+						}
+					}
+				}
+				modifier = {
+					factor = 1.25
+					OR = {
+						is_materialist = yes
+						AND = {
+							has_faction = technologist
+							any_pop_faction = {
+								is_pop_faction_type = technologist
+								support > 0.15
+							}
+						}
+					}
+				}
+				modifier = {
+					factor = 1.25
+					OR = {
+						is_spiritualist = yes
+						AND = {
+							has_faction = traditionalist
+							any_pop_faction = {
+								is_pop_faction_type = traditionalist
+								support > 0.15
+							}
+						}
+					}
+				}
+				country_event = {
+					id = facpol_election_events.21
+				}
+			}
+			5 = {
+				modifier = {
+					factor = 0
+					OR = {
+						years_passed < 30
+						NOT = {
+							has_country_flag = facpol_recent_faction_bankrupt
+						}
+					}
+				}
+				modifier = {
+					factor = 1.25
+					any_owned_leader = {
+						OR = {
+							has_trait = leader_trait_embezzler
+							has_trait = leader_trait_embezzler_2
+							has_trait = leader_trait_corrupt
+							has_trait = leader_trait_corrupt_2
+						}
+					}
+				}
+				modifier = {
+					factor = 1.25
+					any_owned_leader = {
+						is_councilor = yes
+						OR = {
+							has_trait = leader_trait_embezzler
+							has_trait = leader_trait_embezzler_2
+							has_trait = leader_trait_corrupt
+							has_trait = leader_trait_corrupt_2
+						}
+					}
+				}
+				modifier = {
+					factor = 1.25
+					any_owned_leader = {
+						is_ruler = yes
+						OR = {
+							has_trait = leader_trait_embezzler
+							has_trait = leader_trait_embezzler_2
+							has_trait = leader_trait_corrupt
+							has_trait = leader_trait_corrupt_2
+						}
+					}
+				}
+				country_event = {
+					id = facpol_election_events.22
+				}
+			}
+			10 = {
+				modifier = {
+					factor = 1.25
+					any_owned_leader = {
+						OR = {
+							has_trait = leader_trait_politician
+							has_trait = leader_trait_politician_2
+							has_trait = leader_trait_reformer
+							has_trait = leader_trait_reformer_2
+							has_trait = leader_trait_reformer_3
+						}
+					}
+				}
+				modifier = {
+					factor = 1.25
+					any_owned_leader = {
+						is_councilor = yes
+						OR = {
+							has_trait = leader_trait_politician
+							has_trait = leader_trait_politician_2
+							has_trait = leader_trait_reformer
+							has_trait = leader_trait_reformer_2
+							has_trait = leader_trait_reformer_3
+						}
+					}
+				}
+				country_event = {
+					id = facpol_election_events.23
+				}
+			}
+		}
+	}
+}
+
+# Supremacist leader assasination attempt
+country_event = { 
+	id = facpol_election_events.02
+	title = facpol_election_events.02.name
+	desc = facpol_election_events.02.desc
+	is_triggered_only = yes
+
+	immediate = {
+		random_owned_leader = {
+			limit = {
+				has_ethic = ethic_xenophobe
+				is_ruler = no
+			}
+			save_event_target_as = facpol_supremacist_leader_assassination
+		}
+	}
+
+	picture = GFX_evt_alien_propaganda
+
+	option = {
+		name = facpol_election_events.02.A
+		random_list = {
+			35 = { 
+				random_owned_leader = {
+					limit = {
+						is_same_value = event_target:facpol_supremacist_leader_assassination
+					}
+					kill_leader = {
+						show_notification = yes
+					}
+				}
+			}
+			65 = {
+				random_owned_leader = {
+					limit = {
+						is_same_value = event_target:facpol_supremacist_leader_assassination
+					}
+					add_trait = leader_trait_maimed
+				}
+			}
+		}
+		add_modifier = {
+			modifier = facpol_supremacist_martyr
+			days = 1800
+		}
+		random_pop_faction = {
+			limit = {
+				is_pop_faction_type = supremacist
+			}
+			add_modifier = {
+				modifier = faction_outraged
+				years = 5
+			}
+		}
+		hidden_effect = {
+			change_variable = {
+				which = var_electoral_turmoil
+				value = 5
+			}
+		}
+		custom_tooltip = electoral_turmoil_huge_increase
+	}
+}
+
+#Election Campaign Begins
+
+country_event = {
+	id = facpol_election_events.03
+	title = facpol_election_events.03.name
+	desc = facpol_election_events.03.desc
+	is_triggered_only = yes
+	picture = GFX_evt_announcement
+	trigger = {
+		NOT = {
+			has_country_flag = ongoing_elections
+		}	
+	}
+	immediate = {
+		set_timed_country_flag = {
+			flag = ongoing_elections
+			days = 360
+		}
+	}
+	option = {
+		name = facpol_election_events.03.a # observe
+		start_situation = {
+			type = facpol_parliamentary_elections
+			target = root
+			effect = {
+				set_situation_approach = facpol_approach_elections_do_nothing
+				set_situation_flag = path_locked
+			}
+		}
+		set_timed_country_flag = {
+			flag = facpol_approach_elections_do_nothing_cf
+			days = 360
+		}
+		icon = {
+			icon = GFX_situation_approach_this_is_fine
+			icon_background = GFX_situation_approach_bg_yellow
+			text = set_situation_approach_icon_text
+		}
+	}
+	
+	option = {
+		name = facpol_election_events.03.b # protect liberties
+		start_situation = {
+			type = facpol_parliamentary_elections
+			target = root
+			effect = {
+				set_situation_approach = facpol_approach_elections_protect_liberties
+				set_situation_flag = path_locked
+			}
+		}
+		set_timed_country_flag = {
+			flag = facpol_approach_elections_protect_liberties_cf
+			days = 360
+		}
+		icon = {
+			icon = GFX_situation_approach_handshake
+			icon_background = GFX_situation_approach_bg_green
+			text = set_situation_approach_icon_text
+		}
+	}
+
+	option = {
+		name = facpol_election_events.03.c # censorship
+		trigger = {
+			owner = {
+				NOT = { has_ethic = ethic_fanatic_egalitarian }
+			}
+		}
+		start_situation = {
+			type = facpol_parliamentary_elections
+			target = root
+			effect = {
+				set_situation_approach = facpol_approach_elections_censorship
+				set_situation_flag = path_locked
+			}
+		}
+		set_timed_country_flag = {
+			flag = facpol_approach_elections_censorship_cf
+			days = 360
+		}
+		icon = {
+			icon_background = GFX_situation_approach_bg_red
+			icon = GFX_situation_approach_influence
+			text = set_situation_approach_icon_text
+		}
+	}
+	option = {
+		name = facpol_election_events.03.d # steal the vote
+		trigger = {
+			owner = {
+				has_civic = civic_shadow_council
+			}
+		}
+		start_situation = {
+			type = facpol_parliamentary_elections
+			target = root
+			effect = {
+				set_situation_approach = facpol_approach_elections_falsify
+				set_situation_flag = path_locked
+			}
+		}
+		set_timed_country_flag = {
+			flag = facpol_approach_elections_falsify_cf
+			days = 360
+		}
+		icon = {
+			icon = GFX_situation_approach_balance_sheet
+			icon_background = GFX_situation_approach_bg_red
+			text = set_situation_approach_icon_text
+		}
+	}
+}
+
+situation_event = { #random cooldown for the gatekeeper event
+	id = facpol_election_events.04
+	hide_window = yes
+	is_triggered_only = yes
+	trigger = {
+		owner = {
+			is_ai = no
+		}
+		
+	}
+	immediate = {
+		owner = {
+			country_event = {
+				id = facpol_election_events.01
+				days = 30
+				random = 30
+			}	
+		}
+
+	}
+}
+
+country_event = { #trade unionist assassinated
+	id = facpol_election_events.05
+	title = facpol_election_events.05.name
+	desc = facpol_election_events.05.desc
+	is_triggered_only = yes
+
+	immediate = {
+
+		random_pop_faction = {
+			limit = {
+				is_pop_faction_type = progressive
+			}
+			add_modifier = {
+				modifier = faction_outraged
+				years = 5
+			}
+		}
+	}
+
+	picture = GFX_evt_spy_network
+
+	option = {
+		name = facpol_election_events.05.A
+		add_modifier = {
+			modifier = facpol_labor_martyr
+			years = 5
+		}
+		change_variable = {
+			which = var_electoral_turmoil
+			value = 5
+		}
+		custom_tooltip = electoral_turmoil_huge_increase
+	}
+}
+
+country_event = { #parliament ousted
+	id = facpol_election_events.06
+	title = facpol_election_events.06.name
+	desc = facpol_election_events.06.desc
+	is_triggered_only = yes
+
+	trigger = {
+		NOR = {
+			has_ethic = ethic_egalitarian
+			has_ethic = ethic_fanatic_egalitarian
+			has_civic = civic_parliamentary_system
+			has_authority = auth_democratic
+		}
+		OR = {
+			has_country_flag = ongoing_elections
+			has_country_flag = ongoing_parliament_term
+		}
+	}
+
+	immediate = {
+		remove_country_flag = ongoing_elections
+		remove_country_flag = ongoing_parliament_term
+		remove_country_flag = facpol_approach_elections_falsify_cf
+		remove_country_flag = facpol_approach_elections_censorship_cf
+		remove_country_flag = facpol_approach_elections_do_nothing_cf
+		remove_country_flag = facpol_approach_elections_protect_liberties_cf
+		random_pop_faction = {
+			limit = {
+				is_pop_faction_type = progressive
+			}
+			add_modifier = {
+				modifier = faction_outraged
+				years = 10
+			}
+		}
+	}
+
+	picture = GFX_evt_coronation
+
+	option = {
+		name = facpol_election_events.06.a #amnesty
+		add_modifier = {
+			modifier = facpol_political_amnesty
+			years = 5
+		}
+	}
+	option = {
+		name = facpol_election_events.06.b #crackdown
+		add_modifier = {
+			modifier = facpol_political_crackdown
+			years = 5
+		}
+	}
+}
+
+situation_event = { #peaceful election
+	id = facpol_election_events.07
+	title = facpol_election_events.07.name
+	desc = facpol_election_events.07.desc
+	is_triggered_only = yes
+
+	picture = GFX_evt_crisis_defeated
+
+	option = {
+		name = facpol_election_events.07.A
+		owner = {
+			add_modifier = {
+				modifier = facpol_peaceful_election
+				days = 720
+			}
+			# hidden_effect = {
+			# 	country_event = {
+			# 		id = facpol_election_events.24
+			# 	}
+			# }
+		}
+	}
+}
+
+situation_event = { #contested election
+	id = facpol_election_events.08
+	title = facpol_election_events.08.name
+	desc = facpol_election_events.08.desc
+	is_triggered_only = yes
+
+	picture = GFX_evt_smear_campaign
+
+	option = {
+		name = facpol_election_events.08.A
+		owner = {
+			add_modifier = {
+				modifier = facpol_contested_election
+				days = 720
+			}
+			# hidden_effect = {
+			# 	country_event = {
+			# 		id = facpol_election_events.24
+			# 	}
+			# }
+		}
+
+	}
+}
+situation_event = { #violent election
+	id = facpol_election_events.09
+	title = facpol_election_events.09.name
+	desc = facpol_election_events.09.desc
+	is_triggered_only = yes
+
+	picture = GFX_evt_open_revolt
+
+	option = {
+		name = facpol_election_events.09.A
+		owner = {
+			add_modifier = {
+				modifier = facpol_violent_election
+				days = 720
+			}
+			# hidden_effect = {
+			# 	country_event = {
+			# 		id = facpol_election_events.24
+			# 	}
+			# }
+		}
+	}
+}
+
+country_event = {
+	id = facpol_election_events.10 #Spiritualist Scandal
+	title = facpol_election_events.10.name
+	desc = {
+		trigger = {
+			NOR = { 
+				has_civic = civic_death_cult
+				has_civic = civic_death_cult_corporate
+			}
+		}
+		text = facpol_election_events.10.desc
+	} 
+	desc = {
+		trigger = {
+			OR = { 
+				has_civic = civic_death_cult
+				has_civic = civic_death_cult_corporate
+			}
+		}
+		text = facpol_election_events.10.cult
+	} 
+	is_triggered_only = yes
+
+	immediate = {
+		random_owned_leader = {
+			limit = {
+				has_ethic = ethic_spiritualist
+				is_ruler = no
+			}
+			save_event_target_as = facpol_spiritualist_cult_scandal
+		}
+		set_timed_country_flag = {
+			flag = recent_spiritualist_scandal
+			years = 20
+		}
+	}
+
+	picture = GFX_evt_conclave
+	option = {
+		name = facpol_election_events.10.A #Stand in defense of them
+		add_modifier = {
+			modifier = facpol_spiritualist_scandal
+			days = 720
+		}
+		hidden_effect = {
+			change_variable = {
+				which = var_electoral_turmoil
+				value = 1
+			}
+		}
+		custom_tooltip = electoral_turmoil_slight_increase
+	}
+	option = {
+		name = facpol_election_events.10.B #Make them resign
+		random_owned_leader = {
+			limit = {
+				is_same_value = event_target:facpol_spiritualist_cult_scandal
+			}
+			kill_leader = {
+				show_notification = no
+			}
+		}
+	}
+}
+
+country_event = {
+	id = facpol_election_events.11 #Militarist Scandal
+	title = facpol_election_events.11.name
+	desc = facpol_election_events.11.desc
+	is_triggered_only = yes
+
+	trigger = {
+		any_owned_leader = {
+			has_ethic = ethic_militarist
+			leader_class = commander
+			is_ruler = no
+		}
+	}
+
+	immediate = {
+		random_owned_leader = {
+			limit = {
+				has_ethic = ethic_militarist
+				leader_class = commander
+				is_ruler = no
+			}
+			save_event_target_as = facpol_militarist_corruption_scandal
+		}
+		set_timed_country_flag = {
+			flag = recent_militarist_scandal
+			years = 20
+		}
+	}
+
+	picture = GFX_evt_salute
+	option = {
+		name = facpol_election_events.11.A #Do nothing
+		add_modifier = {
+			modifier = facpol_militarist_scandal
+			days = 720
+		}
+		hidden_effect = {
+			change_variable = {
+				which = var_electoral_turmoil
+				value = 1
+			}
+		}
+		custom_tooltip = electoral_turmoil_slight_increase
+	}
+	option = {
+		name = facpol_election_events.11.B #Find a scrapegoat
+		random_owned_leader = {
+			limit = {
+				is_same_value = event_target:facpol_militarist_corruption_scandal
+			}
+			kill_leader = {
+				show_notification = no
+			}
+		}
+	}
+	option = {
+		name = facpol_election_events.11.C #Investigate Corruption
+		allow = {
+			resource_stockpile_compare = {
+				resource = influence
+				value >= 100
+			}
+		}
+		add_resource = {
+			influence  = -100
+			
+		}
+		hidden_effect = {
+			subtract_variable = {
+				which = var_electoral_turmoil
+				value = 1
+			}
+		}
+		custom_tooltip = electoral_turmoil_slight_decrease
+	}
+}
+
+country_event = {
+	id = facpol_election_events.12 #Elections Betting
+	title = facpol_election_events.12.name
+	desc = facpol_election_events.12.desc
+	is_triggered_only = yes
+
+	picture = GFX_evt_financial_instruments
+	option = {
+		name = facpol_election_events.12.A #Allow it
+		add_modifier = {
+			modifier = facpol_elections_betting
+			days = 360
+		}
+	}
+	option = {
+		name = facpol_election_events.12.B #Ban it
+		hidden_effect = {
+			subtract_variable = {
+				which = var_electoral_turmoil
+				value = 1
+			}
+		}
+		custom_tooltip = electoral_turmoil_slight_decrease
+		set_country_flag = election_betting_banned
+		
+	}
+	option = {
+		name = facpol_election_events.12.C #Abuse it
+		trigger = {
+			has_civic = civic_shadow_council
+		}
+		set_country_flag = election_betting_banned
+		add_monthly_resource_mult = {
+			resource = energy
+			value = 4
+			min = 300
+			max = 5000
+
+		}
+		hidden_effect = {
+			change_variable = {
+				which = var_electoral_turmoil
+				value = 2
+			}
+		}
+		custom_tooltip = electoral_turmoil_increase
+	}
+}
+
+country_event = {
+	id = facpol_election_events.13 #Galcom Election Oversight Committee
+	title = facpol_election_events.13.name
+	desc = facpol_election_events.13.desc
+	is_triggered_only = yes
+
+	trigger = {
+		any_situation = {
+			is_situation_type = facpol_parliamentary_elections
+		}
+	}
+
+	picture = GFX_evt_board_meeting
+	option = {
+		name = facpol_election_events.13.A #Accept
+		trigger = {
+			OR = {
+				has_country_flag = facpol_approach_elections_do_nothing_cf
+				has_country_flag = facpol_approach_elections_protect_liberties_cf
+			}
+		}
+		set_timed_country_flag = {
+			flag = foc_investigation
+			years = 2
+		}
+		hidden_effect = {
+			random_list = {
+				5 = {
+					country_event = {
+						id = facpol_election_events.14
+						days = 300
+					}
+					modifier = {
+						factor = 0.25
+						NOT = {
+							has_country_flag = facpol_approach_elections_protect_liberties_cf
+						}
+					}
+				}
+				5 = {
+					country_event = {
+						id = facpol_election_events.15
+						days = 300
+					}
+					modifier = {
+						factor = 0.25
+						has_country_flag = facpol_approach_elections_protect_liberties_cf
+					}
+				}
+			}
+		}
+	}
+	option = {
+		name = facpol_election_events.13.B #Accept but sabotage
+		trigger = {
+			OR = {
+				has_country_flag = facpol_approach_elections_falsify_cf
+				has_country_flag = facpol_approach_elections_censorship_cf
+			}
+		}
+		hidden_effect = {
+			random_list = {
+				5 = {
+					country_event = {
+						id = facpol_election_events.19
+						days = 300
+					}
+				}
+				2 = {
+					country_event = {
+						id = facpol_election_events.20
+						days = 300
+					}
+				}
+				3 = {
+					country_event = {
+						id = facpol_election_events.16
+						days = 60
+						random = 30
+					}
+				}
+			}
+		}
+		set_timed_country_flag = {
+			flag = foc_investigation
+			years = 2
+		}
+	}
+	option = {
+		name = facpol_election_events.13.C #Refuse
+		trigger = {
+			OR = {
+				is_xenophobe = yes
+				is_democracy = no
+				has_country_flag = facpol_approach_elections_falsify_cf
+				has_country_flag = facpol_approach_elections_censorship_cf
+			}
+		}
+		set_country_flag = galcom_oversight_committee_banned
+		hidden_effect = {
+			change_variable = {
+				which = var_electoral_turmoil
+				value = 2
+			}
+		}
+		custom_tooltip = electoral_turmoil_increase
+		add_modifier = {
+			modifier = galcom_oversight_committee_ban
+			years = 10
+		}
+	}
+}
+
+country_event = {
+	id = facpol_election_events.14 #Galcom Election Oversight Committee praises us
+	title = facpol_election_events.14.name
+	desc = facpol_election_events.14.desc
+	is_triggered_only = yes
+	picture = GFX_evt_board_meeting
+	option = {
+		name = facpol_election_events.14.A
+		add_monthly_resource_mult = {
+			resource = unity
+			value = @tier3unityreward
+			min = @tier3unitymin
+			max = @tier3unitymax
+		}
+		add_modifier = {
+			modifier = galcom_oversight_committee_praising
+			years = 5
+		}
+	}
+}
+
+country_event = {
+	id = facpol_election_events.15 #Galcom Election Oversight Committee wants changes
+	title = facpol_election_events.15.name
+	desc = facpol_election_events.15.desc
+	is_triggered_only = yes
+	picture = GFX_evt_board_meeting
+	option = {
+		allow = {
+			resource_stockpile_compare = {
+				resource = energy
+				value >= 1000
+			}
+			resource_stockpile_compare = {
+				resource = influence
+				value >= 100
+			}
+		}
+		name = facpol_election_events.15.A
+		add_resource = {
+			energy = -1000
+			influence = -100
+		}
+		add_monthly_resource_mult = {
+			resource = unity
+			value = @tier2unityreward
+			min = @tier2unitymin
+			max = @tier2unitymax
+		}
+		add_modifier = {
+			modifier = galcom_oversight_committee_reforms
+			years = -1
+		}
+		hidden_effect = {
+			random_pop_faction = {
+				limit = {
+					is_pop_faction_type = progressive
+				}
+				add_modifier = {
+					modifier = faction_approves_galcom_reforms
+					days = -1
+				}
+			}
+			random_pop_faction = {
+				limit = {
+					is_pop_faction_type = xenoist
+				}
+				add_modifier = {
+					modifier = faction_approves_galcom_reforms
+					days = -1
+				}
+			}
+			random_pop_faction = {
+				limit = {
+					is_pop_faction_type = supremacist
+				}
+				add_modifier = {
+					modifier = faction_outraged
+					years = 20
+				}
+			}
+			random_pop_faction = {
+				limit = {
+					is_pop_faction_type = isolationist
+				}
+				add_modifier = {
+					modifier = faction_outraged
+					years = 20
+				}
+			}
+		}
+	}
+	option = {
+		name = facpol_election_events.15.B
+		add_resource = {
+			influence = 50
+		}
+	}
+}
+
+country_event = {
+	id = facpol_election_events.16 #Galcom Investigator diggs too deep
+	title = facpol_election_events.16.name
+	desc = facpol_election_events.16.desc
+	is_triggered_only = yes
+	picture = GFX_evt_infiltration_neutral
+	option = {
+		allow = {
+			resource_stockpile_compare = {
+				resource = influence
+				value >= 50
+			}
+		}
+		name = facpol_election_events.16.A
+		add_resource = {
+			influence = -50
+		}
+		hidden_effect = {
+			random_list = {
+				7 = {
+					country_event = {
+						id = facpol_election_events.17
+						days = 30
+						random = 15
+					}
+				}
+				3 = {
+					country_event = {
+						id = facpol_election_events.18
+						days = 30
+						random = 15
+					}
+				}
+			}
+		}
+	}
+	option = {
+		name = facpol_election_events.16.B
+		hidden_effect = {
+			country_event = {
+				id = facpol_election_events.20
+				days = 300
+			}
+		}
+	}
+}
+
+country_event = {
+	id = facpol_election_events.17 #Galcom Investigator killed
+	title = facpol_election_events.17.name
+	desc = facpol_election_events.17.desc
+	is_triggered_only = yes
+	picture = GFX_evt_debris
+	option = {
+		name = facpol_election_events.17.A
+		set_country_flag = galcom_oversight_committee_banned
+	}
+}
+
+country_event = {
+	id = facpol_election_events.18 #Galcom Investigator assasination failed
+	title = facpol_election_events.18.name
+	desc = facpol_election_events.18.desc
+	is_triggered_only = yes
+	picture = GFX_evt_spy_network
+	option = {
+		name = facpol_election_events.18.A
+		add_modifier = {
+			modifier = attempted_to_murder_galcom_envoy
+			years = 10
+		}
+		set_country_flag = galcom_oversight_committee_banned
+	}
+}
+
+country_event = {
+	id = facpol_election_events.19 #Galcom Election Oversight Committee neutral statement
+	title = facpol_election_events.19.name
+	desc = facpol_election_events.19.desc
+	is_triggered_only = yes
+	picture = GFX_evt_board_meeting
+	option = {
+		name = facpol_election_events.19.A
+	}
+}
+
+country_event = {
+	id = facpol_election_events.20 #Galcom Election Oversight Committee negative statement
+	title = facpol_election_events.20.name
+	desc = facpol_election_events.20.desc
+	is_triggered_only = yes
+	picture = GFX_evt_board_meeting
+	option = {
+		name = facpol_election_events.20.A
+		add_modifier = {
+			modifier = galcom_oversight_committee_condemnation
+			years = 5
+		}
+		hidden_effect = {
+			random_pop_faction = {
+				limit = {
+					is_pop_faction_type = progressive
+				}
+				add_modifier = {
+					modifier = faction_joins_galcom_condemnation
+					years = 5
+				}
+			}
+			random_pop_faction = {
+				limit = {
+					is_pop_faction_type = xenoist
+				}
+				add_modifier = {
+					modifier = faction_joins_galcom_condemnation
+					years = 5
+				}
+			}
+		}
+	}
+}
+
+country_event = {
+	id = facpol_election_events.21 #Culture War: State and Church
+	title = facpol_election_events.21.name
+	desc = facpol_election_events.21.desc
+	is_triggered_only = yes
+	picture = GFX_evt_unity_symbol
+	immediate = {
+		set_timed_country_flag = {
+			flag = facpol_culture_war
+			years = 10
+		}
+	}
+	option = {
+		name = facpol_election_events.21.A #Do Nothing
+		add_modifier = {
+			modifier = facpol_religious_culture_war_debate
+			years = 5
+		}
+	}
+	option = {
+		name = facpol_election_events.21.B #Promote Spiritualism
+		trigger = {
+			is_materialist = no
+		}
+		allow = {
+			resource_stockpile_compare = {
+				resource = unity
+				value >= 500
+			}
+		}
+		add_resource = {
+			unity = -500
+		}
+		add_modifier = {
+			modifier = facpol_religious_culture_war_promote_spiritualism
+			years = 5
+		}
+	}
+
+	option = {
+		name = facpol_election_events.21.C #Promote Materialism
+		trigger = {
+			is_spiritualist = no
+		}
+		allow = {
+			resource_stockpile_compare = {
+				resource = unity
+				value >= 500
+			}
+		}
+		add_resource = {
+			unity = -500
+		}
+		add_modifier = {
+			modifier = facpol_religious_culture_war_promote_materialism
+			years = 5
+		}
+	}
+	option = {
+		name = facpol_election_events.21.D #Supress Spiritualism
+		trigger = {
+			OR = {
+				is_materialist = yes
+				AND = {
+					is_egalitarian = no
+					is_spiritualist = no
+				}
+			}
+		}
+		allow = {
+			resource_stockpile_compare = {
+				resource = unity
+				value >= 500
+			}
+		}
+		add_resource = {
+			unity = -500
+		}
+		add_modifier = {
+			modifier = facpol_religious_culture_war_supress_spiritualism
+			years = 5
+		}
+		hidden_effect = {
+			change_variable = {
+				which = var_electoral_turmoil
+				value = 1
+			}
+		}
+		custom_tooltip = electoral_turmoil_slight_increase
+	}
+
+	option = {
+		name = facpol_election_events.21.E #Supress Materialism
+		trigger = {
+			OR = {
+				is_spiritualist = yes
+				AND = {
+					is_egalitarian = no
+					is_materialist = no
+				}
+			}
+		}
+		allow = {
+			resource_stockpile_compare = {
+				resource = unity
+				value >= 500
+			}
+		}
+		add_resource = {
+			unity = -500
+		}
+		add_modifier = {
+			modifier = facpol_religious_culture_war_supress_materialism
+			years = 5
+		}
+		hidden_effect = {
+			change_variable = {
+				which = var_electoral_turmoil
+				value = 1
+			}
+		}
+		custom_tooltip = electoral_turmoil_slight_increase
+	}
+}
+
+country_event = {
+	id = facpol_election_events.22 #Faction near bankruptcy
+	title = facpol_election_events.22.name
+
+	
+	is_triggered_only = yes
+	picture = GFX_evt_unity_symbol
+	immediate = {
+		random_list = {
+			1 = {
+				modifier = {
+					factor = 0
+					NOT = {
+						has_faction = xenoist
+					}
+				}
+				modifier = {
+					factor = 1.35
+					any_owned_leader = {
+						has_ethic = ethic_xenophile
+						OR = {
+							has_trait = leader_trait_embezzler
+							has_trait = leader_trait_embezzler_2
+							has_trait = leader_trait_corrupt
+							has_trait = leader_trait_corrupt_2
+						}
+					}
+				}
+				random_pop_faction = {
+					limit = {
+						is_pop_faction_type = xenoist
+					}
+					save_event_target_as = facpol_xenoist_bankrupt_faction
+					save_event_target_as = facpol_the_bankrupt_faction
+				}
+			}
+			1 = {
+				modifier = {
+					factor = 0
+					NOT = {
+						has_faction = supremacist
+					}
+				}
+				modifier = {
+					factor = 1.35
+					any_owned_leader = {
+						has_ethic = ethic_xenophobe
+						OR = {
+							has_trait = leader_trait_embezzler
+							has_trait = leader_trait_embezzler_2
+							has_trait = leader_trait_corrupt
+							has_trait = leader_trait_corrupt_2
+						}
+					}
+				}
+				random_pop_faction = {
+					limit = {
+						is_pop_faction_type = supremacist
+					}
+					save_event_target_as = facpol_supremacist_bankrupt_faction
+					save_event_target_as = facpol_the_bankrupt_faction
+				}
+			}
+			1 = {
+				modifier = {
+					factor = 0
+					NOT = {
+						has_faction = isolationist
+					}
+				}
+				modifier = {
+					factor = 1.35
+					any_owned_leader = {
+						has_ethic = ethic_xenophobe
+						OR = {
+							has_trait = leader_trait_embezzler
+							has_trait = leader_trait_embezzler_2
+							has_trait = leader_trait_corrupt
+							has_trait = leader_trait_corrupt_2
+						}
+					}
+				}
+				random_pop_faction = {
+					limit = {
+						is_pop_faction_type = isolationist
+					}
+					save_event_target_as = facpol_isolationist_bankrupt_faction
+					save_event_target_as = facpol_the_bankrupt_faction
+				}
+			}
+			1 = {
+				modifier = {
+					factor = 0
+					NOT = {
+						has_faction = technologist
+					}
+				}
+				modifier = {
+					factor = 1.35
+					any_owned_leader = {
+						has_ethic = ethic_materialist
+						OR = {
+							has_trait = leader_trait_embezzler
+							has_trait = leader_trait_embezzler_2
+							has_trait = leader_trait_corrupt
+							has_trait = leader_trait_corrupt_2
+						}
+					}
+				}
+				random_pop_faction = {
+					limit = {
+						is_pop_faction_type = technologist
+					}
+					save_event_target_as = facpol_technologist_bankrupt_faction
+					save_event_target_as = facpol_the_bankrupt_faction
+				}
+			}
+			1 = {
+				modifier = {
+					factor = 0
+					NOT = {
+						has_faction = traditionalist
+					}
+				}
+				modifier = {
+					factor = 1.35
+					any_owned_leader = {
+						has_ethic = ethic_spiritualist
+						OR = {
+							has_trait = leader_trait_embezzler
+							has_trait = leader_trait_embezzler_2
+							has_trait = leader_trait_corrupt
+							has_trait = leader_trait_corrupt_2
+						}
+					}
+				}
+				random_pop_faction = {
+					limit = {
+						is_pop_faction_type = traditionalist
+					}
+					save_event_target_as = facpol_traditionalist_bankrupt_faction
+					save_event_target_as = facpol_the_bankrupt_faction
+				}
+			}
+			1 = {
+				modifier = {
+					factor = 0
+					NOT = {
+						has_faction = totalitarian
+					}
+				}
+				modifier = {
+					factor = 1.35
+					any_owned_leader = {
+						has_ethic = ethic_authoritarian
+						OR = {
+							has_trait = leader_trait_embezzler
+							has_trait = leader_trait_embezzler_2
+							has_trait = leader_trait_corrupt
+							has_trait = leader_trait_corrupt_2
+						}
+					}
+				}
+				random_pop_faction = {
+					limit = {
+						is_pop_faction_type = totalitarian
+					}
+					save_event_target_as = facpol_totalitarian_bankrupt_faction
+					save_event_target_as = facpol_the_bankrupt_faction
+				}
+			}
+			1 = {
+				modifier = {
+					factor = 0
+					NOT = {
+						has_faction = progressive
+					}
+				}
+				modifier = {
+					factor = 1.35
+					any_owned_leader = {
+						has_ethic = ethic_egalitarian
+						OR = {
+							has_trait = leader_trait_embezzler
+							has_trait = leader_trait_embezzler_2
+							has_trait = leader_trait_corrupt
+							has_trait = leader_trait_corrupt_2
+						}
+					}
+				}
+				random_pop_faction = {
+					limit = {
+						is_pop_faction_type = progressive
+					}
+					save_event_target_as = facpol_progressive_bankrupt_faction
+					save_event_target_as = facpol_the_bankrupt_faction
+				}
+			}
+			1 = {
+				modifier = {
+					factor = 0
+					NOT = {
+						has_faction = imperialist
+					}
+				}
+				modifier = {
+					factor = 1.35
+					any_owned_leader = {
+						has_ethic = ethic_militarist
+						OR = {
+							has_trait = leader_trait_embezzler
+							has_trait = leader_trait_embezzler_2
+							has_trait = leader_trait_corrupt
+							has_trait = leader_trait_corrupt_2
+						}
+					}
+				}
+				random_pop_faction = {
+					limit = {
+						is_pop_faction_type = imperialist
+					}
+					save_event_target_as = facpol_imperialist_bankrupt_faction
+					save_event_target_as = facpol_the_bankrupt_faction
+				}
+			}
+			1 = {
+				modifier = {
+					factor = 0
+					NOT = {
+						has_faction = prosperity
+					}
+				}
+				modifier = {
+					factor = 1.35
+					any_owned_leader = {
+						has_ethic = ethic_pacifist
+						OR = {
+							has_trait = leader_trait_embezzler
+							has_trait = leader_trait_embezzler_2
+							has_trait = leader_trait_corrupt
+							has_trait = leader_trait_corrupt_2
+						}
+					}
+				}
+				random_pop_faction = {
+					limit = {
+						is_pop_faction_type = prosperity
+					}
+					save_event_target_as = facpol_prosperity_bankrupt_faction
+					save_event_target_as = facpol_the_bankrupt_faction
+				}
+			}
+		}
+		set_timed_country_flag = {
+			flag = facpol_recent_faction_bankrupt
+			years = 10
+		}
+	}
+
+	desc = facpol_election_events.22.desc
+	
+	option = {
+		name = facpol_election_events.22.A
+		random_pop_faction = {
+			limit = {
+				OR = {
+					is_same_value = event_target:facpol_xenoist_bankrupt_faction
+					is_same_value = event_target:facpol_supremacist_bankrupt_faction
+					is_same_value = event_target:facpol_isolationist_bankrupt_faction
+					is_same_value = event_target:facpol_technologist_bankrupt_faction
+					is_same_value = event_target:facpol_traditionalist_bankrupt_faction
+					is_same_value = event_target:facpol_totalitarian_bankrupt_faction
+					is_same_value = event_target:facpol_progressive_bankrupt_faction
+					is_same_value = event_target:facpol_imperialist_bankrupt_faction
+					is_same_value = event_target:facpol_prosperity_bankrupt_faction
+				}
+			}
+			add_modifier = {
+				modifier = facpol_faction_bankrupt
+				years = 10
+			}
+		}
+		hidden_effect = {
+			random_list = {
+				1 = {
+					modifier = {
+						factor = 0
+						NOT = {
+							any_pop_faction = {
+								is_same_value = event_target:facpol_xenoist_bankrupt_faction
+							}
+						}
+					}
+					add_modifier = {
+						modifier = facpol_xenophile_bankrupt_faction
+						years = 10
+					}
+				}
+				1 = {
+					modifier = {
+						factor = 0
+						NOT = {
+							any_pop_faction = {
+								is_same_value = event_target:facpol_supremacist_bankrupt_faction
+							}
+						}
+					}
+					add_modifier = {
+						modifier = facpol_xenophobe_bankrupt_faction
+						years = 10
+					}
+				}
+				1 = {
+					modifier = {
+						factor = 0
+						NOT = {
+							any_pop_faction = {
+								is_same_value = event_target:facpol_isolationist_bankrupt_faction
+							}
+						}
+					}
+					add_modifier = {
+						modifier = facpol_xenophobe_bankrupt_faction
+						years = 10
+					}
+				}
+				1 = {
+					modifier = {
+						factor = 0
+						NOT = {
+							any_pop_faction = {
+								is_same_value = event_target:facpol_technologist_bankrupt_faction
+							}
+						}
+					}
+					add_modifier = {
+						modifier = facpol_materialist_bankrupt_faction
+						years = 10
+					}
+				}
+				1 = {
+					modifier = {
+						factor = 0
+						NOT = {
+							any_pop_faction = {
+								is_same_value = event_target:facpol_traditionalist_bankrupt_faction
+							}
+						}
+					}
+					add_modifier = {
+						modifier = facpol_spiritualist_bankrupt_faction
+						years = 10
+					}
+				}
+				1 = {
+					modifier = {
+						factor = 0
+						NOT = {
+							any_pop_faction = {
+								is_same_value = event_target:facpol_totalitarian_bankrupt_faction
+							}
+						}
+					}
+					add_modifier = {
+						modifier = facpol_authoritarian_bankrupt_faction
+						years = 10
+					}
+				}
+				1 = {
+					modifier = {
+						factor = 0
+						NOT = {
+							any_pop_faction = {
+								is_same_value = event_target:facpol_progressive_bankrupt_faction
+							}
+						}
+					}
+					add_modifier = {
+						modifier = facpol_egalitarian_bankrupt_faction
+						years = 10
+					}
+				}
+				1 = {
+					modifier = {
+						factor = 0
+						NOT = {
+							any_pop_faction = {
+								is_same_value = event_target:facpol_imperialist_bankrupt_faction
+							}
+						}
+					}
+					add_modifier = {
+						modifier = facpol_militarist_bankrupt_faction
+						years = 10
+					}
+				}
+				1 = {
+					modifier = {
+						factor = 0
+						NOT = {
+							any_pop_faction = {
+								is_same_value = event_target:facpol_prosperity_bankrupt_faction
+							}
+						}
+					}
+					add_modifier = {
+						modifier = facpol_pacifist_bankrupt_faction
+						years = 10
+					}
+				}
+			}
+		}
+
+		custom_tooltip = facpol_reduced_faction_ethic_attraction
+	}
+	option = {
+		name = facpol_election_events.22.B
+		allow = {
+			resource_stockpile_compare = {
+				resource = energy
+				value >= 500
+			}
+		}
+		add_resource = {
+			energy = -500
+		}
+		random_pop_faction = {
+			limit = {
+				OR = {
+					is_same_value = event_target:facpol_xenoist_bankrupt_faction
+					is_same_value = event_target:facpol_supremacist_bankrupt_faction
+					is_same_value = event_target:facpol_isolationist_bankrupt_faction
+					is_same_value = event_target:facpol_technologist_bankrupt_faction
+					is_same_value = event_target:facpol_traditionalist_bankrupt_faction
+					is_same_value = event_target:facpol_totalitarian_bankrupt_faction
+					is_same_value = event_target:facpol_progressive_bankrupt_faction
+					is_same_value = event_target:facpol_imperialist_bankrupt_faction
+					is_same_value = event_target:facpol_prosperity_bankrupt_faction
+				}
+			}
+			add_modifier = {
+				modifier = facpol_faction_saved_from_bankruptcy
+				years = 10
+			}
+		}
+		add_modifier = {
+			modifier = facpol_favourising_faction
+			years = 5
+		}
+	}
+	option = {
+		name = facpol_election_events.22.C
+		add_modifier = {
+			modifier = facpol_public_funding_for_factions
+			years = 10
+		}
+	}
+}
+
+country_event = {
+	id = facpol_election_events.23 #Faction's successful electoral campaign
+	title = facpol_election_events.23.name
+
+	
+	is_triggered_only = yes
+	picture = GFX_evt_unity_symbol
+	immediate = {
+		random_list = {
+			1 = {
+				modifier = {
+					factor = 0
+					NOR = {
+						has_faction = xenoist
+						any_owned_leader = {
+							has_ethic = ethic_xenophile
+						}
+					}
+				}
+				modifier = {
+					factor = 1.35
+					any_owned_leader = {
+						has_ethic = ethic_xenophile
+						OR = {
+							has_trait = leader_trait_politician
+							has_trait = leader_trait_politician_2
+							has_trait = leader_trait_reformer
+							has_trait = leader_trait_reformer_2
+							has_trait = leader_trait_reformer_3
+						}
+					}
+				}
+				random_pop_faction = {
+					limit = {
+						is_pop_faction_type = xenoist
+					}
+					save_event_target_as = facpol_xenoist_campaign_faction
+					save_event_target_as = facpol_the_campaign_faction
+				}
+				random_owned_leader = {
+					limit = {
+						has_ethic = ethic_xenophile
+					}
+					weights = {
+						base = 1
+						modifier = {
+							factor = 2
+							OR = {
+								has_trait = leader_trait_politician
+								has_trait = leader_trait_politician_2
+								has_trait = leader_trait_reformer
+								has_trait = leader_trait_reformer_2
+								has_trait = leader_trait_reformer_3
+							}
+						}
+					}
+					save_event_target_as = facpol_election_campaign_leader
+				}
+			}
+			1 = {
+				modifier = {
+					factor = 0
+					NOR = {
+						has_faction = supremacist
+						any_owned_leader = {
+							has_ethic = ethic_xenophobe
+						}
+					}
+				}
+				modifier = {
+					factor = 1.35
+					any_owned_leader = {
+						has_ethic = ethic_xenophobe
+						OR = {
+							has_trait = leader_trait_politician
+							has_trait = leader_trait_politician_2
+							has_trait = leader_trait_reformer
+							has_trait = leader_trait_reformer_2
+							has_trait = leader_trait_reformer_3
+						}
+					}
+				}
+				random_pop_faction = {
+					limit = {
+						is_pop_faction_type = supremacist
+					}
+					save_event_target_as = facpol_supremacist_campaign_faction
+					save_event_target_as = facpol_the_campaign_faction
+				}
+				random_owned_leader = {
+					limit = {
+						has_ethic = ethic_xenophobe
+					}
+					weights = {
+						base = 1
+						modifier = {
+							factor = 2
+							OR = {
+								has_trait = leader_trait_politician
+								has_trait = leader_trait_politician_2
+								has_trait = leader_trait_reformer
+								has_trait = leader_trait_reformer_2
+								has_trait = leader_trait_reformer_3
+							}
+						}
+					}
+					save_event_target_as = facpol_election_campaign_leader
+				}
+			}
+			1 = {
+				modifier = {
+					factor = 0
+					NOR = {
+						has_faction = isolationist
+						any_owned_leader = {
+							has_ethic = ethic_xenophobe
+						}
+					}
+				}
+				modifier = {
+					factor = 1.35
+					any_owned_leader = {
+						has_ethic = ethic_xenophobe
+						OR = {
+							has_trait = leader_trait_politician
+							has_trait = leader_trait_politician_2
+							has_trait = leader_trait_reformer
+							has_trait = leader_trait_reformer_2
+							has_trait = leader_trait_reformer_3
+						}
+					}
+				}
+				random_pop_faction = {
+					limit = {
+						is_pop_faction_type = isolationist
+					}
+					save_event_target_as = facpol_isolationist_campaign_faction
+					save_event_target_as = facpol_the_campaign_faction
+				}
+				random_owned_leader = {
+					limit = {
+						has_ethic = ethic_xenophobe
+					}
+					weights = {
+						base = 1
+						modifier = {
+							factor = 2
+							OR = {
+								has_trait = leader_trait_politician
+								has_trait = leader_trait_politician_2
+								has_trait = leader_trait_reformer
+								has_trait = leader_trait_reformer_2
+								has_trait = leader_trait_reformer_3
+							}
+						}
+					}
+					save_event_target_as = facpol_election_campaign_leader
+				}
+			}
+			1 = {
+				modifier = {
+					factor = 0
+					NOR = {
+						has_faction = technologist
+						any_owned_leader = {
+							has_ethic = ethic_materialist
+						}
+					}
+				}
+				modifier = {
+					factor = 1.35
+					any_owned_leader = {
+						has_ethic = ethic_materialist
+						OR = {
+							has_trait = leader_trait_politician
+							has_trait = leader_trait_politician_2
+							has_trait = leader_trait_reformer
+							has_trait = leader_trait_reformer_2
+							has_trait = leader_trait_reformer_3
+						}
+					}
+				}
+				random_pop_faction = {
+					limit = {
+						is_pop_faction_type = technologist
+					}
+					save_event_target_as = facpol_technologist_campaign_faction
+					save_event_target_as = facpol_the_campaign_faction
+				}
+				random_owned_leader = {
+					limit = {
+						has_ethic = ethic_materialist
+					}
+					weights = {
+						base = 1
+						modifier = {
+							factor = 2
+							OR = {
+								has_trait = leader_trait_politician
+								has_trait = leader_trait_politician_2
+								has_trait = leader_trait_reformer
+								has_trait = leader_trait_reformer_2
+								has_trait = leader_trait_reformer_3
+							}
+						}
+					}
+					save_event_target_as = facpol_election_campaign_leader
+				}
+			}
+			1 = {
+				modifier = {
+					factor = 0
+					NOR = {
+						has_faction = traditionalist
+						any_owned_leader = {
+							has_ethic = ethic_spiritualist
+						}
+					}
+				}
+				modifier = {
+					factor = 1.35
+					any_owned_leader = {
+						has_ethic = ethic_spiritualist
+						OR = {
+							has_trait = leader_trait_politician
+							has_trait = leader_trait_politician_2
+							has_trait = leader_trait_reformer
+							has_trait = leader_trait_reformer_2
+							has_trait = leader_trait_reformer_3
+						}
+					}
+				}
+				random_pop_faction = {
+					limit = {
+						is_pop_faction_type = traditionalist
+					}
+					save_event_target_as = facpol_traditionalist_campaign_faction
+					save_event_target_as = facpol_the_campaign_faction
+				}
+				random_owned_leader = {
+					limit = {
+						has_ethic = ethic_spiritualist
+					}
+					weights = {
+						base = 1
+						modifier = {
+							factor = 2
+							OR = {
+								has_trait = leader_trait_politician
+								has_trait = leader_trait_politician_2
+								has_trait = leader_trait_reformer
+								has_trait = leader_trait_reformer_2
+								has_trait = leader_trait_reformer_3
+							}
+						}
+					}
+					save_event_target_as = facpol_election_campaign_leader
+				}
+			}
+			1 = {
+				modifier = {
+					factor = 0
+					NOR = {
+						has_faction = totalitarian
+						any_owned_leader = {
+							has_ethic = ethic_authoritarian
+						}
+					}
+				}
+				modifier = {
+					factor = 1.35
+					any_owned_leader = {
+						has_ethic = ethic_authoritarian
+						OR = {
+							has_trait = leader_trait_politician
+							has_trait = leader_trait_politician_2
+							has_trait = leader_trait_reformer
+							has_trait = leader_trait_reformer_2
+							has_trait = leader_trait_reformer_3
+						}
+					}
+				}
+				random_pop_faction = {
+					limit = {
+						is_pop_faction_type = totalitarian
+					}
+					save_event_target_as = facpol_totalitarian_campaign_faction
+					save_event_target_as = facpol_the_campaign_faction
+				}
+				random_owned_leader = {
+					limit = {
+						has_ethic = ethic_authoritarian
+					}
+					weights = {
+						base = 1
+						modifier = {
+							factor = 2
+							OR = {
+								has_trait = leader_trait_politician
+								has_trait = leader_trait_politician_2
+								has_trait = leader_trait_reformer
+								has_trait = leader_trait_reformer_2
+								has_trait = leader_trait_reformer_3
+							}
+						}
+					}
+					save_event_target_as = facpol_election_campaign_leader
+				}
+			}
+			1 = {
+				modifier = {
+					factor = 0
+					NOR = {
+						has_faction = progressive
+						any_owned_leader = {
+							has_ethic = ethic_egalitarian
+						}
+					}
+				}
+				modifier = {
+					factor = 1.35
+					any_owned_leader = {
+						has_ethic = ethic_egalitarian
+						OR = {
+							has_trait = leader_trait_politician
+							has_trait = leader_trait_politician_2
+							has_trait = leader_trait_reformer
+							has_trait = leader_trait_reformer_2
+							has_trait = leader_trait_reformer_3
+						}
+					}
+				}
+				random_pop_faction = {
+					limit = {
+						is_pop_faction_type = progressive
+					}
+					save_event_target_as = facpol_progressive_campaign_faction
+					save_event_target_as = facpol_the_campaign_faction
+				}
+				random_owned_leader = {
+					limit = {
+						has_ethic = ethic_egalitarian
+					}
+					weights = {
+						base = 1
+						modifier = {
+							factor = 2
+							OR = {
+								has_trait = leader_trait_politician
+								has_trait = leader_trait_politician_2
+								has_trait = leader_trait_reformer
+								has_trait = leader_trait_reformer_2
+								has_trait = leader_trait_reformer_3
+							}
+						}
+					}
+					save_event_target_as = facpol_election_campaign_leader
+				}
+			}
+			1 = {
+				modifier = {
+					factor = 0
+					NOR = {
+						has_faction = imperialist
+						any_owned_leader = {
+							has_ethic = ethic_militarist
+						}
+					}
+				}
+				modifier = {
+					factor = 1.35
+					any_owned_leader = {
+						has_ethic = ethic_militarist
+						OR = {
+							has_trait = leader_trait_politician
+							has_trait = leader_trait_politician_2
+							has_trait = leader_trait_reformer
+							has_trait = leader_trait_reformer_2
+							has_trait = leader_trait_reformer_3
+						}
+					}
+				}
+				random_pop_faction = {
+					limit = {
+						is_pop_faction_type = imperialist
+					}
+					save_event_target_as = facpol_imperialist_campaign_faction
+					save_event_target_as = facpol_the_campaign_faction
+				}
+				random_owned_leader = {
+					limit = {
+						has_ethic = ethic_militarist
+					}
+					weights = {
+						base = 1
+						modifier = {
+							factor = 2
+							OR = {
+								has_trait = leader_trait_politician
+								has_trait = leader_trait_politician_2
+								has_trait = leader_trait_reformer
+								has_trait = leader_trait_reformer_2
+								has_trait = leader_trait_reformer_3
+							}
+						}
+					}
+					save_event_target_as = facpol_election_campaign_leader
+				}
+			}
+			1 = {
+				modifier = {
+					factor = 0
+					NOR = {
+						has_faction = prosperity
+						any_owned_leader = {
+							has_ethic = ethic_pacifist
+						}
+					}
+				}
+				modifier = {
+					factor = 1.35
+					any_owned_leader = {
+						has_ethic = ethic_pacifist
+						OR = {
+							has_trait = leader_trait_politician
+							has_trait = leader_trait_politician_2
+							has_trait = leader_trait_reformer
+							has_trait = leader_trait_reformer_2
+							has_trait = leader_trait_reformer_3
+						}
+					}
+				}
+				random_pop_faction = {
+					limit = {
+						is_pop_faction_type = prosperity
+					}
+					save_event_target_as = facpol_prosperity_campaign_faction
+					save_event_target_as = facpol_the_campaign_faction
+				}
+				random_owned_leader = {
+					limit = {
+						has_ethic = ethic_pacifist
+					}
+					weights = {
+						base = 1
+						modifier = {
+							factor = 2
+							OR = {
+								has_trait = leader_trait_politician
+								has_trait = leader_trait_politician_2
+								has_trait = leader_trait_reformer
+								has_trait = leader_trait_reformer_2
+								has_trait = leader_trait_reformer_3
+							}
+						}
+					}
+					save_event_target_as = facpol_election_campaign_leader
+				}
+			}
+		}
+
+	}
+
+	desc = facpol_election_events.23.desc
+	
+	option = {
+		name = facpol_election_events.23.A
+		random_pop_faction = {
+			limit = {
+				OR = {
+					is_same_value = event_target:facpol_xenoist_campaign_faction
+					is_same_value = event_target:facpol_supremacist_campaign_faction
+					is_same_value = event_target:facpol_isolationist_campaign_faction
+					is_same_value = event_target:facpol_technologist_campaign_faction
+					is_same_value = event_target:facpol_traditionalist_campaign_faction
+					is_same_value = event_target:facpol_totalitarian_campaign_faction
+					is_same_value = event_target:facpol_progressive_campaign_faction
+					is_same_value = event_target:facpol_imperialist_campaign_faction
+					is_same_value = event_target:facpol_prosperity_campaign_faction
+				}
+			}
+			add_modifier = {
+				modifier = facpol_faction_successful_campaign
+				years = 5
+			}
+		}
+		hidden_effect = {
+			random_list = {
+				1 = {
+					modifier = {
+						factor = 0
+						NOT = {
+							any_pop_faction = {
+								is_same_value = event_target:facpol_xenoist_campaign_faction
+							}
+						}
+					}
+					add_modifier = {
+						modifier = facpol_xenophile_campaign_faction
+						years = 5
+					}
+				}
+				1 = {
+					modifier = {
+						factor = 0
+						NOT = {
+							any_pop_faction = {
+								is_same_value = event_target:facpol_supremacist_campaign_faction
+							}
+						}
+					}
+					add_modifier = {
+						modifier = facpol_xenophobe_campaign_faction
+						years = 5
+					}
+				}
+				1 = {
+					modifier = {
+						factor = 0
+						NOT = {
+							any_pop_faction = {
+								is_same_value = event_target:facpol_isolationist_campaign_faction
+							}
+						}
+					}
+					add_modifier = {
+						modifier = facpol_xenophobe_campaign_faction
+						years = 5
+					}
+				}
+				1 = {
+					modifier = {
+						factor = 0
+						NOT = {
+							any_pop_faction = {
+								is_same_value = event_target:facpol_technologist_campaign_faction
+							}
+						}
+					}
+					add_modifier = {
+						modifier = facpol_materialist_campaign_faction
+						years = 5
+					}
+				}
+				1 = {
+					modifier = {
+						factor = 0
+						NOT = {
+							any_pop_faction = {
+								is_same_value = event_target:facpol_traditionalist_campaign_faction
+							}
+						}
+					}
+					add_modifier = {
+						modifier = facpol_spiritualist_campaign_faction
+						years = 5
+					}
+				}
+				1 = {
+					modifier = {
+						factor = 0
+						NOT = {
+							any_pop_faction = {
+								is_same_value = event_target:facpol_totalitarian_campaign_faction
+							}
+						}
+					}
+					add_modifier = {
+						modifier = facpol_authoritarian_campaign_faction
+						years = 5
+					}
+				}
+				1 = {
+					modifier = {
+						factor = 0
+						NOT = {
+							any_pop_faction = {
+								is_same_value = event_target:facpol_progressive_campaign_faction
+							}
+						}
+					}
+					add_modifier = {
+						modifier = facpol_egalitarian_campaign_faction
+						years = 5
+					}
+				}
+				1 = {
+					modifier = {
+						factor = 0
+						NOT = {
+							any_pop_faction = {
+								is_same_value = event_target:facpol_imperialist_campaign_faction
+							}
+						}
+					}
+					add_modifier = {
+						modifier = facpol_militarist_campaign_faction
+						years = 5
+					}
+				}
+				1 = {
+					modifier = {
+						factor = 0
+						NOT = {
+							any_pop_faction = {
+								is_same_value = event_target:facpol_prosperity_campaign_faction
+							}
+						}
+					}
+					add_modifier = {
+						modifier = facpol_pacifist_campaign_faction
+						years = 5
+					}
+				}
+			}
+		}
+
+		custom_tooltip = facpol_increased_faction_ethic_attraction
+	}
+	option = {
+		name = facpol_election_events.23.B
+		
+		random_pop_faction = {
+			limit = {
+				OR = {
+					is_same_value = event_target:facpol_xenoist_campaign_faction
+					is_same_value = event_target:facpol_supremacist_campaign_faction
+					is_same_value = event_target:facpol_isolationist_campaign_faction
+					is_same_value = event_target:facpol_technologist_campaign_faction
+					is_same_value = event_target:facpol_traditionalist_campaign_faction
+					is_same_value = event_target:facpol_totalitarian_campaign_faction
+					is_same_value = event_target:facpol_progressive_campaign_faction
+					is_same_value = event_target:facpol_imperialist_campaign_faction
+					is_same_value = event_target:facpol_prosperity_campaign_faction
+				}
+			}
+			add_modifier = {
+				modifier = facpol_faction_successful_campaign
+				years = 5
+			}
+		}
+		random_owned_leader = {
+			limit = {
+				is_same_value = event_target:facpol_election_campaign_leader
+			}
+			add_experience = 100
+		}
+	}
+}
+
+# country_event = {
+# 	id = facpol_election_events.24
+# 	hide_window = yes
+# 	is_triggered_only = yes
+# 	immediate = {
+# 		remove_country_flag = ongoing_elections
+# 		remove_country_flag = facpol_approach_elections_falsify_cf
+# 		remove_country_flag = facpol_approach_elections_censorship_cf
+# 		remove_country_flag = facpol_approach_elections_do_nothing_cf
+# 		remove_country_flag = facpol_approach_elections_protect_liberties_cf
+# 	}
+
+# }

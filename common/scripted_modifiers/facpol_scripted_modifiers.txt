@@ -1,0 +1,34 @@
+discriminated_pop_amenities_usage_mult = {
+	icon = "mod_planet_amenities_mult"
+	percentage = yes
+	good = no
+	category = pop
+}
+
+discriminated_pop_happiness_mult = {
+	icon = "mod_pop_happiness"
+	percentage = yes
+	good = yes
+	category = pop
+}
+
+heathen_pop_happiness_mult = {
+	icon = "mod_pop_happiness"
+	percentage = yes
+	good = yes
+	category = pop
+}
+
+heathen_pop_political_power_mult = {
+	icon = "mod_pop_happiness"
+	percentage = yes
+	neutral = yes
+	category = pop
+}
+
+discriminated_pop_political_power_mult = {
+	icon = "mod_pop_happiness"
+	percentage = yes
+	neutral = yes
+	category = pop
+}

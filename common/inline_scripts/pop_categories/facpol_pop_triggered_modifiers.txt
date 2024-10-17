@@ -1,0 +1,81 @@
+triggered_pop_modifier = {
+	potential = {
+		OR = {
+			is_pop_category = worker
+			is_pop_category = slave
+			AND = {
+				exists = owner
+				NOT = {
+					is_same_species = owner
+				}
+			}
+		}
+	}
+	key = mod_discriminated_pop_amenities_usage_mult
+	pop_amenities_usage_mult = 1
+	mult = modifier:discriminated_pop_amenities_usage_mult
+}
+
+triggered_pop_modifier = {
+	potential = {
+		OR = {
+			is_pop_category = worker
+			is_pop_category = slave
+			AND = {
+				exists = owner
+				NOT = {
+					is_same_species = owner
+				}
+			}
+		}
+		is_mechanical_species = no
+	}
+	key = mod_discriminated_pop_happiness_mult
+	pop_happiness = 1
+	mult = modifier:discriminated_pop_happiness_mult
+}
+
+triggered_pop_modifier = {
+	potential = {
+		pop_has_ethic = ethic_spiritualist
+		NOT = {
+			is_same_species = owner
+		}
+		is_mechanical_species = no
+	}
+	key = mod_heathen_pop_happiness_mult
+	pop_happiness = 1
+	mult = modifier:heathen_pop_happiness_mult
+}
+
+triggered_pop_modifier = {
+	potential = {
+		OR = {
+			is_pop_category = worker
+			is_pop_category = slave
+			AND = {
+				exists = owner
+				NOT = {
+					is_same_species = owner
+				}
+			}
+		}
+		is_mechanical_species = no
+	}
+	key = mod_discriminated_pop_political_power_mult
+	pop_political_power = 1
+	mult = modifier:discriminated_pop_political_power_mult
+}
+
+triggered_pop_modifier = {
+	potential = {
+		pop_has_ethic = ethic_spiritualist
+		NOT = {
+			is_same_species = owner
+		}
+		is_mechanical_species = no
+	}
+	key = mod_heathen_pop_political_power_mult
+	pop_political_power = 1
+	mult = modifier:heathen_pop_political_power_mult
+}

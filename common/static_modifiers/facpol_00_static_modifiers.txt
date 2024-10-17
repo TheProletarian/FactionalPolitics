@@ -1,0 +1,932 @@
+
+facpol_xenophile_faction_loyal = { #Social Studies
+	country_society_tech_research_speed = 0.15
+}
+
+facpol_xenophile_faction_disloyal = { #International Condemnations
+	country_influence_produces_mult = -0.1
+}
+
+facpol_supremacist_faction_loyal = { #Self-Strenghening
+	country_unity_produces_mult = 0.1
+}
+
+facpol_supremacist_faction_disloyal = { #Race Riots
+	planet_stability_add = -10
+}
+
+facpol_isolationist_faction_loyal = { #Patriotic Zeal
+	ship_home_territory_fire_rate_mult = 0.25
+}
+
+facpol_isolationist_faction_disloyal = { #Self-Defence Squads
+	pop_citizen_happiness = -0.15
+}
+
+facpol_materialist_faction_loyal = { #Seekers of Wonders
+	science_ship_survey_speed = 0.35
+}
+
+facpol_materialist_faction_disloyal = { #Nihilism
+	country_unity_produces_mult = -0.1
+}
+
+facpol_spiritualist_faction_loyal = { #Marry and Reproduce
+	pop_growth_speed = 0.05
+}
+
+facpol_spiritualist_faction_disloyal = { #Old Ways
+	all_technology_research_speed = -0.1
+}
+
+facpol_authoritarian_faction_loyal = { #Noble Duty
+	planet_jobs_ruler_produces_mult = 0.25
+}
+
+facpol_authoritarian_faction_disloyal = { #Business Plot
+	planet_jobs_specialist_produces_mult = -0.10
+}
+
+facpol_egalitarian_faction_loyal = { #Labor Heroes
+	planet_jobs_worker_produces_mult = 0.15
+}
+
+facpol_egalitarian_faction_disloyal = { #Construction Workers Strike
+	planet_building_build_speed_mult = -0.2
+	planet_decision_enact_speed_mult = -0.2
+}
+
+facpol_militarist_faction_loyal = { #Motivated Troops
+	army_damage_mult = 0.2
+}
+
+facpol_militarist_faction_disloyal = { #Equipment Waste
+	ships_upkeep_mult = 0.15
+}
+
+facpol_pacifist_faction_loyal = { #Engines of Industry
+	country_engineering_tech_research_speed = 0.15
+}
+
+facpol_pacifist_faction_disloyal = { #Tax Evasion
+	country_energy_produces_mult = -0.1
+}
+
+facpol_supremacist_martyr = {
+	pop_ethic_xenophobe_attraction_mult = 0.5
+	country_unity_produces_mult = -0.1
+}
+
+faction_outraged = {
+	faction_approval = -0.3
+}
+
+facpol_labor_martyr = {
+	pop_ethic_egalitarian_attraction_mult = 0.5
+	planet_jobs_worker_produces_mult = -0.1
+}
+
+facpol_political_amnesty = {
+	faction_approval = 0.05
+}
+
+facpol_political_crackdown = {
+	pop_factions_produces_mult = -0.4
+	planet_stability_add = 10
+}
+
+facpol_peaceful_election = {
+	pop_factions_produces_mult = 0.2
+	pop_citizenry_happiness = 0.1
+	planet_stability_add = 5
+}
+
+facpol_contested_election = {
+	pop_factions_produces_mult = 0.1
+}
+
+facpol_violent_election = {
+	pop_factions_produces_mult = -0.4
+	pop_citizenry_happiness = -0.2
+	planet_stability_add = -10
+}
+
+facpol_spiritualist_scandal = {
+	pop_ethic_spiritualist_attraction_mult = -0.5
+}
+
+facpol_militarist_scandal = {
+	pop_ethic_militarist_attraction_mult = -0.5
+}
+
+facpol_elections_betting = {
+	trade_value_mult = 0.1
+}
+
+galcom_oversight_committee_ban = {
+	country_influence_produces_mult = -0.1
+	diplo_weight_mult = -0.2
+}
+
+galcom_oversight_committee_praising = {
+	diplo_weight_pops_mult = 0.25
+}
+
+galcom_oversight_committee_reforms = {
+	diplo_weight_pops_mult = 0.15
+	pop_happiness = 0.05
+	pop_ethic_xenophile_attraction_mult = 0.35
+}
+
+faction_approves_galcom_reforms = {
+	pop_factions_unity_produces_mult = 0.1
+	faction_approval = 0.1
+}
+
+attempted_to_murder_galcom_envoy = {
+	country_influence_produces_mult = -0.2
+	diplo_weight_mult = -0.4
+}
+
+galcom_oversight_committee_condemnation = {
+	diplo_weight_pops_mult = -0.15
+	pop_happiness = -0.05
+}
+
+faction_joins_galcom_condemnation = {
+	pop_factions_unity_produces_mult = -0.1
+	faction_approval = -0.1
+}
+
+facpol_parliament_fails_forming_gov = {
+	country_unity_produces_mult = -0.2
+	pop_citizenry_happiness = -0.1
+	country_influence_produces_mult = -0.1
+	diplo_weight_mult = -0.1
+}
+
+facpol_xenophile_coalition_gov = {
+	pop_ethic_xenophile_attraction_mult = 0.3
+}
+
+facpol_xenophile_majority_gov = {
+	pop_ethic_xenophile_attraction_mult = 0.5
+}
+
+facpol_xenophile_supermajority_gov = {
+	pop_ethic_xenophile_attraction_mult = 0.75
+}
+
+facpol_xenophobe_coalition_gov = {
+	pop_ethic_xenophobe_attraction_mult = 0.3
+}
+
+facpol_xenophobe_majority_gov = {
+	pop_ethic_xenophobe_attraction_mult = 0.5
+}
+
+facpol_xenophobe_supermajority_gov = {
+	pop_ethic_xenophobe_attraction_mult = 0.75
+}
+
+facpol_spiritualist_coalition_gov = {
+	pop_ethic_spiritualist_attraction_mult = 0.3
+}
+
+facpol_spiritualist_majority_gov = {
+	pop_ethic_spiritualist_attraction_mult = 0.5
+}
+
+facpol_spiritualist_supermajority_gov = {
+	pop_ethic_spiritualist_attraction_mult = 0.75
+}
+
+facpol_materialist_coalition_gov = {
+	pop_ethic_materialist_attraction_mult = 0.3
+}
+
+facpol_materialist_majority_gov = {
+	pop_ethic_materialist_attraction_mult = 0.5
+}
+
+facpol_materialist_supermajority_gov = {
+	pop_ethic_materialist_attraction_mult = 0.75
+}
+
+facpol_authoritarian_coalition_gov = {
+	pop_ethic_authoritarian_attraction_mult = 0.3
+}
+
+facpol_authoritarian_majority_gov = {
+	pop_ethic_authoritarian_attraction_mult = 0.5
+}
+
+facpol_authoritarian_supermajority_gov = {
+	pop_ethic_authoritarian_attraction_mult = 0.75
+}
+
+facpol_egalitarian_coalition_gov = {
+	pop_ethic_egalitarian_attraction_mult = 0.3
+}
+
+facpol_egalitarian_majority_gov = {
+	pop_ethic_egalitarian_attraction_mult = 0.5
+}
+
+facpol_egalitarian_supermajority_gov = {
+	pop_ethic_egalitarian_attraction_mult = 0.75
+}
+
+facpol_militarist_coalition_gov = {
+	pop_ethic_militarist_attraction_mult = 0.3
+}
+
+facpol_militarist_majority_gov = {
+	pop_ethic_militarist_attraction_mult = 0.5
+}
+
+facpol_militarist_supermajority_gov = {
+	pop_ethic_militarist_attraction_mult = 0.75
+}
+
+facpol_pacifist_coalition_gov = {
+	pop_ethic_pacifist_attraction_mult = 0.3
+}
+
+facpol_pacifist_majority_gov = {
+	pop_ethic_pacifist_attraction_mult = 0.5
+}
+
+facpol_pacifist_supermajority_gov = {
+	pop_ethic_pacifist_attraction_mult = 0.75
+}
+
+facpol_xenophile_falsified_gov = {
+	pop_ethic_xenophile_attraction_mult = -0.3
+}
+
+facpol_xenophobe_falsified_gov = {
+	pop_ethic_xenophobe_attraction_mult = -0.3
+}
+
+facpol_spiritualist_falsified_gov = {
+	pop_ethic_spiritualist_attraction_mult = -0.3
+}
+
+facpol_materialist_falsified_gov = {
+	pop_ethic_materialist_attraction_mult = -0.3
+}
+
+facpol_authoritarian_falsified_gov = {
+	pop_ethic_authoritarian_attraction_mult = -0.3
+}
+
+facpol_egalitarian_falsified_gov = {
+	pop_ethic_egalitarian_attraction_mult = -0.3
+}
+
+facpol_militarist_falsified_gov = {
+	pop_ethic_militarist_attraction_mult = -0.3
+}
+
+facpol_pacifist_falsified_gov = {
+	pop_ethic_pacifist_attraction_mult = -0.3
+}
+
+facpol_religious_culture_war_debate = {
+	pop_ethic_spiritualist_attraction_mult = 0.25
+	pop_ethic_materialist_attraction_mult = 0.25
+}
+
+facpol_religious_culture_war_promote_spiritualism = {
+	pop_ethic_spiritualist_attraction_mult = 0.45
+}
+
+facpol_religious_culture_war_promote_materialism = {
+	pop_ethic_materialist_attraction_mult = 0.45
+}
+
+facpol_religious_culture_war_supress_spiritualism = {
+	pop_ethic_spiritualist_attraction_mult = -0.45
+}
+
+facpol_religious_culture_war_supress_materialism = {
+	pop_ethic_materialist_attraction_mult = -0.45
+}
+
+facpol_faction_bankrupt = {
+	faction_approval = -0.1
+	pop_factions_unity_produces_mult = -0.5
+}
+
+facpol_faction_saved_from_bankruptcy = {
+	faction_approval = 0.25
+}
+
+facpol_favourising_faction = {
+	faction_approval = -0.05
+}
+
+facpol_xenophile_bankrupt_faction = {
+	pop_ethic_xenophile_attraction_mult = -0.3
+}
+
+facpol_xenophobe_bankrupt_faction = {
+	pop_ethic_xenophobe_attraction_mult = -0.3
+}
+
+facpol_spiritualist_bankrupt_faction = {
+	pop_ethic_spiritualist_attraction_mult = -0.3
+}
+
+facpol_materialist_bankrupt_faction = {
+	pop_ethic_materialist_attraction_mult = -0.3
+}
+
+facpol_authoritarian_bankrupt_faction = {
+	pop_ethic_authoritarian_attraction_mult = -0.3
+}
+
+facpol_egalitarian_bankrupt_faction = {
+	pop_ethic_egalitarian_attraction_mult = -0.3
+}
+
+facpol_militarist_bankrupt_faction = {
+	pop_ethic_militarist_attraction_mult = -0.3
+}
+
+facpol_pacifist_bankrupt_faction = {
+	pop_ethic_pacifist_attraction_mult = -0.3
+}
+
+facpol_public_funding_for_factions = {
+	pop_category_rulers_energy_upkeep_add = 0.1
+	pop_category_specialists_energy_upkeep_add = 0.07
+	pop_category_workers_energy_upkeep_add = 0.05
+	pop_factions_unity_produces_mult = 0.1
+	faction_approval = 0.1
+}
+
+facpol_xenophile_campaign_faction = {
+	pop_ethic_xenophile_attraction_mult = 0.3
+}
+
+facpol_xenophobe_campaign_faction = {
+	pop_ethic_xenophobe_attraction_mult = 0.3
+}
+
+facpol_spiritualist_campaign_faction = {
+	pop_ethic_spiritualist_attraction_mult = 0.3
+}
+
+facpol_materialist_campaign_faction = {
+	pop_ethic_materialist_attraction_mult = 0.3
+}
+
+facpol_authoritarian_campaign_faction = {
+	pop_ethic_authoritarian_attraction_mult = 0.3
+}
+
+facpol_egalitarian_campaign_faction = {
+	pop_ethic_egalitarian_attraction_mult = 0.3
+}
+
+facpol_militarist_campaign_faction = {
+	pop_ethic_militarist_attraction_mult = 0.3
+}
+
+facpol_pacifist_campaign_faction = {
+	pop_ethic_pacifist_attraction_mult = 0.3
+}
+
+facpol_faction_successful_campaign = {
+	pop_factions_unity_produces_mult = 0.25
+}
+
+facpol_easier_migration_act = {
+	pop_ethic_xenophile_attraction_mult = 0.2
+	pop_growth_from_immigration = 0.2
+	planet_immigration_pull_mult = 0.1
+	intel_encryption_add = -2
+}
+
+facpol_easier_migration_act_faction_approves = {
+	faction_approval = 0.10
+}
+
+facpol_easier_migration_act_faction_disapproves = {
+	faction_approval = -0.10
+}
+
+facpol_small_protests = {
+	pop_citizen_happiness = -0.05
+}
+
+facpol_medium_protests = {
+	pop_citizen_happiness = -0.1
+	planet_stability_add = -5
+}
+
+facpol_large_protests = {
+	pop_citizen_happiness = -0.2
+	planet_stability_add = -10
+}
+
+facpol_xeno_protection_act = {
+	pop_environment_tolerance = 0.05
+	planet_farmers_food_produces_mult = -0.1
+	planet_miners_minerals_produces_mult = -0.1
+	deposit_blockers_natural_unity_produces_add = 2
+	planet_clear_blocker_speed_mult = -0.2
+}
+
+facpol_xeno_protection_act_faction_approves = {
+	faction_approval = 0.10
+}
+
+facpol_xeno_protection_act_faction_disapproves = {
+	faction_approval = -0.10
+}
+
+facpol_xeno_affairs_departament_act = {
+	envoys_add = 1
+	diplo_weight_mult = 0.1
+	first_contact_speed_mult = 0.25
+	envoy_improve_relations_mult = 0.2
+	country_power_projection_influence_produces_mult = -0.33
+}
+
+facpol_xeno_affairs_departament_act_faction_approves = {
+	faction_approval = 0.10
+}
+
+facpol_xeno_affairs_departament_act_faction_disapproves = {
+	faction_approval = -0.10
+}
+
+facpol_closed_country_act = {
+	envoys_add = -1
+	pop_ethic_xenophobe_attraction_mult = 0.3
+	planet_jobs_unity_produces_mult = 0.15
+	planet_stability_add = 10
+	diplo_weight_mult = -0.5
+	envoy_improve_relations_mult = -0.8
+	pop_growth_from_immigration = -0.2
+	all_technology_research_speed = -0.1
+	trade_value_mult = -0.25
+
+}
+
+facpol_closed_country_act_faction_approves = {
+	faction_approval = 0.10
+}
+
+facpol_closed_country_act_faction_disapproves = {
+	faction_approval = -0.10
+}
+
+
+facpol_foreign_black_market = {
+	pop_ethic_xenophile_attraction_mult = 0.5
+	planet_crime_add = 0.5
+	trade_value_add = -0.2
+}
+
+facpol_segregation_act = {
+	planet_crime_mult = 0.1
+	pop_ethic_xenophobe_attraction_mult = 0.3
+	planet_jobs_worker_produces_mult = 0.1
+	discriminated_pop_amenities_usage_mult = -0.4
+	discriminated_pop_happiness_mult = -0.2
+	discriminated_pop_political_power_mult = -0.25
+
+}
+
+facpol_segregation_act_faction_approves = {
+	faction_approval = 0.10
+}
+
+facpol_segregation_act_faction_disapproves = {
+	faction_approval = -0.10
+}
+
+
+facpol_segregated_pop = {
+	planet_crime_no_happiness_add = 1
+	pop_happiness = -0.2
+	pop_amenities_usage_mult = -0.4
+	planet_pops_consumer_goods_upkeep_mult = -0.3
+	pop_political_power = -0.5
+}
+
+facpol_spread_faith_act = {
+	pop_ethic_spiritualist_attraction_mult = 0.3
+	planet_administrators_produces_mult = 0.5
+	heathen_pop_happiness_mult = -0.2
+	heathen_pop_political_power_mult = -0.25
+}
+
+facpol_spread_faith_act_faction_approves = {
+	faction_approval = 0.10
+}
+
+facpol_spread_faith_act_faction_disapproves = {
+	faction_approval = -0.10
+}
+
+facpol_heathen_pop = {
+	pop_happiness = -0.2
+	pop_amenities_usage_mult = -0.2
+	planet_pops_consumer_goods_upkeep_mult = -0.1
+	pop_political_power = -0.25
+	planet_jobs_unity_produces_mult = -0.75
+}
+
+facpol_temple_land_act = {
+	planet_administrators_upkeep_mult = 0.2
+}
+
+facpol_temple_land_act_faction_approves = {
+	faction_approval = 0.10
+}
+
+facpol_temple_land_act_faction_disapproves = {
+	faction_approval = -0.10
+}
+
+facpol_planetary_temple_lands_t1 = {
+	planet_buildings_cost_mult = -0.05
+	planet_districts_cost_mult = -0.05
+	planetary_ascension_effect_mult = 0.1
+	planet_stability_add = 5
+	pop_ethic_spiritualist_attraction_mult = 0.1
+	planet_max_districts_add = -1
+	icon = gfx/interface/icons/planet_modifiers/pm_artist_monument_erected.dds
+	icon_frame = 1
+}
+
+facpol_planetary_temple_lands_t2 = {
+	planet_buildings_cost_mult = -0.1
+	planet_districts_cost_mult = -0.1
+	planetary_ascension_effect_mult = 0.2
+	planet_stability_add = 10
+	pop_ethic_spiritualist_attraction_mult = 0.2
+	planet_max_districts_add = -2
+	icon = gfx/interface/icons/planet_modifiers/pm_artist_monument_erected.dds
+	icon_frame = 1
+}
+
+facpol_planetary_temple_lands_t3 = {
+	planet_buildings_cost_mult = -0.2
+	planet_districts_cost_mult = -0.2
+	planetary_ascension_effect_mult = 0.4
+	planet_stability_add = 20
+	pop_ethic_spiritualist_attraction_mult = 0.3
+	planet_max_districts_add = -3
+	icon = gfx/interface/icons/planet_modifiers/pm_artist_monument_erected.dds
+	icon_frame = 1
+}
+
+facpol_temple_lands_pop_priest = {
+	pop_political_power = 1
+}
+
+facpol_state_atheism_act = {
+	all_technology_research_speed = 0.1
+	country_unity_produces_mult = -0.1
+	pop_ethic_materialist_attraction_mult = 0.3
+	planet_jobs_specialist_produces_mult = 0.05
+}
+
+facpol_state_atheism_act_faction_approves = {
+	faction_approval = 0.10
+}
+
+facpol_state_atheism_act_faction_disapproves = {
+	faction_approval = -0.10
+}
+
+facpol_machines_rights_act = {
+	ROBOT_pop_happiness = 0.2
+	planet_jobs_robotic_produces_mult = 0.1
+	planet_pops_robotics_upkeep_mult = 0.25
+	country_engineering_tech_research_speed = 0.15
+	empire_size_pops_mult = 0.2
+}
+
+facpol_machines_rights_act_faction_approves = {
+	faction_approval = 0.10
+}
+
+facpol_machines_rights_act_faction_disapproves = {
+	faction_approval = -0.10
+}
+
+facpol_slavery_enforcement_act = {
+	planet_jobs_slave_produces_mult = 0.15
+	pop_happiness = -0.05
+	pop_government_ethic_attraction = -0.25
+}
+
+facpol_slavery_enforcement_act_faction_approves = {
+	faction_approval = 0.10
+}
+
+facpol_slavery_enforcement_act_faction_disapproves = {
+	faction_approval = -0.10
+}
+
+facpol_treason_act = {
+	pop_ethic_authoritarian_attraction_mult = 0.3
+	intel_encryption_add = 2
+	planet_stability_add = 5
+	pop_factions_unity_produces_mult = -0.25
+	envoy_improve_relations_mult = -0.35
+}
+
+facpol_treason_act_faction_approves = {
+	faction_approval = 0.10
+}
+
+facpol_treason_act_faction_disapproves = {
+	faction_approval = -0.10
+}
+
+facpol_right_to_work_act = {
+	pop_cat_worker_happiness = 0.2
+	pop_cat_worker_political_power = 0.25
+	planet_building_build_speed_mult = 0.2
+	planet_jobs_worker_produces_mult = 0.1
+	pop_category_workers_consumer_goods_upkeep_add = 0.1
+	pop_amenities_usage_mult = 0.1
+	pop_housing_usage_mult = 0.1
+}
+
+facpol_right_to_work_act_faction_approves = {
+	faction_approval = 0.10
+}
+
+facpol_right_to_work_act_faction_disapproves = {
+	faction_approval = -0.10
+}
+
+facpol_free_speech_act = {
+	pop_factions_unity_produces_mult = 0.4
+	pop_government_ethic_attraction = -0.33
+	pop_citizenry_happiness = 0.1
+}
+
+facpol_free_speech_act_faction_approves = {
+	faction_approval = 0.10
+}
+
+facpol_free_speech_act_faction_disapproves = {
+	faction_approval = -0.10
+}
+
+facpol_emergency_impressement_act = {
+	ship_base_speed_mult = 0.25
+	ships_upkeep_mult = -0.05
+	trade_value_mult = -0.25
+	country_trade_fee = 0.2
+}
+
+facpol_emergency_impressement_act_faction_approves = {
+	faction_approval = 0.10
+}
+
+facpol_emergency_impressement_act_faction_disapproves = {
+	faction_approval = -0.10
+}
+
+facpol_reindustrialization_act = {
+	planet_jobs_alloys_produces_mult = 0.2
+	pop_environment_tolerance = -0.1
+	pop_growth_speed = -0.05
+}
+
+facpol_reindustrialization_act_faction_approves = {
+	faction_approval = 0.10
+}
+
+facpol_reindustrialization_act_faction_disapproves = {
+	faction_approval = -0.10
+}
+
+facpol_free_trade_act = {
+	trade_value_mult = 0.4
+	country_trade_fee = -0.1
+	planet_stability_add = -10
+	country_trade_attractiveness = 0.2
+}
+
+facpol_free_trade_act_faction_approves = {
+	faction_approval = 0.10
+}
+
+facpol_free_trade_act_faction_disapproves = {
+	faction_approval = -0.10
+}
+
+facpol_business_subsidies_act = {
+	planet_jobs_consumer_goods_produces_mult = 0.25
+	pop_cat_specialist_happiness = 0.1
+	trade_value_mult = 0.1
+	pop_ethic_pacifist_attraction_mult = 0.3
+	planet_buildings_energy_upkeep_mult = 0.2
+	planet_districts_energy_upkeep_mult = 0.2
+}
+
+facpol_business_subsidies_act_faction_approves = {
+	faction_approval = 0.10
+}
+
+facpol_business_subsidies_act_faction_disapproves = {
+	faction_approval = -0.10
+}
+
+facpol_minority_government = {
+	country_edict_fund_mult = -0.2
+	pop_government_ethic_attraction = -0.1
+}
+
+facpol_authoritarian_coalition_partner = {
+	pop_factions_unity_produces_mult = -0.125
+	planet_jobs_specialist_produces_mult = -0.025
+	pop_ethic_authoritarian_attraction_mult = 0.1
+}
+
+facpol_militarist_coalition_partner = {
+	planet_stability_add = -2.5
+	empire_size_pops_mult = 0.075
+	pop_ethic_militarist_attraction_mult = 0.1
+}
+
+facpol_xenophobe_coalition_partner = {
+	trade_value_mult = -0.05
+	pop_ethic_xenophobe_attraction_mult = 0.1
+}
+
+facpol_xenophile_coalition_partner = {
+	pop_growth_speed = -0.05
+	country_starbase_influence_cost_mult = 0.1
+	pop_ethic_xenophile_attraction_mult = 0.1
+}
+
+facpol_pacifist_coalition_partner = {
+	country_claim_influence_cost_mult = 0.05
+	ship_fire_rate_mult = -0.05
+	pop_ethic_pacifist_attraction_mult = 0.1
+}
+
+facpol_egalitarian_coalition_partner = {
+	country_ethic_influence_produces_add = -0.25
+	planet_worker_ownership_jobs_produces_mult = -0.025
+	pop_ethic_egalitarian_attraction_mult = 0.1
+}
+
+facpol_fanatic_spiritualist_coalition_partner = {
+	planet_pops_robotics_upkeep_mult = 0.05
+	all_technology_research_speed = -0.025
+}
+
+facpol_fanatic_materialist_coalition_partner = {
+	country_unity_produces_mult = -0.05
+	edicts_upkeep_mult = 0.05
+	edicts_cost_mult = 0.05
+}
+
+facpol_farmers_coalition_partner = {
+	planet_farmers_energy_upkeep_add = 0.5
+	pop_cat_worker_political_power = 0.2
+}
+
+facpol_miners_coalition_partner = {
+	planet_miners_energy_upkeep_add = 0.5
+	pop_cat_worker_political_power = 0.2
+}
+
+facpol_technician_coalition_partner = {
+	planet_technician_energy_upkeep_add = 0.5
+	pop_cat_worker_political_power = 0.2
+}
+
+facpol_local_autonomy_party = {
+	planet_jobs_minerals_produces_mult = -0.1
+	planet_jobs_energy_produces_mult = -0.1
+	trade_value_mult = 0.15
+	pop_citizenry_happiness = 0.1
+	icon = gfx/interface/icons/planet_modifiers/pm_galactic_senate.dds
+	icon_frame = 2
+}
+
+facpol_manifesti_coalition_partner = {
+	planet_jobs_specialist_produces_mult = -0.15
+	pop_happiness = 0.1
+}
+
+facpol_autonomy_party_coalition_partner = {
+	pop_government_ethic_attraction = -0.1
+}
+
+facpol_restricted_executive_power = {
+	country_edict_fund_mult = -0.2
+}
+
+facpol_ignored_parliament = {
+	pop_citizenry_happiness = -0.05
+	pop_factions_produces_mult = -0.2
+}
+
+facpol_council_supported = {
+	council_agenda_progress_speed = 0.25
+	councilor_skill_add = 1
+	pop_factions_produces_mult = -0.2
+}
+
+facpol_parliament_supported = {
+	council_agenda_progress_speed = -0.25
+	councilor_skill_add = -1
+	pop_factions_produces_mult = 0.2
+}
+
+facpol_banned_lobbying = {
+	pop_cat_worker_happiness = 0.05
+	pop_factions_produces_mult = 0.1
+}
+
+facpol_popular_mp = {
+	planet_stability_add = 5
+	planet_jobs_unity_produces_mult = 0.2
+	icon = gfx/interface/icons/planet_modifiers/pm_unity_symbol.dds
+	icon_frame = 1
+}
+
+facpol_miners_coalition_demand = { #Lift Pollution Controls
+	pop_environment_tolerance = -0.05
+}
+
+facpol_farmers_coalition_demand = { #Hydroponics Research Restrictions
+	starbase_constructions_food_produces_mult = -0.25
+}
+
+facpol_pacifist_coalition_demand = { #Defunding Space Navy
+	shipclass_military_build_cost_mult = 0.1
+}
+
+facpol_manifesti_coalition_demand = { #Ministry of Silly Walks
+	planet_stability_add = -5
+}
+
+facpol_xenophile_coalition_demand = { #Legalize Xeno-Brothels
+	pop_amenities_usage_mult = 0.2
+}
+
+facpol_xenophobe_coalition_demand = { #Xeno Citizenship Restrictions
+	discriminated_pop_happiness_mult = -0.2
+}
+
+facpol_militarist_coalition_demand = { #Prioritize Military Infrastructure
+	planet_districts_cost_mult = 0.1
+	planet_buildings_cost_mult = 0.1
+}
+
+facpol_technician_coalition_demand = { #Freeze Energy Prices
+	trade_value_mult = -0.15
+}
+
+facpol_egalitarian_coalition_demand = { #Rise Minimum Wage
+	planet_pops_consumer_goods_upkeep_mult = 0.2
+}
+
+facpol_authoritarian_coalition_demand = { #Grant Noble Privileges
+	country_unity_produces_mult = -0.1
+}
+
+facpol_autonomy_party_coalition_demand = { #Tax Exemptions
+	planet_jobs_minerals_produces_mult = -0.25
+	planet_jobs_energy_produces_mult = -0.25
+	icon = gfx/interface/icons/planet_modifiers/pm_resources_2.dds
+	icon_frame = 3
+}
+
+facpol_fanatic_materialist_coalition_demand = { #Cultural Revolution
+	pop_government_ethic_attraction = -0.3
+}
+
+facpol_fanatic_spiritualist_coalition_demand = { #Ban Promiscuity
+	pop_growth_speed = -0.05
+}
+
+facpol_corruption_unpunished = {
+	planet_stability_add = -10
+	planet_jobs_ruler_produces_mult = -0.25
+	planet_crime_add = 20
+	icon = gfx/interface/icons/planet_modifiers/pm_stellar_culture_shock.dds
+	icon_frame = 3
+}
+
+facpol_hung_parliament = {
+	country_edict_fund_mult = -0.25
+	pop_government_ethic_attraction = -0.15
+}

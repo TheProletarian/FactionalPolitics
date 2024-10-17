@@ -1,0 +1,401 @@
+# Parliamentary Elections
+facpol_parliamentary_elections = {
+    picture = GFX_evt_assembly_fight
+	desc = {
+		text = facpol_parliamentary_elections_desc
+		trigger = {
+			always = yes
+		}
+	}
+	start_value = 0
+	category = positive
+	complete_icon = GFX_situation_outcome_positive
+	complete_icon_frame = GFX_situation_outcome_frame_green
+
+	on_start = {
+		owner = {
+			set_variable = { which = var_electoral_turmoil value = 1 }
+			set_variable_to_random_value = {
+				which = var_electoral_turmoil
+				min = 0
+				max = 2
+				rounded = yes
+			}
+		}
+	}
+
+	on_progress_complete = {
+		if = {
+			limit = {
+				current_situation_approach = facpol_approach_elections_do_nothing
+			}
+			if = {
+				limit = {
+					owner = {
+						check_variable = {
+							which = var_electoral_turmoil
+							value > 8
+						}
+					}
+				}
+				situation_event = {
+					id = facpol_election_events.09
+				}
+			}
+			if = {
+				limit = {
+					owner = {
+						check_variable = {
+							which = var_electoral_turmoil
+							value > 3
+						}
+						check_variable = {
+							which = var_electoral_turmoil
+							value <= 8
+						}
+					}
+
+				}
+				situation_event = {
+					id = facpol_election_events.08
+				}
+			}
+			if = {
+				limit = {
+					owner = {
+						check_variable = {
+							which = var_electoral_turmoil
+							value <= 3
+						}
+					}
+				}
+				situation_event = {
+					id = facpol_election_events.07
+				}
+			}
+		}
+		if = {
+			limit = {
+				current_situation_approach = facpol_approach_elections_protect_liberties
+			}
+			if = {
+				limit = {
+					owner = {
+						check_variable = {
+							which = var_electoral_turmoil
+							value > 9
+						}	
+					}
+				}
+				situation_event = {
+					id = facpol_election_events.09
+				}
+			}
+			if = {
+				limit = {
+					owner = {
+						check_variable = {
+							which = var_electoral_turmoil
+							value > 4
+						}
+						check_variable = {
+							which = var_electoral_turmoil
+							value <= 9
+						}		
+					}
+
+				}
+				situation_event = {
+					id = facpol_election_events.08
+				}
+			}
+			if = {
+				limit = {
+					owner = {
+						check_variable = {
+							which = var_electoral_turmoil
+							value <= 4
+						}
+					}
+
+				}
+				situation_event = {
+					id = facpol_election_events.07
+				}
+			}
+		}
+		if = {
+			limit = {
+				current_situation_approach = facpol_approach_elections_censorship
+			}
+			if = {
+				limit = { 
+					owner = {
+						check_variable = {
+							which = var_electoral_turmoil
+							value > 7
+						}			
+					}
+
+				}
+				situation_event = {
+					id = facpol_election_events.09
+				}
+			}
+			if = {
+				limit = {
+					owner = {
+						check_variable = {
+							which = var_electoral_turmoil
+							value > 2
+						}
+						check_variable = {
+							which = var_electoral_turmoil
+							value <= 7
+						}
+					}
+				}
+				situation_event = {
+					id = facpol_election_events.08
+				}
+			}
+			if = {
+				limit = {
+					owner = {
+						check_variable = {
+							which = var_electoral_turmoil
+							value <= 2
+						}	
+					}
+
+				}
+				situation_event = {
+					id = facpol_election_events.07
+				}
+			}
+		}
+		if = {
+			limit = {
+				current_situation_approach = facpol_approach_elections_falsify
+			}
+			if = {
+				limit = { 
+					owner = {
+						check_variable = {
+							which = var_electoral_turmoil
+							value > 6
+						}	
+					}
+
+				}
+				situation_event = {
+					id = facpol_election_events.09
+				}
+			}
+			if = {
+				limit = {
+					owner = {
+						check_variable = {
+							which = var_electoral_turmoil
+							value > 1
+						}
+						check_variable = {
+							which = var_electoral_turmoil
+							value <= 6
+						}
+					}
+
+				}
+				situation_event = {
+					id = facpol_election_events.08
+				}
+			}
+			if = {
+				limit = {
+					owner = {					
+						check_variable = {
+						which = var_electoral_turmoil
+						value <= 1
+						}
+					}
+
+				}
+				situation_event = {
+					id = facpol_election_events.07
+				}
+			}
+		}
+		hidden_effect = {
+			if = {
+				limit = {
+					current_situation_approach = facpol_approach_elections_falsify
+				 }
+				 owner = {
+					country_event = {
+						id = facpol_parliament_events.11 
+						days = 30
+						random = 15
+					} 
+				}
+			}
+			else = {
+				owner = {
+					country_event = {
+						id = facpol_parliament_events.10
+						days = 30
+						random = 15
+					}
+				}
+			}
+			destroy_situation = this 
+		}
+	}
+
+	abort_trigger = {
+		owner = {
+			NOT = { has_policy_flag = has_parliament }
+		}
+	}
+	on_abort = {
+		owner = {
+			country_event = {
+				id = facpol_election_events.06
+			}
+		}
+		hidden_effect = { destroy_situation = this }
+	}
+
+	on_fail = {
+	}
+
+	stages = {
+		stage_1 = {
+			icon = GFX_situation_stage_1
+			icon_background = GFX_situation_stage_frame_blue
+			end = 100
+		}
+	}
+
+	monthly_progress = {
+		base = 10
+	}
+
+	approach = {
+		name = facpol_approach_elections_do_nothing
+		icon = GFX_situation_approach_this_is_fine
+		icon_background = GFX_situation_approach_bg_yellow
+		allow = {
+			custom_tooltip = {
+				fail_text = too_late_to_change_approach
+				OR = {
+					NOT = { has_situation_flag = path_locked }
+					current_situation_approach = facpol_approach_elections_do_nothing
+				}
+			}
+		}
+		resources = {
+			category = situations
+			upkeep = {
+				energy = 8
+			}
+		}
+
+		target_modifier = {
+			pop_factions_produces_mult = 0.1
+		}
+	}
+
+	approach = {
+		name = facpol_approach_elections_protect_liberties
+		icon = GFX_situation_approach_handshake
+		icon_background = GFX_situation_approach_bg_green
+		allow = {
+			custom_tooltip = {
+				fail_text = too_late_to_change_approach
+				OR = {
+					NOT = { has_situation_flag = path_locked }
+					current_situation_approach = facpol_approach_elections_protect_liberties
+				}
+			}
+		}
+		resources = {
+			category = situations
+			upkeep = {
+				energy = 16
+			}
+		}
+
+		target_modifier = {
+			pop_factions_produces_mult = 0.25
+			pop_ethics_shift_speed_mult = 0.5
+		}
+	}
+
+	approach = {
+		name = facpol_approach_elections_censorship
+		icon = GFX_situation_approach_influence
+		icon_background = GFX_situation_approach_bg_red
+		potential = {
+			owner = {
+				NOT = { has_ethic = ethic_fanatic_egalitarian }
+			}
+		}
+		allow = {
+			custom_tooltip = {
+				fail_text = too_late_to_change_approach
+				OR = {
+					NOT = { has_situation_flag = path_locked }
+					current_situation_approach = facpol_approach_elections_censorship
+				}
+			}
+		}
+		resources = {
+			category = situations
+			upkeep = {
+				energy = 8
+			}
+			upkeep = {
+				unity = 4
+			}
+		}
+
+		target_modifier = {
+			pop_government_ethic_attraction = 0.33
+		}
+	}
+
+	approach = {
+		name = facpol_approach_elections_falsify
+		icon = GFX_situation_approach_balance_sheet
+		icon_background = GFX_situation_approach_bg_red
+		potential = {
+			owner = {
+				has_civic = civic_shadow_council
+			}
+		}
+		allow = {
+			custom_tooltip = {
+				fail_text = too_late_to_change_approach
+				OR = {
+					NOT = { has_situation_flag = path_locked }
+					current_situation_approach = facpol_approach_elections_falsify
+				}
+			}
+		}
+		resources = {
+			category = situations
+			upkeep = {
+				energy = 25
+			}
+			upkeep = {
+				unity = 50
+			}
+		}
+	}
+
+	on_monthly = {
+		events = {
+			facpol_election_events.04
+		}
+	}
+}

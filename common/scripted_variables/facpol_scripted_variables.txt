@@ -1,0 +1,2 @@
+@facpol_bankrupt_faction_production_penalty = -0.15
+@facpol_bankrupt_faction_extortion_penalty = -0.15

@@ -1,0 +1,940 @@
+namespace = facpol_meta
+namespace = facpol_test
+event = {
+	id = facpol_meta.01
+	hide_window = yes
+	is_triggered_only = yes
+	immediate = {
+		set_global_flag = facpol_mod_is_active
+	}
+}
+
+country_event = {
+	id = facpol_meta.03
+	hide_window = yes
+	is_triggered_only = yes
+	trigger = {
+		has_country_flag = ongoing_parliament_term
+		NOT = {
+			has_modifier = facpol_parliament_fails_forming_gov
+		}
+	}
+	immediate = {
+		random_list = {
+			300 = {
+				modifier = {
+					factor = 2
+					has_modifier = facpol_minority_government
+				}
+			}
+			50 = {
+				modifier = {
+					factor = 0
+					OR = {
+						has_modifier = facpol_easier_migration_act
+						has_modifier = facpol_closed_country_act
+						num_migration_pacts = 0
+						NOR = {
+							has_modifier = facpol_xenophile_coalition_gov
+							has_modifier = facpol_xenophile_majority_gov
+							has_modifier = facpol_xenophile_supermajority_gov
+							has_modifier = facpol_xenophile_falsified_gov
+						}
+					}
+				}
+				modifier = {
+					factor = 1.5
+					OR = {
+						has_modifier = facpol_xenophile_majority_gov
+						has_modifier = facpol_xenophile_falsified_gov
+					}
+					
+				}
+				modifier = {
+					factor = 2
+					has_modifier = facpol_xenophile_supermajority_gov
+				}
+				modifier = {
+					factor = 1.2
+					num_migration_pacts > 2
+				}
+				modifier = {
+					factor = 1.2
+					has_civic = civic_free_haven
+				}
+				country_event = {
+					id = facpol_parliament_events.13
+				}
+			}
+			50 = {
+				modifier = {
+					factor = 0
+					OR = {
+						has_modifier = facpol_xeno_protection_act
+						NOR = {
+							has_modifier = facpol_xenophile_coalition_gov
+							has_modifier = facpol_xenophile_majority_gov
+							has_modifier = facpol_xenophile_supermajority_gov
+							has_modifier = facpol_xenophile_falsified_gov
+						}
+						has_origin = origin_void_dwellers
+						has_origin = origin_void_machines
+						num_owned_planets < 2
+					}
+				}
+				modifier = {
+					factor = 1.5
+					OR = {
+						has_modifier = facpol_xenophile_majority_gov
+						has_modifier = facpol_xenophile_falsified_gov
+					}
+					
+				}
+				modifier = {
+					factor = 2
+					has_modifier = facpol_xenophile_supermajority_gov
+				}
+				modifier = {
+					factor = 1.2
+					any_owned_planet = {
+						OR = {
+						has_deposit = d_alien_sanctuary
+						has_deposit = d_alien_pets_deposit
+						has_deposit = d_dangerous_wildlife_blocker
+						}
+					}
+				}
+				modifier = {
+					factor = 1.2
+					has_civic = civic_environmentalist
+				}
+				country_event = {
+					id = facpol_parliament_events.17
+				}
+			}
+			50 = {
+				modifier = {
+					factor = 0
+					OR = {
+						has_modifier = facpol_xeno_affairs_departament_act
+						NOR = {
+							has_modifier = facpol_xenophile_coalition_gov
+							has_modifier = facpol_xenophile_majority_gov
+							has_modifier = facpol_xenophile_supermajority_gov
+							has_modifier = facpol_xenophile_falsified_gov
+						}
+						has_origin = origin_void_dwellers
+						has_origin = origin_void_machines
+						num_communications < 3
+					}
+				}
+				modifier = {
+					factor = 1.5
+					OR = {
+						has_modifier = facpol_xenophile_majority_gov
+						has_modifier = facpol_xenophile_falsified_gov
+					}
+					
+				}
+				modifier = {
+					factor = 2
+					has_modifier = facpol_xenophile_supermajority_gov
+				}
+				modifier = {
+					factor = 1.2
+					has_civic = civic_diplomatic_corps
+				}
+				country_event = {
+					id = facpol_parliament_events.18
+				}
+			}
+			50 = {
+				modifier = {
+					factor = 0
+					OR = {
+						has_modifier = facpol_closed_country_act
+						has_modifier = facpol_easier_migration_act
+						NOR = {
+							has_modifier = facpol_xenophobe_coalition_gov
+							has_modifier = facpol_xenophobe_majority_gov
+							has_modifier = facpol_xenophobe_supermajority_gov
+							has_modifier = facpol_xenophobe_falsified_gov
+						}
+					}
+				}
+				modifier = {
+					factor = 1.5
+					OR = {
+						has_modifier = facpol_xenophobe_majority_gov
+						has_modifier = facpol_xenophobe_falsified_gov
+					}
+					
+				}
+				modifier = {
+					factor = 2
+					has_modifier = facpol_xenophobe_supermajority_gov
+				}
+				modifier = {
+					factor = 1.2
+					has_civic = civic_inwards_perfection
+				}
+				country_event = {
+					id = facpol_parliament_events.19
+				}
+			}
+			50 = {
+				modifier = {
+					factor = 0
+					OR = {
+						has_modifier = facpol_segregation_act
+						NOR = {
+							has_modifier = facpol_xenophobe_coalition_gov
+							has_modifier = facpol_xenophobe_majority_gov
+							has_modifier = facpol_xenophobe_supermajority_gov
+							has_modifier = facpol_xenophobe_falsified_gov
+						}
+					}
+				}
+				modifier = {
+					factor = 1.5
+					OR = {
+						has_modifier = facpol_xenophobe_majority_gov
+						has_modifier = facpol_xenophobe_falsified_gov
+					}
+					
+				}
+				modifier = {
+					factor = 2
+					has_modifier = facpol_xenophobe_supermajority_gov
+				}
+				modifier = {
+					factor = 1.2
+					has_civic = civic_slaver_guilds
+				}
+				country_event = {
+					id = facpol_parliament_events.20
+				}
+			}
+			100 = {
+				modifier = {
+					factor = 0
+					OR = {
+						has_modifier = facpol_spread_faith_act
+						has_modifier = facpol_state_atheism_act
+						is_spiritualist = no
+						NOR = {
+							has_modifier = facpol_spiritualist_coalition_gov
+							has_modifier = facpol_spiritualist_majority_gov
+							has_modifier = facpol_spiritualist_supermajority_gov
+							has_modifier = facpol_spiritualist_falsified_gov
+						}
+						NOT = {
+							any_owned_pop = {
+								is_spiritualist = yes
+								is_robot_pop = no
+								NOT = {
+									is_same_species = owner
+								}
+							}
+						}
+					}
+
+				}
+				modifier = {
+					factor = 1.5
+					OR = {
+						has_modifier = facpol_spiritualist_majority_gov
+						has_modifier = facpol_spiritualist_falsified_gov
+					}
+					
+				}
+				modifier = {
+					factor = 2
+					has_modifier = facpol_spiritualist_supermajority_gov
+				}
+				modifier = {
+					factor = 1.2					
+					OR = {
+						has_civic = civic_death_cult
+						has_civic = civic_death_cult_corporate
+						has_civic = civic_exalted_priesthood
+					}
+				}
+				country_event = {
+					id = facpol_parliament_events.21
+				}
+			}
+			50 = {
+				modifier = {
+					factor = 0
+					OR = {
+						has_modifier = facpol_temple_land_act
+						is_spiritualist = no
+						NOR = {
+							has_modifier = facpol_spiritualist_coalition_gov
+							has_modifier = facpol_spiritualist_majority_gov
+							has_modifier = facpol_spiritualist_supermajority_gov
+							has_modifier = facpol_spiritualist_falsified_gov
+						}
+						num_owned_planets < 3
+					}
+				}
+				modifier = {
+					factor = 1.5
+					OR = {
+						has_modifier = facpol_spiritualist_majority_gov
+						has_modifier = facpol_spiritualist_falsified_gov
+					}
+					
+				}
+				modifier = {
+					factor = 2
+					has_modifier = facpol_spiritualist_supermajority_gov
+				}
+				modifier = {
+					factor = 1.2					
+					OR = {
+						has_civic = civic_memorialist
+						has_civic = civic_exalted_priesthood
+					}
+				}
+				modifier = {
+					factor = 1.2
+					num_owned_planets > 10
+				}
+				country_event = {
+					id = facpol_parliament_events.22
+				}
+			}
+			50 = {
+				modifier = {
+					factor = 0
+					OR = {
+						has_modifier = facpol_state_atheism_act
+						has_modifier = facpol_spread_faith_act
+						is_materialist = no
+						NOR = {
+							has_modifier = facpol_materialist_coalition_gov
+							has_modifier = facpol_materialist_majority_gov
+							has_modifier = facpol_materialist_supermajority_gov
+							has_modifier = facpol_materialist_falsified_gov
+						}
+					}
+				}
+				modifier = {
+					factor = 1.5
+					OR = {
+						has_modifier = facpol_materialist_majority_gov
+						has_modifier = facpol_materialist_falsified_gov
+					}
+					
+				}
+				modifier = {
+					factor = 2
+					has_modifier = facpol_materialist_supermajority_gov
+				}
+				modifier = {
+					factor = 1.2					
+					OR = {
+						has_civic = civic_technocracy
+						has_civic = civic_pleasure_seekers
+						has_civic = civic_police_state
+					}
+				}
+				country_event = {
+					id = facpol_parliament_events.23
+				}
+			}
+			50 = {
+				modifier = {
+					factor = 0
+					OR = {
+						has_modifier = facpol_machines_rights_act
+						NOR = {
+							has_policy_flag = ai_full_rights
+							any_owned_leader = {
+								is_materialist = yes
+								species = {
+									OR = {
+										has_trait = trait_machine_unit
+										has_trait = trait_mechanical
+										is_species_class = ROBOT
+										is_species_class = MACHINE
+									}
+								}
+							}
+						}
+						is_individual_machine = yes
+						NOR = {
+							has_modifier = facpol_materialist_coalition_gov
+							has_modifier = facpol_materialist_majority_gov
+							has_modifier = facpol_materialist_supermajority_gov
+							has_modifier = facpol_materialist_falsified_gov
+						}
+					}
+				}
+				modifier = {
+					factor = 1.5
+					OR = {
+						has_modifier = facpol_materialist_majority_gov
+						has_modifier = facpol_materialist_falsified_gov
+					}
+					
+				}
+				modifier = {
+					factor = 2
+					has_modifier = facpol_materialist_supermajority_gov
+				}
+				modifier = {
+					factor = 1.2					
+					OR = {
+						has_origin = origin_mechanists
+						has_civic = civic_idealistic_foundation
+					}
+				}
+				country_event = {
+					id = facpol_parliament_events.24
+				}
+			}
+			50 = {
+				modifier = {
+					factor = 0
+					OR = {
+						has_modifier = facpol_slavery_enforcement_act
+						has_policy_flag = slavery_not_allowed
+						is_homicidal = yes
+						NOR = {
+							has_modifier = facpol_authoritarian_coalition_gov
+							has_modifier = facpol_authoritarian_majority_gov
+							has_modifier = facpol_authoritarian_supermajority_gov
+							has_modifier = facpol_authoritarian_falsified_gov
+						}
+					}
+				}
+				modifier = {
+					factor = 1.5
+					OR = {
+						has_modifier = facpol_authoritarian_majority_gov
+						has_modifier = facpol_authoritarian_falsified_gov
+					}
+					
+				}
+				modifier = {
+					factor = 2
+					has_modifier = facpol_authoritarian_supermajority_gov
+				}
+				modifier = {
+					factor = 1.2					
+					OR = {
+						has_civic = civic_slaver_guilds
+						has_civic = civic_nationalistic_zeal
+					}
+				}
+				country_event = {
+					id = facpol_parliament_events.25
+				}
+			}
+			50 = {
+				modifier = {
+					factor = 0
+					OR = {
+						has_modifier = facpol_treason_act
+						num_communications < 3
+						NOR = {
+							has_modifier = facpol_authoritarian_coalition_gov
+							has_modifier = facpol_authoritarian_majority_gov
+							has_modifier = facpol_authoritarian_supermajority_gov
+							has_modifier = facpol_authoritarian_falsified_gov
+						}
+					}
+				}
+				modifier = {
+					factor = 1.5
+					OR = {
+						has_modifier = facpol_authoritarian_majority_gov
+						has_modifier = facpol_authoritarian_falsified_gov
+					}
+					
+				}
+				modifier = {
+					factor = 2
+					has_modifier = facpol_authoritarian_supermajority_gov
+				}
+				modifier = {
+					factor = 1.2					
+					OR = {
+						has_civic = civic_cutthroat_politics
+						has_civic = civic_shadow_council
+					}
+				}
+				country_event = {
+					id = facpol_parliament_events.26
+				}
+			}
+			50 = {
+				modifier = {
+					factor = 0
+					OR = {
+						has_modifier = facpol_right_to_work_act
+						NOR = {
+							has_modifier = facpol_egalitarian_coalition_gov
+							has_modifier = facpol_egalitarian_majority_gov
+							has_modifier = facpol_egalitarian_supermajority_gov
+							has_modifier = facpol_egalitarian_falsified_gov
+						}
+					}
+				}
+				modifier = {
+					factor = 1.5
+					OR = {
+						has_modifier = facpol_egalitarian_majority_gov
+						has_modifier = facpol_egalitarian_falsified_gov
+					}
+					
+				}
+				modifier = {
+					factor = 2
+					has_modifier = facpol_egalitarian_supermajority_gov
+				}
+				modifier = {
+					factor = 1.2					
+					has_civic = civic_shared_burden
+				}
+				country_event = {
+					id = facpol_parliament_events.27
+				}
+			}
+			50 = {
+				modifier = {
+					factor = 0
+					OR = {
+						has_modifier = facpol_free_speech_act
+						NOR = {
+							has_modifier = facpol_egalitarian_coalition_gov
+							has_modifier = facpol_egalitarian_majority_gov
+							has_modifier = facpol_egalitarian_supermajority_gov
+							has_modifier = facpol_egalitarian_falsified_gov
+						}
+					}
+				}
+				modifier = {
+					factor = 1.5
+					OR = {
+						has_modifier = facpol_egalitarian_majority_gov
+						has_modifier = facpol_egalitarian_falsified_gov
+					}
+					
+				}
+				modifier = {
+					factor = 2
+					has_modifier = facpol_egalitarian_supermajority_gov
+				}
+				modifier = {
+					factor = 1.2					
+					OR = {
+						has_civic = civic_idealistic_foundation
+						has_civic = civic_parliamentary_system
+					}
+				}
+				country_event = {
+					id = facpol_parliament_events.28
+				}
+			}
+			50 = {
+				modifier = {
+					factor = 0
+					OR = {
+						has_modifier = facpol_emergency_impressement_act
+						NOR = {
+							has_modifier = facpol_militarist_coalition_gov
+							has_modifier = facpol_militarist_majority_gov
+							has_modifier = facpol_militarist_supermajority_gov
+							has_modifier = facpol_militarist_falsified_gov
+						}
+					}
+				}
+				modifier = {
+					factor = 1.5
+					OR = {
+						has_modifier = facpol_militarist_majority_gov
+						has_modifier = facpol_militarist_falsified_gov
+					}
+					
+				}
+				modifier = {
+					factor = 2
+					has_modifier = facpol_militarist_supermajority_gov
+				}
+				modifier = {
+					factor = 1.2					
+					OR = {
+						has_civic = civic_nationalistic_zeal
+						has_civic = civic_distinguished_admiralty
+					}
+				}
+				country_event = {
+					id = facpol_parliament_events.29
+				}
+			}
+			50 = {
+				modifier = {
+					factor = 0
+					OR = {
+						has_modifier = facpol_reindustrialization_act
+						NOR = {
+							has_modifier = facpol_militarist_coalition_gov
+							has_modifier = facpol_militarist_majority_gov
+							has_modifier = facpol_militarist_supermajority_gov
+							has_modifier = facpol_militarist_falsified_gov
+						}
+					}
+				}
+				modifier = {
+					factor = 1.5
+					OR = {
+						has_modifier = facpol_militarist_majority_gov
+						has_modifier = facpol_militarist_falsified_gov
+					}
+					
+				}
+				modifier = {
+					factor = 2
+					has_modifier = facpol_militarist_supermajority_gov
+				}
+				modifier = {
+					factor = 1.2					
+					OR = {
+						has_civic = civic_relentless_industrialists
+						has_civic = civic_mining_guilds
+					}
+				}
+				country_event = {
+					id = facpol_parliament_events.30
+				}
+			}
+			50 = {
+				modifier = {
+					factor = 0
+					OR = {
+						has_modifier = facpol_free_trade_act
+						NOR = {
+							has_modifier = facpol_pacifist_coalition_gov
+							has_modifier = facpol_pacifist_majority_gov
+							has_modifier = facpol_pacifist_supermajority_gov
+							has_modifier = facpol_pacifist_falsified_gov
+						}
+					}
+				}
+				modifier = {
+					factor = 1.5
+					OR = {
+						has_modifier = facpol_pacifist_majority_gov
+						has_modifier = facpol_pacifist_falsified_gov
+					}
+					
+				}
+				modifier = {
+					factor = 2
+					has_modifier = facpol_pacifist_supermajority_gov
+				}
+				modifier = {
+					factor = 1.2					
+					OR = {
+						has_civic = civic_merchant_guilds
+						has_civic = civic_free_traders
+					}
+				}
+				country_event = {
+					id = facpol_parliament_events.31
+				}
+			}
+			50 = {
+				modifier = {
+					factor = 0
+					OR = {
+						has_modifier = facpol_business_subsidies_act
+						NOR = {
+							has_modifier = facpol_pacifist_coalition_gov
+							has_modifier = facpol_pacifist_majority_gov
+							has_modifier = facpol_pacifist_supermajority_gov
+							has_modifier = facpol_pacifist_falsified_gov
+						}
+					}
+				}
+				modifier = {
+					factor = 1.5
+					OR = {
+						has_modifier = facpol_pacifist_majority_gov
+						has_modifier = facpol_pacifist_falsified_gov
+					}
+					
+				}
+				modifier = {
+					factor = 2
+					has_modifier = facpol_pacifist_supermajority_gov
+				}
+				modifier = {
+					factor = 1.2					
+					OR = {
+						has_civic = civic_crafters
+						has_civic = civic_corporate_crafters
+					}
+				}
+				country_event = {
+					id = facpol_parliament_events.32
+				}
+			}
+			25 = {
+				modifier = {
+					factor = 0.25
+					has_any_major_disloyal_faction = yes
+				}
+				modifier = {
+					factor = 1.25
+					has_any_major_loyal_faction = yes
+				}
+				country_event = {
+					id = facpol_parliament_events.103
+				}
+			}
+			25 = {
+				modifier = {
+					factor = 1.5
+					has_any_major_disloyal_faction = yes
+				}
+				modifier = {
+					factor = 0.75
+					has_any_major_loyal_faction = yes
+				}
+				modifier = {
+					factor = 0
+					has_country_flag = facpol_parliament_government_conflict
+				}
+				country_event = {
+					id = facpol_parliament_events.104
+				}
+			}
+			25 = {
+				modifier = {
+					factor = 1.5
+					any_council_member = {
+						num_negative_traits > 1
+					}
+				}
+				modifier = {
+					factor = 0.5
+					NOT = {
+						any_council_member = {
+							num_negative_traits > 0 
+						}
+					}
+				}
+				modifier = {
+					factor = 1.5
+					any_council_member = {
+						num_negative_traits > 2 
+					}
+				}
+				modifier = {
+					factor = 0
+					has_country_flag = facpol_parliament_government_conflict
+				}
+				country_event = {
+					id = facpol_parliament_events.105
+				}
+			}
+			15 = {
+				modifier = {
+					factor = 0
+					has_modifier = facpol_banned_lobbying
+				}
+				country_event = {
+					id = facpol_parliament_events.106
+				}
+			}
+			15 = {
+				modifier = {
+					factor = 0
+					NOT = {
+						any_owned_planet = {
+							NOR = {
+								planet_crime < 10
+								planet_stability > 80
+								happiness_planet > 80
+							}
+							num_pops > 5 
+						}
+					}					
+				}
+				country_event = {
+					id = facpol_parliament_events.107
+				}
+			}
+			50 = {
+				modifier = {
+					factor = 0
+					has_coalition_partner = no			
+				}
+				country_event = {
+					id = facpol_parliament_events.108
+				}
+			}
+			50 = {
+				modifier = {
+					factor = 0
+					NAND = {
+						any_owned_planet = {
+							NOR = {
+								planet_crime < 10
+								planet_stability > 80
+								happiness_planet > 80
+							}
+							num_pops > 5 
+						}
+						any_owned_leader = {
+							OR = {
+								has_trait = leader_trait_corrupt
+								has_trait = leader_trait_corrupt_2
+								has_trait = leader_trait_insider_trading
+								has_trait = leader_trait_insider_trading_2
+							}
+							is_ruler = no
+						}
+						has_country_flag = facpol_corrupt_coalition
+					}					
+				}
+				country_event = {
+					id = facpol_parliament_events.109
+				}
+			}
+		}
+	}
+}
+
+country_event = {
+	id = facpol_meta.04
+	hide_window = yes
+	is_triggered_only = yes
+	trigger = {
+		has_modifier = facpol_temple_land_act
+	}
+	immediate = {
+		every_owned_planet = {
+			if = {
+				limit = { 
+					OR = {
+						has_building = building_sacrificial_temple_3
+						has_building = building_sacred_nexus
+					}
+				}
+				add_modifier = {
+					modifier = facpol_planetary_temple_lands_t3
+					days = 30
+				}
+			}
+			else_if = {
+				limit = { 
+					OR = {
+						has_building = building_sacrificial_temple_2
+						has_building = building_holotemple
+					}
+				}
+				add_modifier = {
+					modifier = facpol_planetary_temple_lands_t2
+					days = 30
+				}
+			}
+			else_if = {
+				limit = { 
+					OR = {
+						has_building = building_sacrificial_temple_1
+						has_building = building_temple
+					}
+				}
+				add_modifier = {
+					modifier = facpol_planetary_temple_lands_t1
+					days = 30
+				}
+			}
+		}
+	}
+}
+
+country_event = { #random cooldown for the gatekeeper event
+	id = facpol_meta.05
+	hide_window = yes
+	is_triggered_only = yes
+	trigger = {
+		owner = {
+			is_ai = no
+			has_country_flag = ongoing_parliament_term
+		}
+		
+	}
+	immediate = {
+		owner = {
+			country_event = {
+				id = facpol_meta.03
+				days = 30
+				random = 330
+			}	
+		}
+	}
+}
+
+country_event = {
+	id = facpol_meta.06
+	hide_window = yes
+	is_triggered_only = yes
+	trigger = {
+		has_policy_flag = has_parliament
+		NOR = {
+			has_country_flag = ongoing_elections
+			has_country_flag = ongoing_parliament_term
+		}
+		OR = {
+			has_faction = imperialist
+			has_faction = isolationist
+			has_faction = progressive
+			has_faction = prosperity
+			has_faction = supremacist
+			has_faction = technologist
+			has_faction = totalitarian
+			has_faction = traditionalist
+			has_faction = xenoist
+		}
+	}
+	immediate = {
+		country_event = {
+			id = facpol_election_events.03
+		}
+	}
+}
+
+planet_event = {
+	id = facpol_meta.07
+	hide_window = yes
+	is_triggered_only = yes
+	pre_triggers = {
+		original_owner = no
+	}
+	immediate = {
+		remove_modifier = facpol_autonomy_party_coalition_demand
+	}
+}
+
+# country_event = {
+# 	id = facpol_test.01
+# 	is_triggered_only = yes
+# 	hide_window = yes
+# 	immediate = {
+# 		if = {
+# 			limit = { 
+# 				has_faction = bankers
+# 			}
+# 		}
+# 		add_resource = {
+# 			influence = 100
+# 		}
+# 	}
+# }
